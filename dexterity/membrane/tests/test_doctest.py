@@ -1,30 +1,10 @@
 import unittest
 
-#from zope.testing import doctestunit
-#from zope.component import testing
+from zope.testing import doctestunit
+from zope.component import testing
 from Testing import ZopeTestCase as ztc
 
-from Products.Five import fiveconfigure
-from Products.PloneTestCase import PloneTestCase as ptc
-from Products.PloneTestCase.layer import PloneSite
-ptc.setupPloneSite()
-
-import dexterity.membrane
-
-
-class TestCase(ptc.PloneTestCase):
-
-    class layer(PloneSite):
-
-        @classmethod
-        def setUp(cls):
-            fiveconfigure.debug_mode = True
-            ztc.installPackage(dexterity.membrane)
-            fiveconfigure.debug_mode = False
-
-        @classmethod
-        def tearDown(cls):
-            pass
+from dexterity.membrane.tests import base
 
 
 def test_suite():
@@ -43,11 +23,11 @@ def test_suite():
         # Integration tests that use PloneTestCase
         #ztc.ZopeDocFileSuite(
         #    'README.txt', package='dexterity.membrane',
-        #    test_class=TestCase),
+        #    test_class=base.TestCase),
 
         #ztc.FunctionalDocFileSuite(
         #    'browser.txt', package='dexterity.membrane',
-        #    test_class=TestCase),
+        #    test_class=base.FunctionalTestCase),
 
         ])
 

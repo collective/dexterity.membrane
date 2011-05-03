@@ -1,0 +1,29 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    xmlns:grok="http://namespaces.zope.org/grok"
+    i18n_domain="dexterity.membrane">
+
+  <!-- Include configuration for dependencies listed in setup.py -->
+  <includeDependencies package="." />
+  <!-- Grok the package to initialise schema interfaces and content classes -->
+  <grok:grok package="." />
+
+  <!--i18n:registerTranslations directory="locales" /-->
+
+  <!-- Register an extension profile to make the product installable -->
+  <include package=".behavior" />
+
+  <genericsetup:registerProfile
+      name="default"
+      title="Quick dump of some code in a client project for a membrane behavior for dexterity content."
+      directory="profiles/default"
+      description="Extension profile for Quick dump of some code in a client project for a membrane behavior for dexterity content."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+
+  <!-- -*- extra stuff goes here -*- -->
+
+</configure>

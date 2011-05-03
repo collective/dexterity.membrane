@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<object name="dexterity.membrane.member"
+   meta_type="Dexterity FTI"
+   i18n:domain="dexterity.membrane" xmlns:i18n="http://xml.zope.org/namespaces/i18n">
+
+  <!-- Basic metadata -->
+  <property name="title" i18n:translate="">Member</property>
+  <property name="description"
+    i18n:translate="">Member</property>
+  <property name="content_icon">user.png</property>
+  <property name="global_allow">True</property>
+  <property name="filter_content_types">True</property>
+  <property name="allowed_content_types" />
+  <property name="allow_discussion">False</property>
+
+ <!-- schema interface FIXME: this is ugly -->
+ <property name="schema">dexterity.membrane.content.member.IMember</property> 
+
+ <!-- class used for content items -->
+ <property name="klass">plone.dexterity.content.Item</property>
+<!--
+  <property name="product">dexterity.membrane</property>
+  <property name="factory">addMember</property>
+-->
+ <property name="add_permission">cmf.AddPortalContent</property>
+ <property name="behaviors">
+     <element value="plone.app.content.interfaces.INameFromTitle" />
+     <element value="plone.app.dexterity.behaviors.metadata.IDublinCore"/>
+     <element value="plone.app.referenceablebehavior.referenceable.IReferenceable" />
+     <element value="dexterity.membrane.behavior.membraneuser.IMembraneUser" />
+     <element value="dexterity.membrane.behavior.membraneuser.IProvidePasswords" />
+ </property>
+
+  <!-- View information -->
+  <property name="default_view">view</property>
+  <property name="default_view_fallback">False</property>
+  <property name="view_methods">
+    <element value="base_view" />
+  </property>
+
+  <!-- Method aliases -->
+  <alias from="(Default)" to="(selected layout)" />
+  <alias from="edit" to="@@edit" />
+  <alias from="sharing" to="@@sharing" />
+  <alias from="view" to="@@view" />
+
+  <!-- Actions -->
+  <action title="View" action_id="view" category="object" condition_expr=""
+    url_expr="string:${object_url}/" visible="True">
+    <permission value="View" />
+  </action>
+
+  <action title="Edit" action_id="edit" category="object" condition_expr=""
+    url_expr="string:${object_url}/edit" visible="True">
+    <permission value="Modify portal content" />
+  </action>
+</object>

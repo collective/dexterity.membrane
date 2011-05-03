@@ -1,0 +1,34 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:grok="http://namespaces.zope.org/grok"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    i18n_domain="dexterity.membrane">
+
+  <!-- Grok schemata -->
+  <grok:grok package="." />
+
+  <!-- -*- extra stuff goes here -*- -->
+
+  <!-- behavior -->
+  <plone:behavior
+      title="Membrane User"
+      description="Use this content as a membrane user"
+      provides=".membraneuser.IMembraneUser"
+      factory=".membraneuser.MembraneUser"
+      for="dexterity.membrane.content.member.IMember"
+      />
+
+  <plone:behavior
+      title="Password"
+      description="Store password on this content"
+      provides=".membraneuser.IProvidePasswords"
+      factory=".membraneuser.PasswordProvider"
+      for="plone.dexterity.interfaces.IDexterityContent"
+      />
+
+  <adapter
+      factory=".membraneuser.MembraneRoleProvider"
+      name="alm.content.behavior.membraneuser.MembraneRoleProvider"
+      />
+
+</configure>

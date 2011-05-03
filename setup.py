@@ -26,7 +26,6 @@ setup(name='dexterity.membrane',
       install_requires=[
           'setuptools',
           'plone.app.dexterity',
-          'collective.autopermission',
           'Products.membrane>=2.0.2',
           'collective.indexing',
       ],

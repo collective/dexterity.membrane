@@ -14,7 +14,7 @@
   <property name="allow_discussion">False</property>
 
  <!-- schema interface FIXME: this is ugly -->
- <property name="schema">dexterity.membrane.content.member.IMember</property> 
+ <property name="schema">dexterity.membrane.content.member.IMember</property>
 
  <!-- class used for content items -->
  <property name="klass">plone.dexterity.content.Item</property>

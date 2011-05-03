@@ -27,7 +27,8 @@ setup(name='dexterity.membrane',
           'setuptools',
           'plone.app.dexterity',
           'collective.autopermission',
-          # -*- Extra requirements: -*-
+          'Products.membrane',
+          'collective.indexing',
       ],
       entry_points="""
       # -*- Entry points: -*-

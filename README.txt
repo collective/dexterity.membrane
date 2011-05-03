@@ -10,27 +10,25 @@ left behind here or removed, but it seems to be okay.
 Compatibility
 -------------
 
-This package has been developed for Plone 4.1.  It may work on 4.0 and
-3.3, but that has not been tested.
+This package has been developed for Plone 4.1.  In fact it will only
+work on that version (or higher) as we need uuid support.
 
 We depend on Products.membrane 2.0.2 or higher as that contains a fix
 to make sure members that are deleted are also removed from the
 membrane_tool catalog.
 
-If you are on Plone 4.1 you may want to include
-``plone.app.referenceablebehavior`` and enable the
-the plone.app.referenceablebehavior.referenceable.IReferenceable
-on our member content type.  It gives uuid support, which means
-members can be referenced from Archetypes content.
-
 
 User id
 -------
 
-As user id we currently use the intid that is generated for the
-content item.  On Plone 4.1 it would be easy to use the uuid instead,
-if wanted.  See the definition of ``getUserId`` in the
-``membraneuser.py`` behavior.
+As user id we use the uuid that is generated for the content item.
+This only works on Plone 4.1 and higher.  See the definition of
+``getUserId`` in the ``membraneuser.py`` behavior.
+
+If you define your own member content type, you should enable the the
+plone.app.referenceablebehavior.referenceable.IReferenceable on it as
+that gives uuid support.  This also means members can be referenced
+from Archetypes content.
 
 
 Email as login name

@@ -16,9 +16,7 @@ from Products.membrane.interfaces import IMembraneUserAuth
 from Products.membrane.interfaces import IMembraneUserObject
 from Products.membrane.interfaces import IMembraneUserProperties
 from Products.PlonePAS.sheet import MutablePropertySheet
-#from plone.uuid.interfaces import IUUID
-from zope.app.intid.interfaces import IIntIds
-from zope.component import getUtility
+from plone.uuid.interfaces import IUUID
 
 from dexterity.membrane import _
 from dexterity.membrane.content.member import IMember
@@ -52,17 +50,7 @@ class MembraneUser(object):
         return state in self.allowed_states
 
     def getUserId(self):
-        # Return the intid.  Fall back to the object id if this fails.
-        # A uuid may be nice, but we need Plone 4.1 for that.
-        # Actually, we have that now, so we could do this:
-        #return IUUID(self.context)
-        intids = getUtility(IIntIds)
-        try:
-            return str(intids.getId(self.context))
-        except KeyError:
-            logger.warn("KeyError getting intid for MembraneUser %s.",
-                        self.context.id)
-            return self.context.id
+        return IUUID(self.context)
 
     def getUserName(self):
         # The email address is the login name.  We force lower case.

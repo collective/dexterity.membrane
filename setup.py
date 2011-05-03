@@ -29,6 +29,7 @@ setup(name='dexterity.membrane',
           'plone.app.dexterity',
           'Products.membrane>=2.0.2',
           'collective.indexing',
+          'plone.app.referenceablebehavior',
       ],
       entry_points="""
       # -*- Entry points: -*-

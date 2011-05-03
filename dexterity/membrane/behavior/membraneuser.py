@@ -7,6 +7,7 @@ from zope.interface import alsoProvides
 from zope.interface import invariant, Invalid
 from zope.interface import implements
 from zope import schema
+from z3c.form.interfaces import IEditForm, IAddForm
 from plone.directives import form
 #from plone.dexterity.interfaces import IDexterityContent
 #from plone.autoform.interfaces import IFormFieldProvider
@@ -117,7 +118,9 @@ class IProvidePasswords(form.Schema):
         if data.password != data.confirm_password:
             raise Invalid(_(u"The password and confirmation do not match."))
 
-    # TODO: Hide the password fields when viewing.
+    form.omitted('password', 'confirm_password')
+    form.no_omit(IAddForm, 'password', 'confirm_password')
+    form.no_omit(IEditForm, 'password', 'confirm_password')
 
 
 alsoProvides(IProvidePasswords, form.IFormFieldProvider)

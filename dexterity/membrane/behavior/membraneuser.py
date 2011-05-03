@@ -74,7 +74,10 @@ class MyUserAuthentication(grok.Adapter, MembraneUser):
             # Should never happen, as the code should then never end
             # up here, but better safe than sorry.
             return False
-        return pw_validate(self.context.password,
+        password_provider = IProvidePasswords(self.context)
+        if not password_provider:
+            return False
+        return pw_validate(password_provider.password,
                            credentials.get('password', ''))
 
     def authenticateCredentials(self, credentials):

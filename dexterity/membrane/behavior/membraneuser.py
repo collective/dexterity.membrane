@@ -103,7 +103,6 @@ class IProvidePasswords(form.Schema):
     password = schema.Password(
         title=_(u"Password"),
         required=False,
-        # TODO: store hashed
     )
 
     confirm_password = schema.Password(

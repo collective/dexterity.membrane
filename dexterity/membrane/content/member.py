@@ -82,20 +82,12 @@ def is_url(value):
     raise Invalid(_(u"Not a valid link"))
 
 
-class IMember(form.Schema):
-    """
-    Member
-    """
+class IEmail(form.Schema):
+    """Email address schema.
 
-    first_name = schema.TextLine(
-        title=_(u"First Name"),
-        required=False,
-        )
-
-    last_name = schema.TextLine(
-        title=_(u"Last Name"),
-        required=True,
-        )
+    If you have this field, we can make you a member.  To authenticate
+    you also need a password though.
+    """
 
     email = schema.TextLine(
         # String with validation in place looking for @, required.
@@ -119,6 +111,22 @@ class IMember(form.Schema):
         error = validate_unique_email(data.email)
         if error:
             raise Invalid(error)
+
+
+class IMember(IEmail):
+    """
+    Member
+    """
+
+    first_name = schema.TextLine(
+        title=_(u"First Name"),
+        required=False,
+        )
+
+    last_name = schema.TextLine(
+        title=_(u"Last Name"),
+        required=True,
+        )
 
     homepage = schema.TextLine(
         # url format

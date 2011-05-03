@@ -15,7 +15,7 @@
       description="Use this content as a membrane user"
       provides=".membraneuser.IMembraneUser"
       factory=".membraneuser.MembraneUser"
-      for="dexterity.membrane.content.member.IMember"
+      for="dexterity.membrane.content.member.IEmail"
       />
 
   <plone:behavior

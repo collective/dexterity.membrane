@@ -19,6 +19,7 @@ from Products.PlonePAS.sheet import MutablePropertySheet
 from plone.uuid.interfaces import IUUID
 
 from dexterity.membrane import _
+from dexterity.membrane.content.member import IEmail
 from dexterity.membrane.content.member import IMember
 
 logger = logging.getLogger(__name__)
@@ -58,12 +59,12 @@ class MembraneUser(object):
 
 
 class MembraneUserAdapter(grok.Adapter, MembraneUser):
-    grok.context(IMember)
+    grok.context(IEmail)
     grok.implements(IMembraneUserObject)
 
 
 class MyUserAuthentication(grok.Adapter, MembraneUser):
-    grok.context(IMember)
+    grok.context(IEmail)  # Needs IProvidePasswords too, really.
     grok.implements(IMembraneUserAuth)
 
     def verifyCredentials(self, credentials):
@@ -146,7 +147,7 @@ class PasswordProvider(object):
 
 
 class PasswordProviderAdapter(grok.Adapter, PasswordProvider):
-    grok.context(IMember)
+    grok.context(IEmail)
     grok.implements(IProvidePasswords)
 
 
@@ -238,7 +239,7 @@ class MembraneRoleProvider(object):
     # Give a membrane user some extra local roles in his own member
     # object.
     implements(ILocalRoleProvider)
-    adapts(IMember)
+    adapts(IEmail)
     roles = ('Reader', 'Editor', 'Creator')
 
     def __init__(self, context):

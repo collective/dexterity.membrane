@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<object name="portal_workflow">
+  <object name="dexterity_membrane_workflow" meta_type="Workflow" />
+  <bindings>
+    <type type_id="dexterity.membrane.member">
+      <bound-workflow workflow_id="dexterity_membrane_workflow" />
+    </type>
+  </bindings>
+</object>

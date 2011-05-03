@@ -9,7 +9,7 @@ from plone.app.dexterity.behaviors.metadata import IDublinCore
 from dexterity.membrane.membrane_helpers import get_user_id_for_email
 from dexterity.membrane.behavior.membraneuser import IMembraneUser
 from dexterity.membrane.behavior.membraneuser import IProvidePasswords
-from nd.policy.tests.base import TestCase
+from dexterity.membrane.tests.base import TestCase
 
 
 class TestMember(TestCase):

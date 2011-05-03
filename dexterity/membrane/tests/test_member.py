@@ -15,12 +15,14 @@ from dexterity.membrane.tests.base import TestCase
 class TestMember(TestCase):
 
     def test_create_member(self):
-        member = self._createType(self.portal, 'dexterity.membrane.member', 'dame')
+        member = self._createType(
+            self.portal, 'dexterity.membrane.member', 'jane')
         self.assertEqual(member.portal_type, 'dexterity.membrane.member')
 
     def test_member_is_membrane_type(self):
         membrane = getToolByName(self.portal, 'membrane_tool')
-        self.assertTrue('dexterity.membrane.member' in membrane.listMembraneTypes())
+        self.assertTrue('dexterity.membrane.member' in
+                        membrane.listMembraneTypes())
         # Fine, it is a membrane_type, but does it actually work?  We
         # add a member and see if we can find it again using the
         # membrane_tool.
@@ -29,7 +31,8 @@ class TestMember(TestCase):
         # test to fail just because someone adds an extra test member
         # somewhere.
         start_count = len(membrane.unrestrictedSearchResults())
-        member = self._createType(self.portal, 'dexterity.membrane.member', 'dame')
+        member = self._createType(
+            self.portal, 'dexterity.membrane.member', 'jane')
         # Need to reindex the new object manually in the tests (or
         # maybe notify an event).  We would want to just do
         # 'member.reindexObject()' but that is apparently not enough
@@ -43,7 +46,8 @@ class TestMember(TestCase):
     def test_member_properties(self):
         # Some properties from portal_memberdate can be queried from
         # the member content item.
-        member = self._createType(self.portal, 'dexterity.membrane.member', 'joe')
+        member = self._createType(
+            self.portal, 'dexterity.membrane.member', 'joe')
         member.first_name = 'Joe'
         member.last_name = 'User'
         member.email = 'joe@example.org'
@@ -66,7 +70,8 @@ class TestMember(TestCase):
 
     def test_user_name(self):
         # Some upper and lower case issues.
-        member = self._createType(self.portal, 'dexterity.membrane.member', 'joe')
+        member = self._createType(
+            self.portal, 'dexterity.membrane.member', 'joe')
         member.email = 'JOE@example.org'
         member.password = 'secret'
         member.confirm_password = 'secret'
@@ -110,7 +115,8 @@ class TestMember(TestCase):
         # unindexObject works properly.  Note that collective.indexing
         # needs to be available for this, and its monkey patches
         # applied, which should happen automatically on startup.
-        member = self._createType(self.portal, 'dexterity.membrane.member', 'joe')
+        member = self._createType(
+            self.portal, 'dexterity.membrane.member', 'joe')
         member.email = 'joe@example.org'
         membrane = getToolByName(self.portal, 'membrane_tool')
         membrane.reindexObject(member)
@@ -193,7 +199,8 @@ class TestMember(TestCase):
     def test_member_behaviors(self):
         behaviors = [INameFromTitle, IDublinCore, IMembraneUser,
                      IProvidePasswords]
-        member = self._createType(self.portal, 'dexterity.membrane.member', 'les')
+        member = self._createType(
+            self.portal, 'dexterity.membrane.member', 'les')
         assignable = IBehaviorAssignable(member)
         for b in behaviors:
             self.assertTrue(assignable.supports(b),

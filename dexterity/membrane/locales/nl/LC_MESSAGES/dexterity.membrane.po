@@ -1,67 +1,64 @@
-# --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
-# SOME DESCRIPTIVE TITLE.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Maurits van Rees <maurits@vanrees.org>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2011-05-04 00:57+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2011-05-04 03:00+0200\n"
+"Last-Translator: Maurits van Rees <maurits@vanrees.org>\n"
+"Language-Team: plone-nl@lists.plone.org\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0\n"
-"Language-Code: en\n"
-"Language-Name: English\n"
+"Language-Code: nl\n"
+"Language-Name: Dutch\n"
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: dexterity.membrane\n"
 
 #: ./content/member.py:140
 msgid "Biography"
-msgstr ""
+msgstr "Biografie"
 
 #: ./behavior/membraneuser.py:109
 msgid "Confirm Password"
-msgstr ""
+msgstr "Bevestig wachtwoord"
 
 #: ./content/member.py:95
 msgid "E-mail Address"
-msgstr ""
+msgstr "E-mailadres"
 
 #: ./content/member.py:133
 msgid "External Homepage"
-msgstr ""
+msgstr "Externe homepage"
 
 #: ./content/member.py:122
 msgid "First Name"
-msgstr ""
+msgstr "Voornaam"
 
 #: ./content/member.py:127
 msgid "Last Name"
-msgstr ""
+msgstr "Achternaam"
 
 #: ./profiles/default/types/dexterity.membrane.member.xml
 msgid "Member"
-msgstr ""
+msgstr "Lid"
 
 #: ./behavior/membraneuser.py:96
 msgid "Membership"
-msgstr ""
+msgstr "Lidmaatschap"
 
 #: ./content/member.py:82
 msgid "Not a valid link"
-msgstr ""
+msgstr "Geen geldige link"
 
 #: ./content/member.py:43
 msgid "Not an email address"
-msgstr ""
+msgstr "Geen e-mailadres"
 
 #: ./behavior/membraneuser.py:104
 msgid "Password"
-msgstr ""
+msgstr "Wachtwoord"
 
 #: ./behavior/membraneuser.py:118
 msgid "The password and confirmation do not match."
-msgstr ""
-
+msgstr "Het wachtwoord en de bevestigen komen niet overeen."

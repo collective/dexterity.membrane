@@ -18,9 +18,8 @@
 
   <genericsetup:registerProfile
       name="default"
-      title="Quick dump of some code in a client project for a membrane behavior for dexterity content."
+      title="Dexterity content and behaviors to integrate with membrane."
       directory="profiles/default"
-      description="Extension profile for Quick dump of some code in a client project for a membrane behavior for dexterity content."
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
 

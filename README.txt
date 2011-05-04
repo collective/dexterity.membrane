@@ -2,7 +2,7 @@ Introduction
 ============
 
 This is very much alpha code.  But it seems to work fine in a client
-project.  Or at least the client where this package got copied from
+project.  Or at least the client code where this package got copied from
 seems to work fine.  It could be that too much client code has been
 left behind here or removed, but it seems to be okay.
 
@@ -93,7 +93,7 @@ Membrane implementation
 Local roles
 -----------
 
-This package define a local role provider that makes sure a logged in
+This package defines a local role provider that makes sure a logged in
 user gets the local Reader, Editor and Creator roles on the membrane
 object that belongs to that user.
 

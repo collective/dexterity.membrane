@@ -5,7 +5,7 @@ version = '0.1'
 
 setup(name='dexterity.membrane',
       version=version,
-      description="Quick dump of some code in a client project for a membrane behavior for dexterity content.",
+      description="Dexterity content and behaviors to integrate with membrane.",
       long_description=open("README.txt").read() + "\n" +
                        open(os.path.join("docs", "HISTORY.txt")).read(),
       # Get more strings from
@@ -15,9 +15,9 @@ setup(name='dexterity.membrane',
         "Programming Language :: Python",
         ],
       keywords='',
-      author='',
-      author_email='',
-      url='http://svn.plone.org/svn/collective/',
+      author='Maurits van Rees',
+      author_email='maurits@vanrees.org',
+      url='http://svn.plone.org/svn/collective/dexterity.membrane',
       license='GPL',
       packages=find_packages(exclude=['ez_setup']),
       namespace_packages=['dexterity'],
@@ -37,7 +37,4 @@ setup(name='dexterity.membrane',
       [z3c.autoinclude.plugin]
       target = plone
       """,
-      setup_requires=["PasteScript"],
-      paster_plugins = ["ZopeSkel"],
-
       )

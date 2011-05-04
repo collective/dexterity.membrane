@@ -6,12 +6,16 @@ project.  Or at least the client where this package got copied from
 seems to work fine.  It could be that too much client code has been
 left behind here or removed, but it seems to be okay.
 
+The code is inspired by parts of the ``fsd.membrane`` package (being
+developed by the WebLion group) and the membrane documentation at
+http://packages.python.org/Products.membrane/content.html
+
 
 Compatibility
 -------------
 
 This package has been developed for Plone 4.1.  In fact it will only
-work on that version (or higher) as we need uuid support.
+work on that version (or higher) as we require uuid support.
 
 We depend on Products.membrane 2.0.2 or higher as that contains a fix
 to make sure members that are deleted are also removed from the

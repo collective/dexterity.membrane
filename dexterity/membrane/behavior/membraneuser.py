@@ -16,6 +16,7 @@ from Products.CMFCore.utils import getToolByName
 from Products.membrane.interfaces import IMembraneUserAuth
 from Products.membrane.interfaces import IMembraneUserObject
 from Products.membrane.interfaces import IMembraneUserProperties
+from Products.membrane.interfaces import IMembraneUserChanger
 from Products.PlonePAS.sheet import MutablePropertySheet
 from plone.uuid.interfaces import IUUID
 
@@ -154,6 +155,16 @@ class PasswordProvider(object):
 class PasswordProviderAdapter(grok.Adapter, PasswordProvider):
     grok.context(IEmail)
     grok.implements(IProvidePasswords)
+
+
+class MyUserPasswordChanger(grok.Adapter, MembraneUser):
+    """Supports resetting a member's password via the password reset form."""
+    grok.context(IMember)
+    grok.implements(IMembraneUserChanger)
+    
+    def doChangeUser(self, user_id, password, **kwargs):
+        password_provider = IProvidePasswords(self.context)
+        password_provider.password = password
 
 
 class MyUserProperties(grok.Adapter, MembraneUser):

@@ -126,6 +126,15 @@ class TestMember(TestCase):
         self.assertEqual(len(membrane.unrestrictedSearchResults(
             exact_getUserName='joe@example.org')), 0)
 
+    def test_reset_password(self):
+        member = self._createType(
+            self.portal, 'dexterity.membrane.member', 'joe')
+        member.email = 'joe@example.org'
+        self.portal.membrane_tool.reindexObject(member)
+        user_id = get_user_id_for_email(self.portal, 'joe@example.org')
+        self.portal.acl_users.userSetPassword(user_id, 'foobar')
+        self.assertEqual('{SSHA}SswEFOvNkHEx8nlLfFP2MAfc9j6u87BO/w7+', member.password)
+
     def test_local_roles(self):
         # Members get extra local roles on their own object.
         # Get tools:

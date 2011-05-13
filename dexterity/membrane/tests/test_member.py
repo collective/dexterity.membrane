@@ -133,7 +133,8 @@ class TestMember(TestCase):
         self.portal.membrane_tool.reindexObject(member)
         user_id = get_user_id_for_email(self.portal, 'joe@example.org')
         self.portal.acl_users.userSetPassword(user_id, 'foobar')
-        self.assertEqual('{SSHA}SswEFOvNkHEx8nlLfFP2MAfc9j6u87BO/w7+', member.password)
+        from AccessControl.AuthEncoding import pw_validate
+        self.assertTrue(pw_validate(member.password, 'foobar'))
 
     def test_local_roles(self):
         # Members get extra local roles on their own object.

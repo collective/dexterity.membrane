@@ -4,6 +4,7 @@ from AccessControl.AuthEncoding import pw_validate
 from five import grok
 from zope.component import adapts
 from zope.interface import alsoProvides
+from zope.interface import Interface
 from zope.interface import invariant, Invalid
 from zope.interface import implements
 from zope import schema
@@ -32,22 +33,23 @@ class IMembraneUser(form.Schema):
        Marker/Form interface for Membrane User
     """
 
-
-#alsoProvides(IMembraneUser, IFormFieldProvider)
+class IMembraneUserWorkflow(Interface):
+    """Adapts a membrane user to provide workflow-related info."""
+    
+    def is_right_state(self):
+        """Returns true if the user is in a state considered active."""
 
 
 class MembraneUser(object):
     """Methods for Membrane User
     """
 
-    allowed_states = ('enabled', )
+    allowed_states = ('enabled',)
 
     def __init__(self, context):
         self.context = context
 
     def in_right_state(self):
-        """Is the context in an allowed review state?
-        """
         workflow = getToolByName(self.context, 'portal_workflow')
         state = workflow.getInfoFor(self.context, 'review_state')
         return state in self.allowed_states
@@ -63,6 +65,11 @@ class MembraneUser(object):
 class MembraneUserAdapter(grok.Adapter, MembraneUser):
     grok.context(IEmail)
     grok.implements(IMembraneUserObject)
+
+
+class MembraneUserWorkflow(grok.Adapter, MembraneUser):
+    grok.context(IEmail)
+    grok.implements(IMembraneUserWorkflow)
 
 
 class MyUserAuthentication(grok.Adapter, MembraneUser):
@@ -84,7 +91,8 @@ class MyUserAuthentication(grok.Adapter, MembraneUser):
 
     def authenticateCredentials(self, credentials):
         # Should not authenticate when the user is not enabled.
-        if not self.in_right_state():
+        workflow_info = IMembraneUserWorkflow(self.context)
+        if not workflow_info.in_right_state():
             return
         if self.verifyCredentials(credentials):
             return (self.getUserId(), self.getUserName())
@@ -261,11 +269,15 @@ class MembraneRoleProvider(object):
     def __init__(self, context):
         self.context = context
 
+    def _in_right_state(self):
+        workflow_info = IMembraneUserWorkflow(self.context)
+        return workflow_info.in_right_state()
+
     def getRoles(self, user_id):
         membrane = IMembraneUserObject(self.context)
         if membrane.getUserId() != user_id:
             return ()
-        if not membrane.in_right_state():
+        if not self._in_right_state():
             return ()
         return self.roles
 
@@ -273,7 +285,7 @@ class MembraneRoleProvider(object):
         """Here we should apparently enumerate all users who should
         get an extra role.
         """
-        membrane = IMembraneUserObject(self.context)
-        if not membrane.in_right_state():
+        if not self._in_right_state():
             return
+        membrane = IMembraneUserObject(self.context)
         yield membrane.getUserId(), self.roles

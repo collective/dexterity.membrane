@@ -15,9 +15,9 @@ def test_suite():
         #    'README.txt', package='dexterity.membrane',
         #    setUp=testing.setUp, tearDown=testing.tearDown),
 
-        #doctestunit.DocTestSuite(
-        #    module='dexterity.membrane.mymodule',
-        #    setUp=testing.setUp, tearDown=testing.tearDown),
+        doctestunit.DocTestSuite(
+            module='dexterity.membrane.content.member',
+            setUp=testing.setUp, tearDown=testing.tearDown),
 
 
         # Integration tests that use PloneTestCase

@@ -25,7 +25,7 @@ setup(name='dexterity.membrane',
       zip_safe=False,
       install_requires=[
           'setuptools',
-          'Products.CMFPlone',
+          'Products.CMFPlone>=4.1b1',
           'plone.app.dexterity',
           'Products.membrane>=2.0.2',
           'collective.indexing',

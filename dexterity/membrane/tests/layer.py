@@ -3,7 +3,7 @@
 from Testing.ZopeTestCase import installProduct
 from Testing.ZopeTestCase import installPackage
 from Products.PloneTestCase.layer import PloneSite
-from Products.Five import zcml
+from Zope2.App import zcml
 from Products.Five import fiveconfigure as metaconfigure
 
 

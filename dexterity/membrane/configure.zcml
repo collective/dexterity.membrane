@@ -23,6 +23,8 @@
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
 
+  <adapter name="Title" factory=".indexers.Title" />
+
   <!-- -*- extra stuff goes here -*- -->
 
 </configure>

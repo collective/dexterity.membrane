@@ -19,6 +19,14 @@
       />
 
   <plone:behavior
+      title="Name from full name"
+      description="Use the full name as name (basis for the id)"
+      provides=".membraneuser.INameFromFullName"
+      factory=".membraneuser.NameFromFullName"
+      for="dexterity.membrane.content.member.IMember"
+      />
+
+  <plone:behavior
       title="Password"
       description="Store password on this content"
       provides=".membraneuser.IProvidePasswords"

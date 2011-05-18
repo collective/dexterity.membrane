@@ -9,6 +9,7 @@ from Products.membrane.interfaces import IMembraneUserChanger
 from Products.membrane.interfaces import IMembraneUserObject
 from Products.membrane.interfaces import IMembraneUserProperties
 from five import grok
+from plone.app.content.interfaces import INameFromTitle
 from plone.directives import form
 from plone.uuid.interfaces import IUUID
 from z3c.form.interfaces import IEditForm, IAddForm
@@ -22,6 +23,38 @@ from dexterity.membrane.content.member import IEmail
 from dexterity.membrane.content.member import IMember
 
 logger = logging.getLogger(__name__)
+
+
+def get_full_name(context):
+    names = [
+        context.first_name,
+        context.last_name,
+        ]
+    return u' '.join([name for name in names if name])
+
+
+class INameFromFullName(INameFromTitle):
+    """Get the name from the full name.
+
+    This is really just a marker interface, automatically set by
+    enabling the corresponding behavior.
+
+    Note that when you want this behavior, then you MUST NOT enable
+    the IDublinCore, IBasic, INameFromTitle or INameFromFile behaviors
+    on your type.
+    """
+
+
+class NameFromFullName(object):
+    implements(INameFromFullName)
+    adapts(IMember)
+
+    def __init__(self, context):
+        self.context = context
+
+    @property
+    def title(self):
+        return get_full_name(self.context)
 
 
 class IMembraneUser(form.Schema):
@@ -192,13 +225,8 @@ class MyUserProperties(grok.Adapter, MembraneUser):
     def fullname(self):
         # Note: we only define a getter; a setter would be too tricky
         # due to the multiple fields that are behind this one
-        # property.  Possibly add middle_name and maybe suffix, but we
-        # don't do that in the Lilly project either.
-        names = [
-            self.context.first_name,
-            self.context.last_name,
-            ]
-        return u' '.join([name for name in names if name])
+        # property.
+        return get_full_name(self.context)
 
     def getPropertiesForUser(self, user, request=None):
         """Get properties for this user.

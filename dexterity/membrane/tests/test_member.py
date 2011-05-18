@@ -1,14 +1,16 @@
 import unittest
 
-from plone.behavior.interfaces import IBehaviorAssignable
 from Products.CMFCore.utils import getToolByName
-
 from plone.app.content.interfaces import INameFromTitle
-from plone.app.dexterity.behaviors.metadata import IDublinCore
+from plone.app.dexterity.behaviors import metadata
+from plone.app.referenceablebehavior.referenceable import IReferenceable
+from plone.behavior.interfaces import IBehaviorAssignable
 
-from dexterity.membrane.membrane_helpers import get_user_id_for_email
 from dexterity.membrane.behavior.membraneuser import IMembraneUser
+from dexterity.membrane.behavior.membraneuser import INameFromFullName
 from dexterity.membrane.behavior.membraneuser import IProvidePasswords
+from dexterity.membrane.behavior.membraneuser import get_full_name
+from dexterity.membrane.membrane_helpers import get_user_id_for_email
 from dexterity.membrane.tests.base import TestCase
 
 
@@ -207,14 +209,46 @@ class TestMember(TestCase):
                          ['Authenticated'])
 
     def test_member_behaviors(self):
-        behaviors = [INameFromTitle, IDublinCore, IMembraneUser,
-                     IProvidePasswords]
+        behaviors = [INameFromFullName, IReferenceable,
+                     metadata.ICategorization, metadata.IPublication,
+                     metadata.IOwnership, IMembraneUser, IProvidePasswords]
         member = self._createType(
             self.portal, 'dexterity.membrane.member', 'les')
         assignable = IBehaviorAssignable(member)
         for b in behaviors:
             self.assertTrue(assignable.supports(b),
                             "member type should support %s behavior" % b)
+
+    def test_member_behavior_blacklist(self):
+        # Some behaviors should definitely NOT be provided.
+        black_list = [metadata.IDublinCore, metadata.IBasic]
+        # Note that we would want INameFromTitle in the black list as
+        # well, but it cannot be, as it gets pulled in as base class
+        # of INameFromFullName.
+        member = self._createType(
+            self.portal, 'dexterity.membrane.member', 'les')
+        assignable = IBehaviorAssignable(member)
+        for b in black_list:
+            self.assertFalse(assignable.supports(b),
+                            "member type should NOT support %s behavior" % b)
+
+    def test_name_from_full_name(self):
+        # We do not want to set a title but instead have the first and
+        # last name used as title.  We do not mind too much if the
+        # title field itself is empty, as long as we have our ways to
+        # get the fullname and get a name (basis for id) based on our
+        # title.
+        member = self._createType(
+            self.portal, 'dexterity.membrane.member', 'joe')
+        name_title = INameFromTitle(member)
+        self.assertEqual(name_title.title, u'')
+        member.title = u"Title field"
+        self.assertEqual(name_title.title, u'')
+        member.last_name = u"User"
+        self.assertEqual(name_title.title, u'User')
+        member.first_name = u"Joe"
+        self.assertEqual(name_title.title, u'Joe User')
+        self.assertEqual(get_full_name(member), u'Joe User')
 
 
 def test_suite():

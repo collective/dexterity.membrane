@@ -1,25 +1,21 @@
 import logging
+
 from AccessControl.AuthEncoding import pw_encrypt
 from AccessControl.AuthEncoding import pw_validate
-from five import grok
-from zope.component import adapts
-from zope.interface import alsoProvides
-from zope.interface import Interface
-from zope.interface import invariant, Invalid
-from zope.interface import implements
-from zope import schema
-from z3c.form.interfaces import IEditForm, IAddForm
-from plone.directives import form
-#from plone.dexterity.interfaces import IDexterityContent
-#from plone.autoform.interfaces import IFormFieldProvider
-
 from Products.CMFCore.utils import getToolByName
+from Products.PlonePAS.sheet import MutablePropertySheet
 from Products.membrane.interfaces import IMembraneUserAuth
+from Products.membrane.interfaces import IMembraneUserChanger
 from Products.membrane.interfaces import IMembraneUserObject
 from Products.membrane.interfaces import IMembraneUserProperties
-from Products.membrane.interfaces import IMembraneUserChanger
-from Products.PlonePAS.sheet import MutablePropertySheet
+from five import grok
+from plone.directives import form
 from plone.uuid.interfaces import IUUID
+from z3c.form.interfaces import IEditForm, IAddForm
+from zope import schema
+from zope.component import adapts
+from zope.interface import alsoProvides, implements
+from zope.interface import Interface, invariant, Invalid
 
 from dexterity.membrane import _
 from dexterity.membrane.content.member import IEmail
@@ -33,9 +29,10 @@ class IMembraneUser(form.Schema):
        Marker/Form interface for Membrane User
     """
 
+
 class IMembraneUserWorkflow(Interface):
     """Adapts a membrane user to provide workflow-related info."""
-    
+
     def is_right_state(self):
         """Returns true if the user is in a state considered active."""
 
@@ -169,7 +166,7 @@ class MyUserPasswordChanger(grok.Adapter, MembraneUser):
     """Supports resetting a member's password via the password reset form."""
     grok.context(IMember)
     grok.implements(IMembraneUserChanger)
-    
+
     def doChangeUser(self, user_id, password, **kwargs):
         password_provider = IProvidePasswords(self.context)
         password_provider.password = password

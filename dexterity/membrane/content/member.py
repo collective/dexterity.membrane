@@ -1,13 +1,8 @@
 import re
-#from five import grok
-from zope import schema
-from zope.interface import Invalid, invariant
-#from z3c.relationfield.schema import RelationChoice, RelationList
-#from plone.formwidget.contenttree import ObjPathSourceBinder
-#from plone.app.textfield import RichText
 
 from plone.directives import form
-#from plone.directives import dexterity
+from zope import schema
+from zope.interface import Invalid, invariant
 
 from dexterity.membrane import _
 from dexterity.membrane.membrane_helpers import validate_unique_email

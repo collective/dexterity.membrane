@@ -115,7 +115,7 @@ class IMember(IEmail):
 
     first_name = schema.TextLine(
         title=_(u"First Name"),
-        required=False,
+        required=True,
         )
 
     last_name = schema.TextLine(

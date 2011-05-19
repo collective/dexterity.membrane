@@ -100,7 +100,7 @@ class IEmail(form.Schema):
         his email the same actually works.
         """
         if data.__context__ is not None:
-            if not hasattr(data.__context__, 'email') or data.__context__.email == data.email:
+            if hasattr(data.__context__, 'email') and data.__context__.email == data.email:
                 # No change, fine.
                 return
         error = validate_unique_email(data.email)

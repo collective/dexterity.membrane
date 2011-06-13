@@ -14,6 +14,7 @@
       title="Membrane User"
       description="Use this content as a membrane user"
       provides=".membraneuser.IMembraneUser"
+      marker=".membraneuser.IMembraneUser"
       factory=".membraneuser.MembraneUser"
       for="dexterity.membrane.content.member.IEmail"
       />

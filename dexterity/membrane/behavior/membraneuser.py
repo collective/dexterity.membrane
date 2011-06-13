@@ -19,10 +19,18 @@ from zope.interface import alsoProvides, implements
 from zope.interface import Interface, invariant, Invalid
 
 from dexterity.membrane import _
-from dexterity.membrane.content.member import IEmail
-from dexterity.membrane.content.member import IMember
 
 logger = logging.getLogger(__name__)
+
+
+class IMembraneUser(Interface):
+    """Marker/Form interface for Membrane User
+    
+    The main content schema of the membrane user must contain fields named
+    'first_name', 'last_name', and 'email'.
+    
+    The content item must also be adaptable to IProvidePasswords.
+    """
 
 
 def get_full_name(context):
@@ -47,7 +55,7 @@ class INameFromFullName(INameFromTitle):
 
 class NameFromFullName(object):
     implements(INameFromFullName)
-    adapts(IMember)
+    adapts(IMembraneUser)
 
     def __init__(self, context):
         self.context = context
@@ -55,12 +63,6 @@ class NameFromFullName(object):
     @property
     def title(self):
         return get_full_name(self.context)
-
-
-class IMembraneUser(form.Schema):
-    """
-       Marker/Form interface for Membrane User
-    """
 
 
 class IMembraneUserWorkflow(Interface):
@@ -93,17 +95,17 @@ class MembraneUser(object):
 
 
 class MembraneUserAdapter(grok.Adapter, MembraneUser):
-    grok.context(IEmail)
+    grok.context(IMembraneUser)
     grok.implements(IMembraneUserObject)
 
 
 class MembraneUserWorkflow(grok.Adapter, MembraneUser):
-    grok.context(IEmail)
+    grok.context(IMembraneUser)
     grok.implements(IMembraneUserWorkflow)
 
 
 class MyUserAuthentication(grok.Adapter, MembraneUser):
-    grok.context(IEmail)  # Needs IProvidePasswords too, really.
+    grok.context(IMembraneUser)
     grok.implements(IMembraneUserAuth)
 
     def verifyCredentials(self, credentials):
@@ -191,13 +193,13 @@ class PasswordProvider(object):
 
 
 class PasswordProviderAdapter(grok.Adapter, PasswordProvider):
-    grok.context(IEmail)
+    grok.context(IMembraneUser)
     grok.implements(IProvidePasswords)
 
 
 class MyUserPasswordChanger(grok.Adapter, MembraneUser):
     """Supports resetting a member's password via the password reset form."""
-    grok.context(IMember)
+    grok.context(IMembraneUser)
     grok.implements(IMembraneUserChanger)
 
     def doChangeUser(self, user_id, password, **kwargs):
@@ -211,7 +213,7 @@ class MyUserProperties(grok.Adapter, MembraneUser):
     Adapted from Products/membrane/at/properties.py
     """
 
-    grok.context(IMember)
+    grok.context(IMembraneUser)
     grok.implements(IMembraneUserProperties)
 
     # Map from memberdata property to member field:
@@ -288,7 +290,7 @@ class MembraneRoleProvider(object):
     # Give a membrane user some extra local roles in his own member
     # object.
     implements(ILocalRoleProvider)
-    adapts(IEmail)
+    adapts(IMembraneUser)
     roles = ('Reader', 'Editor', 'Creator')
 
     def __init__(self, context):

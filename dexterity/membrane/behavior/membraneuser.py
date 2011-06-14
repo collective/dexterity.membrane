@@ -12,7 +12,7 @@ from five import grok
 from plone.app.content.interfaces import INameFromTitle
 from plone.directives import form
 from plone.uuid.interfaces import IUUID
-from z3c.form.interfaces import IEditForm, IAddForm
+from z3c.form.interfaces import IAddForm
 from zope import schema
 from zope.component import adapts
 from zope.interface import alsoProvides, implements
@@ -160,7 +160,6 @@ class IProvidePasswords(form.Schema):
 
     form.omitted('password', 'confirm_password')
     form.no_omit(IAddForm, 'password', 'confirm_password')
-    form.no_omit(IEditForm, 'password', 'confirm_password')
 
 
 alsoProvides(IProvidePasswords, form.IFormFieldProvider)

@@ -111,7 +111,7 @@ class MyUserAuthentication(grok.Adapter, MembraneUser):
     def verifyCredentials(self, credentials):
         """Returns True is password is authenticated, False if not.
         """
-        if credentials.get('login') != self.getUserName():
+        if credentials.get('login').lower() != self.getUserName().lower():
             # Should never happen, as the code should then never end
             # up here, but better safe than sorry.
             return False

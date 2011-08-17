@@ -157,7 +157,7 @@ class IProvidePasswords(form.Schema):
         """
         password = getattr(data, 'password', None)
         confirm_password = getattr(data, 'confirm_password', None)
-        if password and confirm_password and password != confirm_password:
+        if password or confirm_password and password != confirm_password:
             raise Invalid(_(u"The password and confirmation do not match."))
 
     form.omitted('password', 'confirm_password')

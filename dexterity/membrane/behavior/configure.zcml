@@ -37,7 +37,7 @@
 
   <adapter
       factory=".membraneuser.MembraneRoleProvider"
-      name="alm.content.behavior.membraneuser.MembraneRoleProvider"
+      name="dexterity.membrane.behavior.membraneuser.MembraneRoleProvider"
       />
 
 </configure>

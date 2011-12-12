@@ -55,10 +55,6 @@ def get_user_id_for_email(context, email):
 
 def validate_unique_email(email, context=None):
     """Validate this email as unique in the site.
-
-    Note that the arguments are switched around compared to the
-    current function in alm/content/pas/utils.py, as we want to be
-    able to only pass in an email value without a context.
     """
     if context is None:
         context = getSite()

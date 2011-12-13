@@ -10,22 +10,22 @@ from dexterity.membrane.tests.base import TestCase
 class TestSettings(TestCase):
 
     def test_controlpanel_view(self):
-        # Test the membership setting control panel view
+        # Test the setting control panel view works
         view = getMultiAdapter((self.portal, self.portal.REQUEST),
                                name="dexteritymembrane-settings")
         view = view.__of__(self.portal)
         self.assertTrue(view())
 
     def test_controlpanel_view_protected(self):
-        # Test that the membership setting control panel view can not be
+        # Test that the setting control panel view can not be
         # accessed by anonymous users
         from AccessControl import Unauthorized
         self.logout()
         self.assertRaises(Unauthorized, self.portal.restrictedTraverse,
                                     '@@dexteritymembrane-settings')
 
-    def test_roles_in_controlpanel(self):
-        # Check that there is an membership entry in the control panel
+    def test_entry_in_controlpanel(self):
+        # Check that there is a dexterity.membrane entry in the control panel
         controlpanel = getToolByName(self.portal, "portal_controlpanel")
         actions = [a.getAction(self)['id']
                             for a in controlpanel.listActions()]

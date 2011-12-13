@@ -16,6 +16,7 @@ class DexterityMembraneLayer(PloneSite):
         zcml.load_config('configure.zcml', dexterity.membrane)
         metaconfigure.debug_mode = False
         installPackage('collective.indexing')
+        installPackage('dexterity.membrane')
 
     @classmethod
     def tearDown(cls):

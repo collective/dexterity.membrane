@@ -7,12 +7,40 @@ slows down test runner startup.
 """
 
 from Products.CMFCore.utils import getToolByName
+from Testing import ZopeTestCase as ztc
+from Products.Five import zcml
+from Products.Five import fiveconfigure
+from Products.PloneTestCase.layer import onsetup
 from Products.PloneTestCase import PloneTestCase as ptc
 
 from dexterity.membrane.tests.layer import DexterityMembraneLayer
 
-ptc.setupPloneSite(products=['dexterity.membrane'])
 
+CONTENT_PROFILE = 'dexterity.membrane.content:content'
+BEHAVIOR_PROFILE = 'dexterity.membrane:behavior'
+
+
+# When ZopeTestCase configures Zope, it will *not* auto-load products
+# in Products/. Instead, we have to use a statement such as:
+#   ztc.installProduct('SimpleAttachment')
+# This does *not* apply to products in eggs and Python packages (i.e.
+# not in the Products.*) namespace. For that, see below.
+# All of Plone's products are already set up by PloneTestCase.
+
+@onsetup
+def setup_product():
+    """Set up the package and its dependencies.
+    """
+    # Load the ZCML configuration for the example.tests package.
+    # This can of course use <include /> to include other packages.
+    fiveconfigure.debug_mode = True
+    import dexterity.membrane
+    zcml.load_config('configure.zcml', dexterity.membrane)
+    fiveconfigure.debug_mode = False
+    ztc.installPackage('dexterity.membrane')
+
+setup_product()
+ptc.setupPloneSite(extension_profiles=[CONTENT_PROFILE, BEHAVIOR_PROFILE])
 
 class TestCase(ptc.PloneTestCase):
     """We use this base class for all the tests in this package. If

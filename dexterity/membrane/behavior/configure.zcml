@@ -2,6 +2,7 @@
     xmlns="http://namespaces.zope.org/zope"
     xmlns:grok="http://namespaces.zope.org/grok"
     xmlns:plone="http://namespaces.plone.org/plone"
+    xmlns:browser="http://namespaces.zope.org/browser"
     i18n_domain="dexterity.membrane">
 
   <!-- Grok schemata -->
@@ -39,5 +40,13 @@
       factory=".membraneuser.MembraneRoleProvider"
       name="dexterity.membrane.behavior.membraneuser.MembraneRoleProvider"
       />
+
+  <!-- Control panel -->
+  <browser:page
+    name="dexteritymembrane-settings"
+    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+    permission="cmf.ManagePortal"
+    class=".settings.DexterityMembraneControlPanelView"
+  />
 
 </configure>

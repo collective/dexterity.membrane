@@ -1,10 +1,18 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
     xmlns:five="http://namespaces.zope.org/five"
-    i18n_domain="nd.content">
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    i18n_domain="dexterity.membrane">
 
-  <!-- configure your content components here -->
+  <!-- make this show up in the quickinstaller separately -->
+  <five:registerPackage package="."/>
 
-  <!-- -*- extra stuff goes here -*- -->
+  <genericsetup:registerProfile
+      name="content"
+      title="dexterity.membrane: content"
+      description="Configuration for the dexterity.membrane example content type"
+      directory="../profiles/default"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
 
 </configure>

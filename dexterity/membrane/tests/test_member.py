@@ -138,7 +138,7 @@ class TestMember(TestCase):
         from AccessControl.AuthEncoding import pw_validate
         self.assertTrue(pw_validate(member.password, 'foobar'))
 
-    def test_local_roles(self):
+    def test_default_local_roles(self):
         # Members get extra local roles on their own object.
         # Get tools:
         membrane = getToolByName(self.portal, 'membrane_tool')
@@ -207,6 +207,31 @@ class TestMember(TestCase):
                          ['Authenticated'])
         self.assertEqual(sorted(bob_member.getRolesInContext(self.portal.bob)),
                          ['Authenticated'])
+
+    def test_local_roles_are_configurable(self):
+        memship = getToolByName(self.portal, 'portal_membership')
+        # Create joe, approve him, and get him indexed with membrane
+        joe = self._createType(self.portal, 'dexterity.membrane.member', 'joe')
+        joe.email = 'joe@example.org'
+        wf_tool = getToolByName(self.portal, 'portal_workflow')
+        self.setRoles(['Reviewer'])
+        wf_tool.doActionFor(joe, 'approve')
+        joe.reindexObject()
+        joe_id = get_user_id_for_email(self.portal, 'joe@example.org')
+        joe_member = memship.getMemberById(joe_id)
+        # Test default roles:
+        self.assertEqual(sorted(joe_member.getRolesInContext(self.portal.joe)),
+                         ['Authenticated', 'Creator', 'Editor', 'Reader'])
+        # Adjust the registry setting
+        from zope.component import getUtility
+        from plone.registry.interfaces import IRegistry
+        from dexterity.membrane.behavior import settings
+        reg = getUtility(IRegistry)
+        config = reg.forInterface(settings.IDexterityMembraneSettings, False)
+        config.local_roles = set([u'Reader'])
+        # Roles should now be trimmed down
+        self.assertEqual(sorted(joe_member.getRolesInContext(self.portal.joe)),
+                         ['Authenticated', 'Reader'])
 
     def test_member_behaviors(self):
         behaviors = [INameFromFullName, IReferenceable,

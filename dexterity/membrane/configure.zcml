@@ -13,13 +13,15 @@
 
   <i18n:registerTranslations directory="locales" />
 
-  <!-- Register an extension profile to make the product installable -->
   <include package=".behavior" />
+  <include package=".content" />
 
+  <!-- Register an extension profile to make the product installable -->
   <genericsetup:registerProfile
-      name="default"
-      title="Dexterity content and behaviors to integrate with membrane."
-      directory="profiles/default"
+      name="behavior"
+      title="dexterity.membrane: behaviors"
+      description="Configuration for the dexterity.membrane behaviors"
+      directory="profiles/behavior"
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
 

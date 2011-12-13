@@ -15,6 +15,7 @@ from plone.uuid.interfaces import IUUID
 from z3c.form.interfaces import IAddForm
 from zope import schema
 from zope.component import adapts
+from zope.component import getUtility
 from zope.interface import alsoProvides, implements
 from zope.interface import Interface, invariant, Invalid
 
@@ -25,10 +26,10 @@ logger = logging.getLogger(__name__)
 
 class IMembraneUser(Interface):
     """Marker/Form interface for Membrane User
-    
+
     The main content schema of the membrane user must contain fields named
     'first_name', 'last_name', and 'email'.
-    
+
     The content item must also be adaptable to IProvidePasswords.
     """
 
@@ -285,17 +286,25 @@ class MyUserProperties(grok.Adapter, MembraneUser):
 
 
 from borg.localrole.interfaces import ILocalRoleProvider
-
+from plone.registry.interfaces import IRegistry
+from dexterity.membrane.behavior import settings
 
 class MembraneRoleProvider(object):
-    # Give a membrane user some extra local roles in his own member
+    # Give a membrane user some extra local roles in his/her own member
     # object.
     implements(ILocalRoleProvider)
     adapts(IMembraneUser)
-    roles = ('Reader', 'Editor', 'Creator')
 
     def __init__(self, context):
         self.context = context
+        self.roles = self._roles()
+
+    def _roles(self):
+        reg = getUtility(IRegistry)
+        config = reg.forInterface(settings.IDexterityMembraneSettings, False)
+        if config:
+            return tuple(config.local_roles)
+        return ()
 
     def _in_right_state(self):
         workflow_info = IMembraneUserWorkflow(self.context)

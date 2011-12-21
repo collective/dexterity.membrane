@@ -303,7 +303,7 @@ class MembraneRoleProvider(object):
         reg = getUtility(IRegistry)
         config = reg.forInterface(settings.IDexterityMembraneSettings, False)
         if config:
-            return tuple(config.local_roles)
+            return tuple(config.local_roles or ('Reader', 'Editor', 'Creator'))
         return ()
 
     def _in_right_state(self):

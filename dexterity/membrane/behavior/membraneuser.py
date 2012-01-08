@@ -289,6 +289,7 @@ from borg.localrole.interfaces import ILocalRoleProvider
 from plone.registry.interfaces import IRegistry
 from dexterity.membrane.behavior import settings
 
+
 class MembraneRoleProvider(object):
     # Give a membrane user some extra local roles in his/her own member
     # object.

@@ -42,6 +42,7 @@ def setup_product():
 setup_product()
 ptc.setupPloneSite(extension_profiles=[CONTENT_PROFILE, BEHAVIOR_PROFILE])
 
+
 class TestCase(ptc.PloneTestCase):
     """We use this base class for all the tests in this package. If
     necessary, we can put common utility or setup code in here. This

@@ -99,8 +99,9 @@ class IEmail(form.Schema):
         The tricky thing is to make sure editing a user and keeping
         his email the same actually works.
         """
-        if data.__context__ is not None:
-            if hasattr(data.__context__, 'email') and data.__context__.email == data.email:
+        user = data.__context__
+        if user is not None:
+            if hasattr(user, 'email') and user.email == data.email:
                 # No change, fine.
                 return
         error = validate_unique_email(data.email)
@@ -135,6 +136,3 @@ class IMember(IEmail):
         title=_(u"Biography"),
         required=False,
         )
-
-# TODO: override standard title field to return a combination of the
-# name fields.

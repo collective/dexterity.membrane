@@ -296,6 +296,8 @@ class MembraneRoleProvider(object):
     implements(ILocalRoleProvider)
     adapts(IMembraneUser)
 
+    _default_roles = ('Reader', 'Editor', 'Creator')
+
     def __init__(self, context):
         self.context = context
         self.roles = self._roles()
@@ -303,9 +305,9 @@ class MembraneRoleProvider(object):
     def _roles(self):
         reg = getUtility(IRegistry)
         config = reg.forInterface(settings.IDexterityMembraneSettings, False)
-        if config:
-            return tuple(config.local_roles or ('Reader', 'Editor', 'Creator'))
-        return ()
+        if config and config.local_roles is not None:
+            return tuple(config.local_roles)
+        return self._default_roles
 
     def _in_right_state(self):
         workflow_info = IMembraneUserWorkflow(self.context)

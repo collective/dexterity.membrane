@@ -1,4 +1,14 @@
 <?xml version="1.0"?>
 <registry>
-  <records interface="dexterity.membrane.behavior.settings.IDexterityMembraneSettings"/>
+ <!-- <records interface="dexterity.membrane.behavior.settings.IDexterityMembraneSettings"/> -->
+  <record name="dexterity.membrane.behavior.settings.IDexterityMembraneSettings.local_roles">
+    <field type="plone.registry.field.Set">
+      <value_type type="plone.registry.field.TextLine" />
+    </field>
+    <value>
+      <element>Reader</element>
+      <element>Editor</element>
+      <element>Creator</element>
+    </value>
+</record>
 </registry>

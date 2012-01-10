@@ -12,13 +12,12 @@ class IDexterityMembraneSettings(Interface):
     """
 
     local_roles = schema.Set(
-        title = u'Local Roles',
-        description = u'The list of additional local roles members will be granted in the context of their own profile objects',
-        required = True,
-        value_type = schema.TextLine(),
-        default=set([u'Reader',
-                     u'Editor',
-                     u'Creator',]))
+        title=u'Local Roles',
+        description=u'The list of additional local roles members will be granted in the context of their own profile objects',
+        value_type=schema.TextLine(),
+        required=False,
+        missing_value=set([]),
+        default=set([]))
 
 
 class DexterityMembraneControlPanelForm(RegistryEditForm):

@@ -105,14 +105,15 @@ class MembraneUserWorkflow(grok.Adapter, MembraneUser):
     grok.implements(IMembraneUserWorkflow)
 
 
-class MyUserAuthentication(grok.Adapter, MembraneUser):
+class MyUserAuthentication(grok.Adapter):
     grok.context(IMembraneUser)
     grok.implements(IMembraneUserAuth)
 
     def verifyCredentials(self, credentials):
         """Returns True is password is authenticated, False if not.
         """
-        if credentials.get('login').lower() != self.getUserName().lower():
+        user = IMembraneUserObject(self.context)
+        if credentials.get('login').lower() != user.getUserName().lower():
             # Should never happen, as the code should then never end
             # up here, but better safe than sorry.
             return False
@@ -128,7 +129,9 @@ class MyUserAuthentication(grok.Adapter, MembraneUser):
         if not workflow_info.in_right_state():
             return
         if self.verifyCredentials(credentials):
-            return (self.getUserId(), self.getUserName())
+            # return (self.getUserId(), self.getUserName())
+            user = IMembraneUserObject(self.context)
+            return (user.getUserId(), user.getUserName())
 
 
 class IProvidePasswords(form.Schema):

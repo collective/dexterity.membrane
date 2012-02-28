@@ -32,10 +32,14 @@ class TestSettings(TestCase):
         self.assertTrue('DexterityMembraneSettings' in actions)
 
     def test_registry_defaults(self):
-        defaults = [u'Creator', u'Editor', u'Reader']
+        default_localroles = [u'Creator', u'Editor', u'Reader']
         reg = getUtility(IRegistry)
         config = reg.forInterface(settings.IDexterityMembraneSettings, False)
         self.assertTrue(config)
         self.assertTrue(hasattr(config, 'local_roles'))
-        for default in defaults:
+        for default in default_localroles:
             self.assertTrue(default in config.local_roles)
+        self.assertTrue(hasattr(config, 'use_email_as_username'))
+        self.assertTrue(config.use_email_as_username)
+        self.assertTrue(hasattr(config, 'use_uuid_as_userid'))
+        self.assertTrue(config.use_uuid_as_userid)

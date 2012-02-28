@@ -78,6 +78,8 @@ class MembraneUser(object):
     """
 
     allowed_states = ('enabled',)
+    _default = {'use_email_as_username': True,
+                'use_uuid_as_userid': True}
 
     def __init__(self, context):
         self.context = context
@@ -88,11 +90,27 @@ class MembraneUser(object):
         return state in self.allowed_states
 
     def getUserId(self):
-        return IUUID(self.context)
+        if self._use_uuid_as_userid():
+            return IUUID(self.context)
+        return self.getUserName()
 
     def getUserName(self):
-        # The email address is the login name.  We force lower case.
-        return self.context.email.lower()
+        if self._use_email_as_username():
+            return self.context.email.lower()
+        return self.context.username
+
+    def _use_email_as_username(self):
+        return self._reg_setting('use_email_as_username')
+
+    def _use_uuid_as_userid(self):
+        return self._reg_setting('use_uuid_as_userid')
+
+    def _reg_setting(self, setting):
+        reg = getUtility(IRegistry)
+        config = reg.forInterface(settings.IDexterityMembraneSettings, False)
+        if config and hasattr(config, setting):
+            return getattr(config, setting)
+        return self._default(setting)
 
 
 class MembraneUserAdapter(grok.Adapter, MembraneUser):

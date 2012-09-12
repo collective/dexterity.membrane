@@ -1,23 +1,22 @@
 from setuptools import setup, find_packages
-import os
 
 version = '1.0dev'
 
 setup(name='dexterity.membrane',
       version=version,
       description="Dexterity content and behaviors to integrate with membrane.",
-      long_description=open("README.txt").read() + "\n" +
-                       open(os.path.join("docs", "HISTORY.txt")).read(),
+      long_description=(open("README.txt").read() + "\n" +
+                        open("CHANGES.rst").read()),
       # Get more strings from
       # http://pypi.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
-        "Framework :: Plone",
-        "Programming Language :: Python",
-        ],
+          "Framework :: Plone",
+          "Programming Language :: Python",
+          ],
       keywords='',
       author='Maurits van Rees',
       author_email='maurits@vanrees.org',
-      url='http://svn.plone.org/svn/collective/dexterity.membrane',
+      url='https://github.com/collective/dexterity.membrane',
       license='GPL',
       packages=find_packages(exclude=['ez_setup']),
       namespace_packages=['dexterity'],

@@ -76,6 +76,10 @@ Behaviors
   adds a password and confirmation field to your dexterity content.
   This is used during authentication.
 
+- ``dexterity.membrane.behavior.membranegroup.IMembraneGroup``: this
+  makes the content behave as a membrane group, defining a way to get
+  the group id (``getGroupId``) and group name (``getGroupName``).
+
 
 Membrane implementation
 -----------------------

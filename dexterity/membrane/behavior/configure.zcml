@@ -21,6 +21,15 @@
       />
 
   <plone:behavior
+      title="Membrane Group"
+      description="Use this content as a membrane group"
+      provides=".membranegroup.IMembraneGroup"
+      marker=".membranegroup.IMembraneGroup"
+      factory=".membranegroup.MembraneGroup"
+      for="plone.dexterity.interfaces.IDexterityContent"
+      />
+
+  <plone:behavior
       title="Name from full name"
       description="Use the full name as name (basis for the id)"
       provides=".membraneuser.INameFromFullName"

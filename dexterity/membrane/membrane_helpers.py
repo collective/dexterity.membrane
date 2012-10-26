@@ -1,5 +1,5 @@
 import logging
-from zope.app.component.hooks import getSite
+from zope.component.hooks import getSite
 from AccessControl import Unauthorized
 from Products.CMFCore.utils import getToolByName
 from Products.membrane.config import TOOLNAME

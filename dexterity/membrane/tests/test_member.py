@@ -79,19 +79,26 @@ class TestMember(TestCase):
         member.confirm_password = 'secret'
         membrane = getToolByName(self.portal, 'membrane_tool')
         membrane.reindexObject(member)
+
         # Uppercase:
         user_id = get_user_id_for_email(self.portal, 'JOE@EXAMPLE.ORG')
-        self.assertTrue(user_id)
-        # Mixed case:
-        user_id = get_user_id_for_email(self.portal, 'JOE@example.org')
-        self.assertTrue(user_id)
+        self.assertFalse(user_id)
+
         # Lowercase:
         user_id = get_user_id_for_email(self.portal, 'joe@example.org')
+        self.assertFalse(user_id)
+
+        # Mixed case:
+        user_id = get_user_id_for_email(self.portal, 'joe@EXAMPLE.org')
+        self.assertFalse(user_id)
+
+        # Mixed case:
+        user_id = get_user_id_for_email(self.portal, 'JOE@example.org')
         self.assertTrue(user_id)
 
         # Real authentication is pickier on the case unfortunately.
         auth = self.portal.acl_users.membrane_users.authenticateCredentials
-        credentials = {'login': 'joe@example.org', 'password': 'secret'}
+        credentials = {'login': 'JOE@example.org', 'password': 'secret'}
         # First the member needs to be enabled before authentication
         # can succeed.
         self.assertEqual(auth(credentials), None)
@@ -99,7 +106,7 @@ class TestMember(TestCase):
         self.setRoles(['Reviewer'])
         wf_tool.doActionFor(member, 'approve')
         self.setRoles([])
-        self.assertEqual(auth(credentials), (user_id, 'joe@example.org'))
+        self.assertEqual(auth(credentials), (user_id, 'JOE@example.org'))
 
         # It would be nice if we could get the next test to pass by
         # setting self.portal.membrane_tool.case_sensitive_auth to

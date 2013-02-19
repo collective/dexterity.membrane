@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.2 - Unreleased
+0.2 - 2013-02-19
 ----------------
 
 - Keep constistent with plone's email login #12187, so don't lowercase email

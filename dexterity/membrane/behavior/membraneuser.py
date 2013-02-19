@@ -96,7 +96,7 @@ class MembraneUser(object):
 
     def getUserName(self):
         if self._use_email_as_username():
-            return self.context.email.lower()
+            return self.context.email
         return self.context.username
 
     def _use_email_as_username(self):
@@ -131,7 +131,7 @@ class MyUserAuthentication(grok.Adapter):
         """Returns True is password is authenticated, False if not.
         """
         user = IMembraneUserObject(self.context)
-        if credentials.get('login').lower() != user.getUserName().lower():
+        if credentials.get('login') != user.getUserName():
             # Should never happen, as the code should then never end
             # up here, but better safe than sorry.
             return False

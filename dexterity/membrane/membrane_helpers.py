@@ -25,8 +25,7 @@ def get_brains_for_email(context, email, request=None):
         return []
     if email == '' or '@' not in email:
         return []
-    # We only store lowercase emails.
-    email = email.lower()
+
     user_catalog = getToolByName(context, TOOLNAME, None)
     if user_catalog is None:
         logger.warn("membrane_tool not found.")

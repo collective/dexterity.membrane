@@ -4,7 +4,8 @@ Changelog
 0.3 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Fix getattr in getPropertiesForUser to have a default value.
+  [datakurre]
 
 
 0.2 (2013-02-19)

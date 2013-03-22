@@ -5,6 +5,7 @@ from plone.app.content.interfaces import INameFromTitle
 from plone.app.dexterity.behaviors import metadata
 from plone.app.referenceablebehavior.referenceable import IReferenceable
 from plone.behavior.interfaces import IBehaviorAssignable
+from dexterity.membrane.content.member import IMember
 
 from dexterity.membrane.behavior.membraneuser import IMembraneUser
 from dexterity.membrane.behavior.membraneuser import INameFromFullName
@@ -12,9 +13,38 @@ from dexterity.membrane.behavior.membraneuser import IProvidePasswords
 from dexterity.membrane.behavior.membraneuser import get_full_name
 from dexterity.membrane.membrane_helpers import get_user_id_for_email
 from dexterity.membrane.tests.base import TestCase
-
+from zope import event
+from dexterity.membrane.events import CreateMembraneEvent
 
 class TestMember(TestCase):
+    def test_createmembrane_event(self):
+        membrane = getToolByName(self.portal, 'membrane_tool')
+        catalog = getToolByName(self.portal, 'portal_catalog')
+        
+        newest = catalog.unrestrictedSearchResults({'object_provides': IMember.__identifier__,
+                             'sort_order': 'reverse',
+                             'sort_on': 'created'})                            
+        start_count = len(newest)        
+        event.notify(CreateMembraneEvent(u'fullname',
+                                         u'password',
+                                         u'123@qq.com',
+                                         u'password'))
+        brain = catalog({'object_provides': IMember.__identifier__,
+                             'sort_order': 'reverse',
+                             'sort_on': 'created'})   
+        now_count = len(brain)
+
+        self.assertEqual(start_count + 1,now_count)
+        self.assertEqual(brain[0].id,str(1000000))
+        event.notify(CreateMembraneEvent(u'fullname2',
+                                         u'password',
+                                         u'124@qq.com',
+                                         u'password'))
+        newest = catalog.unrestrictedSearchResults({'object_provides': IMember.__identifier__,
+                             'sort_order': 'reverse',
+                             'sort_on': 'created',
+                             'sort_limit': 1})        
+        self.assertEqual(newest[0].id,str(1000001))                                         
 
     def test_create_member(self):
         member = self._createType(
@@ -101,11 +131,14 @@ class TestMember(TestCase):
         credentials = {'login': 'JOE@example.org', 'password': 'secret'}
         # First the member needs to be enabled before authentication
         # can succeed.
-        self.assertEqual(auth(credentials), None)
+#        self.assertEqual(auth(credentials), None)
+# pending status may login
+        self.assertEqual(auth(credentials), (user_id, 'JOE@example.org'))        
         wf_tool = getToolByName(self.portal, 'portal_workflow')
         self.setRoles(['Reviewer'])
         wf_tool.doActionFor(member, 'approve')
         self.setRoles([])
+#        self.assertEqual(auth(credentials), None)        
         self.assertEqual(auth(credentials), (user_id, 'JOE@example.org'))
 
         # It would be nice if we could get the next test to pass by
@@ -175,12 +208,12 @@ class TestMember(TestCase):
         self.assertEqual(joe_member.getRolesInContext(self.portal.bob),
                          ['Authenticated'])
         self.assertEqual(sorted(joe_member.getRolesInContext(self.portal.joe)),
-                         ['Authenticated'])
+                         ['Authenticated', 'Creator', 'Editor', 'Reader'])
         # Test roles of fresh bob:
         self.assertEqual(bob_member.getRolesInContext(self.portal),
                          ['Authenticated'])
         self.assertEqual(sorted(bob_member.getRolesInContext(self.portal.bob)),
-                         ['Authenticated'])
+                         ['Authenticated', 'Creator', 'Editor', 'Reader'])
         self.assertEqual(bob_member.getRolesInContext(self.portal.joe),
                          ['Authenticated'])
         # We enable/approve both members now.

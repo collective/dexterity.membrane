@@ -28,8 +28,12 @@ setup(name='dexterity.membrane',
           'plone.app.dexterity',
           'Products.membrane>=2.0.2',
           'collective.indexing',
+          'collective.monkeypatcher',          
           'plone.app.referenceablebehavior',
       ],
+       extras_require={
+          'test': ['plone.app.testing',]
+          },         
       entry_points="""
       # -*- Entry points: -*-
 

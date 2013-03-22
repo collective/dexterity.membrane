@@ -4,8 +4,14 @@ from plone.directives import form
 from zope import schema
 from zope.interface import Invalid, invariant
 
+from z3c.form import group, field
+
 from dexterity.membrane import _
 from dexterity.membrane.membrane_helpers import validate_unique_email
+
+from plone.namedfile.interfaces import IImageScaleTraversable
+from plone.namedfile.field import NamedImage, NamedFile
+from plone.namedfile.field import NamedBlobImage, NamedBlobFile
 
 
 def is_email(value):
@@ -109,30 +115,113 @@ class IEmail(form.Schema):
             raise Invalid(error)
 
 
-class IMember(IEmail):
+class IMember(IEmail,IImageScaleTraversable):
     """
     Member
     """
 
-    first_name = schema.TextLine(
-        title=_(u"First Name"),
-        required=True,
-        )
+
+
 
     last_name = schema.TextLine(
         title=_(u"Last Name"),
         required=True,
         )
-
+    
+    first_name = schema.TextLine(
+        title=_(u"First Name"),
+        required=True,
+        )    
+    
     homepage = schema.TextLine(
         # url format
         title=_(u"External Homepage"),
         required=False,
         constraint=is_url,
+        )   
+    
+    phone = schema.TextLine(
+        title=_(u"Phone number"),
+        required=True
+    )
+    
+    form.fieldset('work',
+            label=_(u"Work"),
+            fields=['organization', 'sector','position', 'research_domain']
+    )
+    
+    organization = schema.TextLine(
+        title=_(u"Organization / Company"),
+        required=True,
+    )
+    
+    sector = schema.Choice(
+        title=_(u"Sector"),
+#        description=_(u"Where you are from"),
+        required=False,
+        vocabulary="dexterity.membrane.vocabulary.sector"
+
+        )        
+
+    position = schema.TextLine(
+        title=_(u"Position / Role in Organization"),
+        required=True,
+    )     
+        
+    research_domain = schema.TextLine(
+
+        title=_(u"research domain"),
+        required=False,
+
         )
+           
+    form.fieldset('geography',
+            label=_(u"Geography"),
+            fields=['country', 'province','address']
+    )
+    
+    country = schema.Choice(
+        title=_(u"Country"),
+        description=_(u"Where you are from"),
+        required=False,
+        vocabulary="collective.conference.vocabulary.countries"
+    )
+
+    province = schema.Choice(
+        title=_(u"the province of your company"),
+        vocabulary="dexterity.membrane.vocabulary.province",        
+        required=True,
+        ) 
+
+    address = schema.TextLine(
+        title=_(u"personal address"),       
+        required=False,
+        ) 
+            
+    bonus = schema.Int(
+        # url format
+        title=_(u"bonus"),
+        required=False,
+#        constraint=is_url,
+        )    
+    
+    qq_number = schema.Int(
+        # url format
+        title=_(u"QQ Number"),
+        required=False,
+
+        )          
 
     form.widget(bio="plone.app.z3cform.wysiwyg.WysiwygFieldWidget")
     bio = schema.Text(
         title=_(u"Biography"),
         required=False,
         )
+    
+    photo = NamedBlobImage(
+        title=_(u"Photo"),
+        description=_(u"Your photo or avatar. Recommended size is 150x195"),
+        required=False
+    )
+    
+    form.omitted('bonus')        

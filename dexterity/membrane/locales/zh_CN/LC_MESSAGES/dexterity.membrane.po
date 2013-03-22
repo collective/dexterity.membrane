@@ -1,0 +1,372 @@
+# --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
+# SOME DESCRIPTIVE TITLE.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: membrane\n"
+"POT-Creation-Date: 2013-03-21 12:01+0000\n"
+"PO-Revision-Date: 2013-03-21 20:25+0800\n"
+"Last-Translator: adam <yuejun.tang@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: dexterity.membrane\n"
+
+#: ./browser/templates/member_view.pt:135
+msgid "Address"
+msgstr "地址"
+
+#: ./vocabulary.py:26
+msgid "Anhui"
+msgstr "安徽"
+
+#: ./vocabulary.py:37
+msgid "Aomen"
+msgstr "澳门"
+
+#: ./browser/memer.py:51
+#: ./browser/templates/member_view.pt:24
+msgid "Base information"
+msgstr "基本信息"
+
+#: ./vocabulary.py:11
+msgid "Beijin"
+msgstr "北京"
+
+#: ./browser/templates/member_view.pt:42
+#: ./content/member.py:217
+msgid "Biography"
+msgstr "自我介绍"
+
+#: ./vocabulary.py:39
+msgid "Chongqing"
+msgstr "重庆"
+
+#: ./behavior/membraneuser.py:175
+msgid "Confirm Password"
+msgstr "确认密码"
+
+#: ./browser/templates/member_view.pt:126
+#: ./content/member.py:184
+msgid "Country"
+msgstr "国家"
+
+#: ./profiles/behavior/controlpanel.xml
+msgid "Dexterity Membrane Behavior Settings"
+msgstr "Dexterity会员系统设置"
+
+#: ./content/member.py:96
+msgid "E-mail Address"
+msgstr "邮件地址"
+
+#: ./vocabulary.py:55
+msgid "Education"
+msgstr "教育"
+
+#: ./browser/templates/member_view.pt:33
+msgid "Email"
+msgstr "邮件地址"
+
+#: ./browser/templates/member_view.pt:37
+#: ./content/member.py:138
+msgid "External Homepage"
+msgstr "我的主页"
+
+#: ./vocabulary.py:57
+msgid "Finance"
+msgstr "金融"
+
+#: ./content/member.py:132
+msgid "First Name"
+msgstr "您的名"
+
+#: ./vocabulary.py:30
+msgid "Fujian"
+msgstr "福建"
+
+#: ./vocabulary.py:42
+msgid "Gansu"
+msgstr "甘肃"
+
+#: ./content/member.py:179
+msgid "Geography"
+msgstr "地理"
+
+#: ./browser/memer.py:95
+#: ./browser/templates/member_view.pt:119
+msgid "Geography information"
+msgstr "地理信息"
+
+#: ./vocabulary.py:56
+msgid "Government"
+msgstr "政府"
+
+#: ./vocabulary.py:31
+msgid "Guangdong"
+msgstr "广东"
+
+#: ./vocabulary.py:32
+msgid "Guangxi"
+msgstr "广西"
+
+#: ./vocabulary.py:34
+msgid "Guizhou"
+msgstr "贵州"
+
+#: ./vocabulary.py:43
+msgid "Hainan"
+msgstr "海南"
+
+#: ./vocabulary.py:17
+msgid "Heber"
+msgstr "河北"
+
+#: ./vocabulary.py:18
+msgid "Henan"
+msgstr "河南"
+
+#: ./vocabulary.py:10
+msgid "Hubei"
+msgstr "湖北"
+
+#: ./vocabulary.py:9
+msgid "Hunan"
+msgstr "湖南"
+
+#: ./behavior/settings.py:30
+msgid "If checked, the UUID value for the adapted object will be used for a userid. Otherwise, the username will be used for the userid."
+msgstr "如果启用，UUID将被当作用户ID，否则username将作为用户ID"
+
+#: ./behavior/settings.py:25
+msgid "If checked, the value in the email field will be used as a username/login. If unchecked, your content type must provide a username field."
+msgstr "如果启用，email字段的值将作为username/login。否则，你的内容类型必须提供一个username字段。"
+
+#: ./vocabulary.py:27
+msgid "Jiangsu"
+msgstr "江苏"
+
+#: ./vocabulary.py:40
+msgid "Jiangxi"
+msgstr "江西"
+
+#: ./vocabulary.py:13
+msgid "Jilin"
+msgstr "吉林"
+
+#: ./content/member.py:127
+msgid "Last Name"
+msgstr "您的姓"
+
+#: ./behavior/settings.py:16
+msgid "Local Roles"
+msgstr "本地角色"
+
+#: ./profiles/default/types/dexterity.membrane.member.xml
+msgid "Member"
+msgstr "成员"
+
+#: ./behavior/membraneuser.py:162
+msgid "Membership"
+msgstr "从属"
+
+#: ./vocabulary.py:19
+msgid "Neimenggu"
+msgstr "内蒙古"
+
+#: ./browser/memer.py:73
+#: ./browser/templates/member_view.pt:89
+msgid "Network information"
+msgstr "网络信息"
+
+#: ./vocabulary.py:41
+msgid "Ningxia"
+msgstr "宁夏"
+
+#: ./content/member.py:83
+msgid "Not a valid link"
+msgstr "不是有效的url"
+
+#: ./content/member.py:44
+msgid "Not an email address"
+msgstr "邮件地址无效"
+
+#: ./browser/templates/member_view.pt:64
+#: ./content/member.py:154
+msgid "Organization / Company"
+msgstr "公司或单位"
+
+#: ./behavior/membraneuser.py:170
+msgid "Password"
+msgstr "密码"
+
+#: ./browser/templates/member_view.pt:102
+#: ./content/member.py:144
+msgid "Phone number"
+msgstr "电话号码"
+
+#: ./content/member.py:222
+msgid "Photo"
+msgstr "相片"
+
+#: ./browser/templates/member_view.pt:69
+#: ./content/member.py:167
+msgid "Position / Role in Organization"
+msgstr "职位"
+
+#: ./browser/templates/member_view.pt:107
+#: ./content/member.py:210
+msgid "QQ Number"
+msgstr "QQ号码"
+
+#: ./vocabulary.py:21
+msgid "Qinghai"
+msgstr "青海"
+
+#: ./content/member.py:159
+msgid "Sector"
+msgstr "行业"
+
+#: ./vocabulary.py:15
+msgid "Shandong"
+msgstr "山东"
+
+#: ./vocabulary.py:25
+msgid "Shanghai"
+msgstr "上海"
+
+#: ./vocabulary.py:16
+msgid "Shanxi"
+msgstr "山西"
+
+#: ./vocabulary.py:35
+msgid "Shenzhen"
+msgstr "深圳"
+
+#: ./vocabulary.py:29
+msgid "Sichuan"
+msgstr "四川"
+
+#: ./vocabulary.py:38
+msgid "Taiwan"
+msgstr "台湾"
+
+#: ./behavior/settings.py:17
+msgid "The list of additional local roles members will be granted in the context of their own profile objects"
+msgstr "将出现在用户配置文件中的用户角色列表。"
+
+#: ./behavior/membraneuser.py:186
+msgid "The password and confirmation do not match."
+msgstr "口令字段和确认字段不匹配。"
+
+#: ./vocabulary.py:24
+msgid "Tianjin"
+msgstr "天津"
+
+#: ./browser/memer.py:62
+msgid "Update password"
+msgstr "更新密码"
+
+#: ./behavior/settings.py:24
+msgid "Use email address for username?"
+msgstr "是否采用邮件地址作为用户名？"
+
+#: ./behavior/settings.py:29
+msgid "Use object UUID for the userid?"
+msgstr "是否采用UUID作为用户ID？"
+
+#: ./content/member.py:185
+msgid "Where you are from"
+msgstr "来自哪里"
+
+#: ./content/member.py:149
+msgid "Work"
+msgstr "工作"
+
+#: ./browser/memer.py:84
+#: ./browser/templates/member_view.pt:56
+msgid "Work information"
+msgstr "工作信息"
+
+#: ./vocabulary.py:36
+msgid "Xianggang"
+msgstr "香港"
+
+#: ./vocabulary.py:20
+msgid "Xinqiang"
+msgstr "新疆"
+
+#: ./vocabulary.py:22
+msgid "Xizang"
+msgstr "西藏"
+
+#: ./content/member.py:223
+msgid "Your photo or avatar. Recommended size is 150x195"
+msgstr "你的相片，建议尺寸为150x195px"
+
+#: ./vocabulary.py:28
+msgid "Zhejiang"
+msgstr "浙江"
+
+#: ./content/member.py:203
+msgid "bonus"
+msgstr "积分"
+
+#: ./browser/templates/member_view.pt:50
+msgid "change password"
+msgstr "更改口令"
+
+#: ./vocabulary.py:59
+msgid "consult"
+msgstr "咨询"
+
+#: ./vocabulary.py:58
+msgid "energy"
+msgstr "能源"
+
+#: ./vocabulary.py:62
+msgid "enterprise"
+msgstr "企业"
+
+#: ./vocabulary.py:12
+msgid "heilongjiang"
+msgstr "黑龙江"
+
+#: ./vocabulary.py:14
+msgid "liaolin"
+msgstr "辽林"
+
+#: ./vocabulary.py:60
+msgid "manufacture"
+msgstr "工厂"
+
+#: ./content/member.py:197
+msgid "personal address"
+msgstr "个人联系地址"
+
+#: ./browser/templates/member_view.pt:78
+#: ./content/member.py:173
+msgid "research domain"
+msgstr "研究领域"
+
+#: ./vocabulary.py:61
+msgid "telecommunication"
+msgstr "电信"
+
+#: ./browser/templates/member_view.pt:130
+#: ./content/member.py:191
+msgid "the province of your company"
+msgstr "公司所在省份"
+
+#: ./browser/templates/member_view.pt:73
+msgid "your job belong to sector"
+msgstr "行业"
+
+#: ./vocabulary.py:33
+msgid "yunnan"
+msgstr "云南"
+

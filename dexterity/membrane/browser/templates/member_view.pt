@@ -1,0 +1,168 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      metal:use-macro="here/main_template/macros/master"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"      
+      i18n:domain="dexterity.membrane">        
+      <head>
+
+   <metal:block fill-slot="style_slot">
+      <metal:block use-macro="here/@@dexterity-membrane-macros/macros/styles"/>
+   </metal:block>
+
+</head>
+<body>
+   <div metal:fill-slot="content-title">
+   </div>
+   <div metal:fill-slot="content-description"></div>
+
+   <div metal:fill-slot="content-core" tal:define="text_to_html nocall:here/@@dexterity-membrane-macros/text_to_html">
+       <section id="profile">
+       <div class="page-header">
+           <h3 i18n:translate="">Base information</h3>           
+       </div>  
+       <div class="row-fluid">
+          <div class="span1">&nbsp;</div>
+        <div class="span2" tal:define="person python:context">
+            <metal:photo use-macro="here/@@dexterity-membrane-macros/macros/profilephoto"></metal:photo>
+        </div>
+        <div class="span7">
+          <dl class="dl-horizontal">                      	
+            <dt i18n:translate="">Email</dt>
+            <dd tal:content="python:(context.email or '').replace('@',' (at) ')">vader@empire.com</dd>
+
+            <tal:block condition="context/homepage">
+            <dt i18n:translate="">External Homepage</dt>
+            <dd tal:content="context/homepage"></dd>
+            </tal:block>
+            
+            <tal:block condition="context/bio">
+            <dt i18n:translate="">Biography</dt>
+            <dd tal:replace="structure python:text_to_html(context.bio)"></dd>
+            </tal:block>
+         </dl>
+       </div>
+          <div class="span2 buttonOverlay">
+          	<a tal:attributes="href python:context.absolute_url() + '/@@edit-baseinfo'" i18n:domain="plone" i18n:translate="" title="edit">Edit</a>
+          	<br />
+          	<a tal:attributes="href python:context.absolute_url() + '/@@edit-password'"  i18n:translate="" title="change password">change password</a>          	
+          </div>       
+      </div>
+      </section>
+       <section id="work">
+       <div class="page-header">
+           <h3 i18n:translate="">Work information</h3>
+       </div>  
+       <div class="row-fluid">
+          <div class="span3">&nbsp;</div>
+
+        <div class="span7">
+          <dl class="dl-horizontal">
+            <tal:block condition="context/organization">
+            <dt i18n:translate="">Organization / Company</dt>
+            <dd tal:content="context/organization"></dd>
+            </tal:block>
+
+            <tal:block condition="context/position">
+            <dt i18n:translate="">Position / Role in Organization</dt>
+            <dd tal:content="context/position">cfo</dd>
+            </tal:block>
+            <tal:block condition="context/sector">
+            <dt i18n:translate="">your job belong to sector</dt>
+            <dd tal:content="context/sector">IT</dd>
+            </tal:block>            
+
+            <tal:block condition="context/research_domain">
+            <dt i18n:translate="">research domain</dt>
+            <dd tal:content="context/research_domain">software</dd>
+            </tal:block>
+
+         </dl>
+       </div>
+          <div class="span2 buttonOverlay"><a tal:attributes="href python:context.absolute_url() + '/@@edit-work'" i18n:domain="plone" i18n:translate="" title="edit">Edit</a></div>       
+      </div>
+      </section>
+      <section id="network">
+       <div class="page-header">
+           <h3 i18n:translate="">Network information</h3>
+       </div>              
+       <div class="row-fluid">
+          <div class="span3">&nbsp;</div>
+
+        <div class="span7">
+          <dl class="dl-horizontal">
+            <tal:block condition="context/homepage">          	                      	
+            <dt i18n:translate="">External Homepage</dt>
+            <dd tal:content="context/homepage"></dd>
+            </tal:block>
+                      	
+            <tal:block condition="context/phone">          	                      	
+            <dt i18n:translate="">Phone number</dt>
+            <dd tal:content="context/phone"></dd>
+            </tal:block>
+            
+            <tal:block condition="context/qq_number">
+            <dt i18n:translate="">QQ Number</dt>
+            <dd tal:content="context/qq_number"></dd>
+            </tal:block>
+          </dl>
+       </div>
+          <div class="span2 buttonOverlay">
+          	<a tal:attributes="href python:context.absolute_url() + '/@@edit-networking'" i18n:domain="plone" i18n:translate="" title="edit">Edit</a>
+          </div>       
+      </div>
+      </section>     
+       <section id="geography">
+       <div class="page-header">
+           <h3 i18n:translate="">Geography information</h3>
+       </div>              
+       <div class="row-fluid">
+          <div class="span3">&nbsp;</div>
+
+        <div class="span7">
+          <dl class="dl-horizontal">
+            <tal:block condition="context/country">          	                      	
+            <dt i18n:translate="">Country</dt>
+            <dd tal:content="context/country"></dd>
+            </tal:block>            
+
+            <tal:block condition="context/province">
+            <dt i18n:translate="">the province of your company</dt>
+            <dd tal:content="context/province"></dd>
+            </tal:block>
+            
+            <tal:block condition="context/address">
+            <dt i18n:translate="">Address</dt>
+            <dd tal:replace="structure python:text_to_html(context.address)"></dd>
+            </tal:block>
+         </dl>
+       </div>
+          <div class="span2 buttonOverlay">
+          	<a tal:attributes="href python:context.absolute_url() + '/@@edit-geography'" i18n:domain="plone" i18n:translate="" title="edit">Edit</a>
+          </div>       
+      </div>
+      </section>
+   </div>
+<metal:js fill-slot="javascript_bottom_slot">
+			  <script type="text/javascript">
+   	var jq=jQuery.noConflict();
+jq(document).ready(function(){
+   	//load overlay effect
+// No overlays for IE6
+	if (!jq.browser.msie ||
+	parseInt(jq.browser.version, 10) >= 7) {
+		// Set up overlays
+		jq(".buttonOverlay > a").prepOverlay({
+		subtype: 'ajax',
+		filter: '#content>*',
+		formselector: '#content-core > form',
+		noform: 'close',
+		closeselector: '[name=form.buttons.cancel]',
+		});
+	}
+	})
+</script>	
+</metal:js>
+</body>
+</html>

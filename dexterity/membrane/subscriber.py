@@ -14,10 +14,26 @@ from zope.site.hooks import getSite
 from zope.component import getUtility
 from plone.uuid.interfaces import IUUID
 
+from Products.statusmessages.interfaces import IStatusMessage
+from collective.singing import mail
+
 from AccessControl import ClassSecurityInfo, getSecurityManager
 from AccessControl.SecurityManagement import newSecurityManager, setSecurityManager
 from AccessControl.User import nobody
 from AccessControl.User import UnrestrictedUser as BaseUnrestrictedUser
+
+#MAIL_NOTIFICATION_TITLE = _(
+#    u"mail_notification_title",
+#    default=u"'${comment_username}' Back to you to ${thread_title} posts")
+#
+#MAIL_NOTIFICATION_MESSAGE = _(
+#    u"mail_notification_message",
+#    default=u"A comment on '${title}' "
+#             "has been posted here: ${link}\n\n"
+#             "---\n"
+#             "${text}\n"
+#             "---\n")
+
 class UnrestrictedUser(BaseUnrestrictedUser):
     """Unrestricted user that still has an id.
     """
@@ -91,10 +107,48 @@ def CreateMembraneEvent(event):
     item.fullname = event.fullname 
     item.password_ctl = event.password_ctl
 
-    membrane = getToolByName(item, 'membrane_tool')      
-#    wtool = getToolByName(members, 'portal_workflow')
-#    import pdb
-#    pdb.set_trace()
-#    wtool.doActionFor(item, 'approve')
+    membrane = getToolByName(item, 'membrane_tool')
     membrane.reindexObject(item)
+    
+#    mail_host = getToolByName(site, 'MailHost')
+#    portal_url = getToolByName(site, 'portal_url')
+#    portal = portal_url.getPortalObject()
+#    sender = portal.getProperty('email_from_address')
+#
+#    # Check if a sender address is available
+#    if not sender:
+#        return
+#
+#
+#    # Avoid sending multiple notification emails to the same person
+#
+#    if not item.email:
+#        return 
+#
+#    
+##    sub = obj.Creator()+_(u" Back to you to ")+conversation.title+_(u" posts")
+#    sub = safe_unicode(obj.Creator())
+#    subject = translate(Message(
+#            MAIL_NOTIFICATION_TITLE,
+#            mapping={'comment_username':obj.Creator(),
+#                    'thread_title':conversation.title}),
+#            context=obj.REQUEST)
+#    link = portal.absolute_url() + '/login' 
+#    message = translate(Message(
+#            MAIL_NOTIFICATION_MESSAGE,
+#            mapping={'title': safe_unicode(portal.title),
+#                     'link': "<a href='"+link+"'>"+link+"</a>",
+#                     'text': obj.text.output}),
+#            context=obj.REQUEST)
+#
+#    try:
+#
+#
+#        mail_host.send(mail.create_html_mail(subject,message,'',sender,item.email))
+#            
+#    except SMTPException:
+#        logger.error('SMTP exception while trying to send an ' + 
+#                         'email from %s to %s',
+#                         sender,
+#                         email)
         

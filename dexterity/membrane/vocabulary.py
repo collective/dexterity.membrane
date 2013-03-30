@@ -8,7 +8,7 @@ from dexterity.membrane import _
 province_type=[
                   ('Hunan','Hunan',_(u'Hunan')),
                   ('hubei','hubei',_(u'Hubei')),
-                  ('beijin','beijin',_(u'Beijin')),
+                  ('beijing','beijing',_(u'Beijing')),
                   ('heilongjiang','heilongjiang',_(u'heilongjiang')),
                   ('jilin','jilin',_(u'Jilin')),  
                   ('liaolin','liaolin',_(u'liaolin')),

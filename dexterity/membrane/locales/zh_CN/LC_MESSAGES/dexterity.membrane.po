@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: membrane\n"
-"POT-Creation-Date: 2013-03-21 12:01+0000\n"
-"PO-Revision-Date: 2013-03-21 20:25+0800\n"
+"POT-Creation-Date: 2013-03-30 03:29+0000\n"
+"PO-Revision-Date: 2013-03-29 16:14+0800\n"
 "Last-Translator: adam <yuejun.tang@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: dexterity.membrane\n"
 
-#: ./browser/templates/member_view.pt:135
+#: ./browser/templates/member_view.pt:136
 msgid "Address"
 msgstr "地址"
 
@@ -30,15 +30,15 @@ msgid "Aomen"
 msgstr "澳门"
 
 #: ./browser/memer.py:51
-#: ./browser/templates/member_view.pt:24
+#: ./browser/templates/member_view.pt:23
 msgid "Base information"
 msgstr "基本信息"
 
 #: ./vocabulary.py:11
-msgid "Beijin"
+msgid "Beijing"
 msgstr "北京"
 
-#: ./browser/templates/member_view.pt:42
+#: ./browser/templates/member_view.pt:41
 #: ./content/member.py:217
 msgid "Biography"
 msgstr "自我介绍"
@@ -47,7 +47,7 @@ msgstr "自我介绍"
 msgid "Chongqing"
 msgstr "重庆"
 
-#: ./behavior/membraneuser.py:175
+#: ./behavior/membraneuser.py:199
 msgid "Confirm Password"
 msgstr "确认密码"
 
@@ -68,11 +68,11 @@ msgstr "邮件地址"
 msgid "Education"
 msgstr "教育"
 
-#: ./browser/templates/member_view.pt:33
+#: ./browser/templates/member_view.pt:32
 msgid "Email"
 msgstr "邮件地址"
 
-#: ./browser/templates/member_view.pt:37
+#: ./browser/templates/member_view.pt:36
 #: ./content/member.py:138
 msgid "External Homepage"
 msgstr "我的主页"
@@ -98,7 +98,7 @@ msgid "Geography"
 msgstr "地理"
 
 #: ./browser/memer.py:95
-#: ./browser/templates/member_view.pt:119
+#: ./browser/templates/member_view.pt:118
 msgid "Geography information"
 msgstr "地理信息"
 
@@ -170,7 +170,7 @@ msgstr "本地角色"
 msgid "Member"
 msgstr "成员"
 
-#: ./behavior/membraneuser.py:162
+#: ./behavior/membraneuser.py:186
 msgid "Membership"
 msgstr "从属"
 
@@ -179,7 +179,7 @@ msgid "Neimenggu"
 msgstr "内蒙古"
 
 #: ./browser/memer.py:73
-#: ./browser/templates/member_view.pt:89
+#: ./browser/templates/member_view.pt:88
 msgid "Network information"
 msgstr "网络信息"
 
@@ -195,16 +195,16 @@ msgstr "不是有效的url"
 msgid "Not an email address"
 msgstr "邮件地址无效"
 
-#: ./browser/templates/member_view.pt:64
+#: ./browser/templates/member_view.pt:63
 #: ./content/member.py:154
 msgid "Organization / Company"
 msgstr "公司或单位"
 
-#: ./behavior/membraneuser.py:170
+#: ./behavior/membraneuser.py:194
 msgid "Password"
 msgstr "密码"
 
-#: ./browser/templates/member_view.pt:102
+#: ./browser/templates/member_view.pt:101
 #: ./content/member.py:144
 msgid "Phone number"
 msgstr "电话号码"
@@ -213,12 +213,12 @@ msgstr "电话号码"
 msgid "Photo"
 msgstr "相片"
 
-#: ./browser/templates/member_view.pt:69
+#: ./browser/templates/member_view.pt:68
 #: ./content/member.py:167
 msgid "Position / Role in Organization"
 msgstr "职位"
 
-#: ./browser/templates/member_view.pt:107
+#: ./browser/templates/member_view.pt:106
 #: ./content/member.py:210
 msgid "QQ Number"
 msgstr "QQ号码"
@@ -259,7 +259,7 @@ msgstr "台湾"
 msgid "The list of additional local roles members will be granted in the context of their own profile objects"
 msgstr "将出现在用户配置文件中的用户角色列表。"
 
-#: ./behavior/membraneuser.py:186
+#: ./behavior/membraneuser.py:210
 msgid "The password and confirmation do not match."
 msgstr "口令字段和确认字段不匹配。"
 
@@ -288,7 +288,7 @@ msgid "Work"
 msgstr "工作"
 
 #: ./browser/memer.py:84
-#: ./browser/templates/member_view.pt:56
+#: ./browser/templates/member_view.pt:55
 msgid "Work information"
 msgstr "工作信息"
 
@@ -316,13 +316,18 @@ msgstr "浙江"
 msgid "bonus"
 msgstr "积分"
 
-#: ./browser/templates/member_view.pt:50
+#: ./browser/templates/member_view.pt:49
 msgid "change password"
 msgstr "更改口令"
 
 #: ./vocabulary.py:59
 msgid "consult"
 msgstr "咨询"
+
+#. Default: "Your account has been created,we have sent instructions for setting a password to this email address: ${address}"
+#: ./patch/membership.py:72
+msgid "create_membrane_account_succesful"
+msgstr ""
 
 #: ./vocabulary.py:58
 msgid "energy"
@@ -348,21 +353,31 @@ msgstr "工厂"
 msgid "personal address"
 msgstr "个人联系地址"
 
-#: ./browser/templates/member_view.pt:78
+#: ./browser/templates/member_view.pt:77
 #: ./content/member.py:173
 msgid "research domain"
 msgstr "研究领域"
+
+#. Default: "Failed to create your account: we were unable to send instructions for setting a password to your email address: ${address}"
+#: ./patch/membership.py:94
+msgid "status_fatal_password_mail"
+msgstr ""
+
+#. Default: "This account has been created, but we were unable to send instructions for setting a password to this email address: ${address}"
+#: ./patch/membership.py:106
+msgid "status_nonfatal_password_mail"
+msgstr ""
 
 #: ./vocabulary.py:61
 msgid "telecommunication"
 msgstr "电信"
 
-#: ./browser/templates/member_view.pt:130
+#: ./browser/templates/member_view.pt:131
 #: ./content/member.py:191
 msgid "the province of your company"
 msgstr "公司所在省份"
 
-#: ./browser/templates/member_view.pt:73
+#: ./browser/templates/member_view.pt:72
 msgid "your job belong to sector"
 msgstr "行业"
 

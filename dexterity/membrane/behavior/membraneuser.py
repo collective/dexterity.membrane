@@ -296,7 +296,7 @@ class MyUserProperties(grok.Adapter, MembraneUser):
             fullname=self.fullname,
             )
         for prop_name, field_name in self.property_map.items():
-            value = getattr(self.context, field_name, None)
+            value = getattr(self.context, field_name)
             if value is None:
                 # Would give an error like this:
                 # ValueError: Property home_page: unknown type

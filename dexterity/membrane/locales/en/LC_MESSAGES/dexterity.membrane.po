@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-03-21 12:01+0000\n"
+"POT-Creation-Date: 2011-05-04 00:57+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,356 +17,51 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: dexterity.membrane\n"
 
-#: ./browser/templates/member_view.pt:135
-msgid "Address"
-msgstr ""
-
-#: ./vocabulary.py:26
-msgid "Anhui"
-msgstr ""
-
-#: ./vocabulary.py:37
-msgid "Aomen"
-msgstr ""
-
-#: ./browser/memer.py:51
-#: ./browser/templates/member_view.pt:24
-msgid "Base information"
-msgstr ""
-
-#: ./vocabulary.py:11
-msgid "Beijin"
-msgstr ""
-
-#: ./browser/templates/member_view.pt:42
-#: ./content/member.py:217
+#: ./content/member.py:140
 msgid "Biography"
 msgstr ""
 
-#: ./vocabulary.py:39
-msgid "Chongqing"
-msgstr ""
-
-#: ./behavior/membraneuser.py:175
+#: ./behavior/membraneuser.py:109
 msgid "Confirm Password"
 msgstr ""
 
-#: ./browser/templates/member_view.pt:126
-#: ./content/member.py:184
-msgid "Country"
-msgstr ""
-
-#: ./profiles/behavior/controlpanel.xml
-msgid "Dexterity Membrane Behavior Settings"
-msgstr ""
-
-#: ./content/member.py:96
+#: ./content/member.py:95
 msgid "E-mail Address"
 msgstr ""
 
-#: ./vocabulary.py:55
-msgid "Education"
-msgstr ""
-
-#: ./browser/templates/member_view.pt:33
-msgid "Email"
-msgstr ""
-
-#: ./browser/templates/member_view.pt:37
-#: ./content/member.py:138
+#: ./content/member.py:133
 msgid "External Homepage"
 msgstr ""
 
-#: ./vocabulary.py:57
-msgid "Finance"
-msgstr ""
-
-#: ./content/member.py:132
+#: ./content/member.py:122
 msgid "First Name"
-msgstr ""
-
-#: ./vocabulary.py:30
-msgid "Fujian"
-msgstr ""
-
-#: ./vocabulary.py:42
-msgid "Gansu"
-msgstr ""
-
-#: ./content/member.py:179
-msgid "Geography"
-msgstr ""
-
-#: ./browser/memer.py:95
-#: ./browser/templates/member_view.pt:119
-msgid "Geography information"
-msgstr ""
-
-#: ./vocabulary.py:56
-msgid "Government"
-msgstr ""
-
-#: ./vocabulary.py:31
-msgid "Guangdong"
-msgstr ""
-
-#: ./vocabulary.py:32
-msgid "Guangxi"
-msgstr ""
-
-#: ./vocabulary.py:34
-msgid "Guizhou"
-msgstr ""
-
-#: ./vocabulary.py:43
-msgid "Hainan"
-msgstr ""
-
-#: ./vocabulary.py:17
-msgid "Heber"
-msgstr ""
-
-#: ./vocabulary.py:18
-msgid "Henan"
-msgstr ""
-
-#: ./vocabulary.py:10
-msgid "Hubei"
-msgstr ""
-
-#: ./vocabulary.py:9
-msgid "Hunan"
-msgstr ""
-
-#: ./behavior/settings.py:30
-msgid "If checked, the UUID value for the adapted object will be used for a userid. Otherwise, the username will be used for the userid."
-msgstr ""
-
-#: ./behavior/settings.py:25
-msgid "If checked, the value in the email field will be used as a username/login. If unchecked, your content type must provide a username field."
-msgstr ""
-
-#: ./vocabulary.py:27
-msgid "Jiangsu"
-msgstr ""
-
-#: ./vocabulary.py:40
-msgid "Jiangxi"
-msgstr ""
-
-#: ./vocabulary.py:13
-msgid "Jilin"
 msgstr ""
 
 #: ./content/member.py:127
 msgid "Last Name"
 msgstr ""
 
-#: ./behavior/settings.py:16
-msgid "Local Roles"
-msgstr ""
-
 #: ./profiles/default/types/dexterity.membrane.member.xml
 msgid "Member"
 msgstr ""
 
-#: ./behavior/membraneuser.py:162
+#: ./behavior/membraneuser.py:96
 msgid "Membership"
 msgstr ""
 
-#: ./vocabulary.py:19
-msgid "Neimenggu"
-msgstr ""
-
-#: ./browser/memer.py:73
-#: ./browser/templates/member_view.pt:89
-msgid "Network information"
-msgstr ""
-
-#: ./vocabulary.py:41
-msgid "Ningxia"
-msgstr ""
-
-#: ./content/member.py:83
+#: ./content/member.py:82
 msgid "Not a valid link"
 msgstr ""
 
-#: ./content/member.py:44
+#: ./content/member.py:43
 msgid "Not an email address"
 msgstr ""
 
-#: ./browser/templates/member_view.pt:64
-#: ./content/member.py:154
-msgid "Organization / Company"
-msgstr ""
-
-#: ./behavior/membraneuser.py:170
+#: ./behavior/membraneuser.py:104
 msgid "Password"
 msgstr ""
 
-#: ./browser/templates/member_view.pt:102
-#: ./content/member.py:144
-msgid "Phone number"
-msgstr ""
-
-#: ./content/member.py:222
-msgid "Photo"
-msgstr ""
-
-#: ./browser/templates/member_view.pt:69
-#: ./content/member.py:167
-msgid "Position / Role in Organization"
-msgstr ""
-
-#: ./browser/templates/member_view.pt:107
-#: ./content/member.py:210
-msgid "QQ Number"
-msgstr ""
-
-#: ./vocabulary.py:21
-msgid "Qinghai"
-msgstr ""
-
-#: ./content/member.py:159
-msgid "Sector"
-msgstr ""
-
-#: ./vocabulary.py:15
-msgid "Shandong"
-msgstr ""
-
-#: ./vocabulary.py:25
-msgid "Shanghai"
-msgstr ""
-
-#: ./vocabulary.py:16
-msgid "Shanxi"
-msgstr ""
-
-#: ./vocabulary.py:35
-msgid "Shenzhen"
-msgstr ""
-
-#: ./vocabulary.py:29
-msgid "Sichuan"
-msgstr ""
-
-#: ./vocabulary.py:38
-msgid "Taiwan"
-msgstr ""
-
-#: ./behavior/settings.py:17
-msgid "The list of additional local roles members will be granted in the context of their own profile objects"
-msgstr ""
-
-#: ./behavior/membraneuser.py:186
+#: ./behavior/membraneuser.py:118
 msgid "The password and confirmation do not match."
-msgstr ""
-
-#: ./vocabulary.py:24
-msgid "Tianjin"
-msgstr ""
-
-#: ./browser/memer.py:62
-msgid "Update password"
-msgstr ""
-
-#: ./behavior/settings.py:24
-msgid "Use email address for username?"
-msgstr ""
-
-#: ./behavior/settings.py:29
-msgid "Use object UUID for the userid?"
-msgstr ""
-
-#: ./content/member.py:185
-msgid "Where you are from"
-msgstr ""
-
-#: ./content/member.py:149
-msgid "Work"
-msgstr ""
-
-#: ./browser/memer.py:84
-#: ./browser/templates/member_view.pt:56
-msgid "Work information"
-msgstr ""
-
-#: ./vocabulary.py:36
-msgid "Xianggang"
-msgstr ""
-
-#: ./vocabulary.py:20
-msgid "Xinqiang"
-msgstr ""
-
-#: ./vocabulary.py:22
-msgid "Xizang"
-msgstr ""
-
-#: ./content/member.py:223
-msgid "Your photo or avatar. Recommended size is 150x195"
-msgstr ""
-
-#: ./vocabulary.py:28
-msgid "Zhejiang"
-msgstr ""
-
-#: ./content/member.py:203
-msgid "bonus"
-msgstr ""
-
-#: ./browser/templates/member_view.pt:50
-msgid "change password"
-msgstr ""
-
-#: ./vocabulary.py:59
-msgid "consult"
-msgstr ""
-
-#: ./vocabulary.py:58
-msgid "energy"
-msgstr ""
-
-#: ./vocabulary.py:62
-msgid "enterprise"
-msgstr ""
-
-#: ./vocabulary.py:12
-msgid "heilongjiang"
-msgstr ""
-
-#: ./vocabulary.py:14
-msgid "liaolin"
-msgstr ""
-
-#: ./vocabulary.py:60
-msgid "manufacture"
-msgstr ""
-
-#: ./content/member.py:197
-msgid "personal address"
-msgstr ""
-
-#: ./browser/templates/member_view.pt:78
-#: ./content/member.py:173
-msgid "research domain"
-msgstr ""
-
-#: ./vocabulary.py:61
-msgid "telecommunication"
-msgstr ""
-
-#: ./browser/templates/member_view.pt:130
-#: ./content/member.py:191
-msgid "the province of your company"
-msgstr ""
-
-#: ./browser/templates/member_view.pt:73
-msgid "your job belong to sector"
-msgstr ""
-
-#: ./vocabulary.py:33
-msgid "yunnan"
 msgstr ""
 

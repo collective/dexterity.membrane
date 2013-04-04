@@ -20,10 +20,9 @@
  <property name="klass">plone.dexterity.content.Item</property>
 <!--
   <property name="product">dexterity.membrane</property>
-  <property name="factory">addMember</property>-->
-
- <property name="add_permission">cmf.AddPortalContent</property> 
-
+  <property name="factory">addMember</property>
+-->
+ <property name="add_permission">cmf.AddPortalContent</property>
  <property name="behaviors">
      <!-- Note: we do not enable IDublinCore as we want to define our
           own Title field based on first and last name.  So we

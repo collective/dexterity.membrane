@@ -1,12 +1,8 @@
-#-*- coding: UTF-8 -*-
-
 import logging
 from zope.component.hooks import getSite
 from AccessControl import Unauthorized
 from Products.CMFCore.utils import getToolByName
 from Products.membrane.config import TOOLNAME
-
-
 #from Products.ZCatalog.Catalog import CatalogSearchArgumentsMap
 
 logger = logging.getLogger(__name__)
@@ -108,5 +104,3 @@ def get_membrane_user(context, principal_id, member_type='nd.content.member',
     if get_object:
         return brain.getObject()
     return brain
-
-

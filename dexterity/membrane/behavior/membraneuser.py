@@ -12,7 +12,7 @@ from five import grok
 from plone.app.content.interfaces import INameFromTitle
 from plone.directives import form
 from plone.uuid.interfaces import IUUID
-from z3c.form.interfaces import IAddForm,IEditForm
+from z3c.form.interfaces import IAddForm
 from zope import schema
 from zope.component import adapts
 from zope.component import getUtility
@@ -35,39 +35,12 @@ class IMembraneUser(Interface):
 
 
 def get_full_name(context):
-    try:
-        portal_state = context.unrestrictedTraverse("@@plone_portal_state")
-#        import pdb
-#        pdb.set_trace()
-        lang = portal_state.language() or portal_state.default_language() 
-        if lang == 'en':            
-                names = [
-                         context.first_name,
-                         context.last_name,
-                         ]
-                return u' '.join([name for name in names if name])
-        else:
-                names = [
-                         context.last_name,                         
-                         context.first_name,
-                         ]            
-                return u''.join([name for name in names if name])              
-            
-    except:
-        names = [
-                    context.last_name,                         
-                    context.first_name,
-                    ]            
-        return u''.join([name for name in names if name])              
-#    names = [
-#        context.first_name,
-#        context.last_name,
-#        ]
-#    return u' '.join([name for name in names if name])
+    names = [
+        context.first_name,
+        context.last_name,
+        ]
+    return u' '.join([name for name in names if name])
 
-#def get_full_name(context):
-#
-#    return context.fullname
 
 class INameFromFullName(INameFromTitle):
     """Get the name from the full name.
@@ -103,8 +76,8 @@ class IMembraneUserWorkflow(Interface):
 class MembraneUser(object):
     """Methods for Membrane User
     """
-# pending status can login
-    allowed_states = ('enabled','pending')
+
+    allowed_states = ('enabled',)
     _default = {'use_email_as_username': True,
                 'use_uuid_as_userid': True}
 
@@ -211,7 +184,6 @@ class IProvidePasswords(form.Schema):
 
     form.omitted('password', 'confirm_password')
     form.no_omit(IAddForm, 'password', 'confirm_password')
-    form.no_omit(IEditForm, 'password', 'confirm_password')    
 
 
 alsoProvides(IProvidePasswords, form.IFormFieldProvider)

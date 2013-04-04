@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-03-30 03:29+0000\n"
+"POT-Creation-Date: 2013-03-21 12:01+0000\n"
 "PO-Revision-Date: 2011-05-04 03:00+0200\n"
 "Last-Translator: Maurits van Rees <maurits@vanrees.org>\n"
 "Language-Team: plone-nl@lists.plone.org\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: dexterity.membrane\n"
 
-#: ./browser/templates/member_view.pt:136
+#: ./browser/templates/member_view.pt:135
 msgid "Address"
 msgstr ""
 
@@ -28,15 +28,15 @@ msgid "Aomen"
 msgstr ""
 
 #: ./browser/memer.py:51
-#: ./browser/templates/member_view.pt:23
+#: ./browser/templates/member_view.pt:24
 msgid "Base information"
 msgstr ""
 
 #: ./vocabulary.py:11
-msgid "Beijing"
+msgid "Beijin"
 msgstr ""
 
-#: ./browser/templates/member_view.pt:41
+#: ./browser/templates/member_view.pt:42
 #: ./content/member.py:217
 msgid "Biography"
 msgstr "Biografie"
@@ -45,7 +45,7 @@ msgstr "Biografie"
 msgid "Chongqing"
 msgstr ""
 
-#: ./behavior/membraneuser.py:199
+#: ./behavior/membraneuser.py:175
 msgid "Confirm Password"
 msgstr "Bevestig wachtwoord"
 
@@ -66,11 +66,11 @@ msgstr "E-mailadres"
 msgid "Education"
 msgstr ""
 
-#: ./browser/templates/member_view.pt:32
+#: ./browser/templates/member_view.pt:33
 msgid "Email"
 msgstr ""
 
-#: ./browser/templates/member_view.pt:36
+#: ./browser/templates/member_view.pt:37
 #: ./content/member.py:138
 msgid "External Homepage"
 msgstr "Externe homepage"
@@ -96,7 +96,7 @@ msgid "Geography"
 msgstr ""
 
 #: ./browser/memer.py:95
-#: ./browser/templates/member_view.pt:118
+#: ./browser/templates/member_view.pt:119
 msgid "Geography information"
 msgstr ""
 
@@ -168,7 +168,7 @@ msgstr ""
 msgid "Member"
 msgstr "Lid"
 
-#: ./behavior/membraneuser.py:186
+#: ./behavior/membraneuser.py:162
 msgid "Membership"
 msgstr "Lidmaatschap"
 
@@ -177,7 +177,7 @@ msgid "Neimenggu"
 msgstr ""
 
 #: ./browser/memer.py:73
-#: ./browser/templates/member_view.pt:88
+#: ./browser/templates/member_view.pt:89
 msgid "Network information"
 msgstr ""
 
@@ -193,16 +193,16 @@ msgstr "Geen geldige link"
 msgid "Not an email address"
 msgstr "Geen e-mailadres"
 
-#: ./browser/templates/member_view.pt:63
+#: ./browser/templates/member_view.pt:64
 #: ./content/member.py:154
 msgid "Organization / Company"
 msgstr ""
 
-#: ./behavior/membraneuser.py:194
+#: ./behavior/membraneuser.py:170
 msgid "Password"
 msgstr "Wachtwoord"
 
-#: ./browser/templates/member_view.pt:101
+#: ./browser/templates/member_view.pt:102
 #: ./content/member.py:144
 msgid "Phone number"
 msgstr ""
@@ -211,12 +211,12 @@ msgstr ""
 msgid "Photo"
 msgstr ""
 
-#: ./browser/templates/member_view.pt:68
+#: ./browser/templates/member_view.pt:69
 #: ./content/member.py:167
 msgid "Position / Role in Organization"
 msgstr ""
 
-#: ./browser/templates/member_view.pt:106
+#: ./browser/templates/member_view.pt:107
 #: ./content/member.py:210
 msgid "QQ Number"
 msgstr ""
@@ -257,7 +257,7 @@ msgstr ""
 msgid "The list of additional local roles members will be granted in the context of their own profile objects"
 msgstr ""
 
-#: ./behavior/membraneuser.py:210
+#: ./behavior/membraneuser.py:186
 msgid "The password and confirmation do not match."
 msgstr "Het wachtwoord en de bevestigen komen niet overeen."
 
@@ -286,7 +286,7 @@ msgid "Work"
 msgstr ""
 
 #: ./browser/memer.py:84
-#: ./browser/templates/member_view.pt:55
+#: ./browser/templates/member_view.pt:56
 msgid "Work information"
 msgstr ""
 
@@ -314,17 +314,12 @@ msgstr ""
 msgid "bonus"
 msgstr ""
 
-#: ./browser/templates/member_view.pt:49
+#: ./browser/templates/member_view.pt:50
 msgid "change password"
 msgstr ""
 
 #: ./vocabulary.py:59
 msgid "consult"
-msgstr ""
-
-#. Default: "Your account has been created,we have sent instructions for setting a password to this email address: ${address}"
-#: ./patch/membership.py:72
-msgid "create_membrane_account_succesful"
 msgstr ""
 
 #: ./vocabulary.py:58
@@ -351,31 +346,21 @@ msgstr ""
 msgid "personal address"
 msgstr ""
 
-#: ./browser/templates/member_view.pt:77
+#: ./browser/templates/member_view.pt:78
 #: ./content/member.py:173
 msgid "research domain"
-msgstr ""
-
-#. Default: "Failed to create your account: we were unable to send instructions for setting a password to your email address: ${address}"
-#: ./patch/membership.py:94
-msgid "status_fatal_password_mail"
-msgstr ""
-
-#. Default: "This account has been created, but we were unable to send instructions for setting a password to this email address: ${address}"
-#: ./patch/membership.py:106
-msgid "status_nonfatal_password_mail"
 msgstr ""
 
 #: ./vocabulary.py:61
 msgid "telecommunication"
 msgstr ""
 
-#: ./browser/templates/member_view.pt:131
+#: ./browser/templates/member_view.pt:130
 #: ./content/member.py:191
 msgid "the province of your company"
 msgstr ""
 
-#: ./browser/templates/member_view.pt:72
+#: ./browser/templates/member_view.pt:73
 msgid "your job belong to sector"
 msgstr ""
 

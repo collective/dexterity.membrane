@@ -5,7 +5,7 @@ version = '0.3.dev0'
 setup(name='dexterity.membrane',
       version=version,
       description="Dexterity content and behaviors to integrate with membrane.",
-      long_description=(open("README.txt").read() + "\n" +
+      long_description=(open("README.rst").read() + "\n" +
                         open("CHANGES.rst").read()),
       # Get more strings from
       # http://pypi.python.org/pypi?%3Aaction=list_classifiers

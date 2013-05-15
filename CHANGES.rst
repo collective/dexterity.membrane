@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.3 (unreleased)
+0.3 (2013-05-15)
 ----------------
 
 - Fix installation problems when OS does not support symbolic links. Renamed

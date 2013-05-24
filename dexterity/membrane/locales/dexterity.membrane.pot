@@ -3,8 +3,8 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-05-04 00:57+0000\n"
+"Project-Id-Version: dexterity.membrane\n"
+"POT-Creation-Date: 2013-05-24 22:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,51 +17,55 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: dexterity.membrane\n"
 
-#: ./content/member.py:140
+#: ./dexterity/membrane/content/member.py:136
 msgid "Biography"
 msgstr ""
 
-#: ./behavior/membraneuser.py:109
+#: ./dexterity/membrane/behavior/membraneuser.py:172
 msgid "Confirm Password"
 msgstr ""
 
-#: ./content/member.py:95
+#: ./dexterity/membrane/profiles/behavior/controlpanel.xml
+msgid "Dexterity Membrane Behavior Settings"
+msgstr ""
+
+#: ./dexterity/membrane/content/member.py:90
 msgid "E-mail Address"
 msgstr ""
 
-#: ./content/member.py:133
+#: ./dexterity/membrane/content/member.py:129
 msgid "External Homepage"
 msgstr ""
 
-#: ./content/member.py:122
+#: ./dexterity/membrane/content/member.py:118
 msgid "First Name"
 msgstr ""
 
-#: ./content/member.py:127
+#: ./dexterity/membrane/content/member.py:123
 msgid "Last Name"
 msgstr ""
 
-#: ./profiles/default/types/dexterity.membrane.member.xml
+#: ./dexterity/membrane/profiles/default/types/dexterity.membrane.member.xml
 msgid "Member"
 msgstr ""
 
-#: ./behavior/membraneuser.py:96
+#: ./dexterity/membrane/behavior/membraneuser.py:159
 msgid "Membership"
 msgstr ""
 
-#: ./content/member.py:82
+#: ./dexterity/membrane/content/member.py:77
 msgid "Not a valid link"
 msgstr ""
 
-#: ./content/member.py:43
+#: ./dexterity/membrane/content/member.py:38
 msgid "Not an email address"
 msgstr ""
 
-#: ./behavior/membraneuser.py:104
+#: ./dexterity/membrane/behavior/membraneuser.py:167
 msgid "Password"
 msgstr ""
 
-#: ./behavior/membraneuser.py:118
+#: ./dexterity/membrane/behavior/membraneuser.py:183
 msgid "The password and confirmation do not match."
 msgstr ""
 

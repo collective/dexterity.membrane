@@ -4,7 +4,7 @@ Changelog
 0.4 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Add Spanish and Brazilian Portuguese translations. [hvelarde]
 
 
 0.3 (2013-05-15)

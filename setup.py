@@ -38,6 +38,11 @@ setup(name='dexterity.membrane',
           'collective.indexing',
           'plone.app.referenceablebehavior',
       ],
+      extras_require={
+          'test': [
+              'plone.app.testing',
+          ],
+      },
       entry_points="""
       # -*- Entry points: -*-
 

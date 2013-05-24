@@ -1,5 +1,6 @@
-recursive-include dexterity *
-recursive-include docs *
-include *
 include *.rst
+
+recursive-include dexterity
+recursive-include docs
+
 global-exclude *.pyc

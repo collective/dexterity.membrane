@@ -8,10 +8,10 @@
   <five:registerPackage package="."/>
 
   <genericsetup:registerProfile
-      name="content"
+      name="example"
       title="dexterity.membrane: content"
       description="Configuration for the dexterity.membrane example content type"
-      directory="../profiles/default"
+      directory="../profiles/example"
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
 

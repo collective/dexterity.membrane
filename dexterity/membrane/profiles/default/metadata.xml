@@ -1,8 +1,6 @@
 <metadata>
   <version>1000</version>
     <dependencies>
-        <dependency>profile-plone.app.dexterity:default</dependency>
-        <dependency>profile-Products.membrane:default</dependency>
-        <dependency>profile-dexterity.membrane:behavior</dependency>
+        <dependency>profile-plone.app.registry:default</dependency>
     </dependencies>
 </metadata>

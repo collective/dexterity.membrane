@@ -18,10 +18,10 @@
 
   <!-- Register an extension profile to make the product installable -->
   <genericsetup:registerProfile
-      name="behavior"
+      name="default"
       title="dexterity.membrane: behaviors"
       description="Configuration for the dexterity.membrane behaviors"
-      directory="profiles/behavior"
+      directory="profiles/default"
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
 

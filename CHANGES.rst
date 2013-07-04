@@ -4,6 +4,10 @@ Changelog
 0.4 (unreleased)
 ----------------
 
+- Rename content profile to example and rename behavior profile to
+  default.  Issue #7.
+  [maurits]
+
 - Add Spanish and Brazilian Portuguese translations. [hvelarde]
 
 

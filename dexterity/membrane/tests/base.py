@@ -16,8 +16,8 @@ from Products.PloneTestCase import PloneTestCase as ptc
 from dexterity.membrane.tests.layer import DexterityMembraneLayer
 
 
-CONTENT_PROFILE = 'dexterity.membrane.content:content'
-BEHAVIOR_PROFILE = 'dexterity.membrane:behavior'
+CONTENT_PROFILE = 'dexterity.membrane.content:example'
+BEHAVIOR_PROFILE = 'dexterity.membrane:default'
 
 
 # When ZopeTestCase configures Zope, it will *not* auto-load products

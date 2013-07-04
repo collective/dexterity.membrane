@@ -4,6 +4,13 @@ Changelog
 0.4 (unreleased)
 ----------------
 
+- Add upgrade step to update the behavior profile.  If you have
+  installed the example content profile, you will see a warning in the
+  Add-ons control panel that Plone does not know how to update this
+  profile.  We recommend that you deactivate it and then activate it
+  again.  Issue #7
+  [maurits]
+
 - Rename content profile to example and rename behavior profile to
   default.  Issue #7.
   [maurits]

@@ -24,6 +24,18 @@
       directory="profiles/default"
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
+  <!-- Note that the example profile is registered in the content
+       directory.  It is registered in such a way that both profiles
+       are visible and can be installed separately.  Any upgrade steps
+       for that profile are also defined there. -->
+
+  <genericsetup:upgradeStep
+      title="Update profile"
+      description="Dummy step to fix profile registration after rename."
+      source="1000"
+      destination="1001"
+      handler="dexterity.membrane.migration.dummy_step"
+      profile="dexterity.membrane:default" />
 
   <adapter name="Title" factory=".indexers.Title" />
 

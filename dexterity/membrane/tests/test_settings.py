@@ -36,6 +36,8 @@ class TestSettings(TestCase):
         reg = getUtility(IRegistry)
         config = reg.forInterface(settings.IDexterityMembraneSettings, False)
         self.assertTrue(config)
+        self.assertTrue(hasattr(config, 'properties_whitelist'))
+        self.assertTrue(len(config.properties_whitelist) == 0)
         self.assertTrue(hasattr(config, 'local_roles'))
         for default in default_localroles:
             self.assertTrue(default in config.local_roles)

@@ -5,6 +5,7 @@
    <field type="plone.registry.field.Set">
      <value_type type="plone.registry.field.ASCIILine" />
    </field>
+   <value></value>
  </record>
   <record name="dexterity.membrane.behavior.settings.IDexterityMembraneSettings.local_roles">
     <field type="plone.registry.field.Set">

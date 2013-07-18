@@ -3,6 +3,7 @@ import logging
 from AccessControl.AuthEncoding import pw_encrypt
 from AccessControl.AuthEncoding import pw_validate
 from Products.CMFCore.utils import getToolByName
+from Products.CMFPlone.utils import base_hasattr
 from Products.PlonePAS.sheet import MutablePropertySheet
 from Products.membrane.interfaces import IMembraneUserAuth
 from Products.membrane.interfaces import IMembraneUserChanger
@@ -90,9 +91,21 @@ class MembraneUser(object):
         return state in self.allowed_states
 
     def getUserId(self):
-        if self._use_uuid_as_userid():
-            return IUUID(self.context)
-        return self.getUserName()
+        # The user id should stay the same, also when you toggle using
+        # the uuid as user id.
+        user_id = ''
+        if base_hasattr(self.context, '_user_id'):
+            user_id = self.context._user_id
+        if not user_id:
+            if self._use_uuid_as_userid():
+                user_id = IUUID(self.context)
+            else:
+                user_id = self.getUserName()
+            if user_id:
+                # We have a fresh, non-empty user id, so we safe it
+                # once and for all.
+                self.context._user_id = user_id
+        return user_id
 
     def getUserName(self):
         if self._use_email_as_username():

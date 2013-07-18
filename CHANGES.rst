@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.4 (unreleased)
+0.4 (2013-07-18)
 ----------------
 
 - Add upgrade step to update the behavior profile.  If you have

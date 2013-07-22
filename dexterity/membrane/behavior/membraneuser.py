@@ -229,6 +229,7 @@ class MyUserPasswordChanger(grok.Adapter, MembraneUser):
         password_provider = IProvidePasswords(self.context)
         password_provider.password = password
 
+
 class MyUserProperties(grok.Adapter, MembraneUser):
     """User properties for this membrane context.
 
@@ -244,7 +245,7 @@ class MyUserProperties(grok.Adapter, MembraneUser):
     property_map = dict(
         email='email',
         home_page='homepage',
-        description='bio',
+        #description='bio', # bio is richText and doesn't work with pluggable property
         )
 
     @property
@@ -277,6 +278,9 @@ class MyUserProperties(grok.Adapter, MembraneUser):
                 value = u''
             properties[prop_name] = value
         whitelist = self._reg_setting('properties_whitelist')
+        if 'schema' in whitelist:
+            # schema is used in UserPropertySheet and can not be used
+            del whitelist['schema']
         for w_property in whitelist:
             value = getattr(self.context, w_property, None)
             if value is None:

@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-07-15 09:55+0000\n"
+"POT-Creation-Date: 2013-07-24 07:30+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -41,12 +41,8 @@ msgstr ""
 msgid "First Name"
 msgstr ""
 
-#: ./behavior/settings.py:42
+#: ./behavior/settings.py:43
 msgid "If checked, the UUID value for the adapted object will be used for a userid. Otherwise, the username will be used for the userid."
-msgstr ""
-
-#: ./behavior/settings.py:36
-msgid "If checked, the value in the "email" field will be used as a username/login. If unchecked, your content type must provide a "username" field."
 msgstr ""
 
 #: ./content/member.py:123
@@ -101,7 +97,12 @@ msgstr ""
 msgid "Use email address for username?"
 msgstr ""
 
-#: ./behavior/settings.py:41
+#: ./behavior/settings.py:42
 msgid "Use object UUID for the userid?"
+msgstr ""
+
+#. Default: "If checked, the value in the \"email\" field will be used as a username/login. If unchecked, your content type must provide a \"username\" field."
+#: ./behavior/settings.py:36
+msgid "use_email_address_for_username"
 msgstr ""
 

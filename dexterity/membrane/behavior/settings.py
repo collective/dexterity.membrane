@@ -33,7 +33,8 @@ class IDexterityMembraneSettings(Interface):
 
     use_email_as_username = schema.Bool(
         title=_(u'Use email address for username?'),
-        description=_(u'If checked, the value in the "email" field will be used as a username/login. If unchecked, your content type must provide a "username" field.'),
+        description=_(u'use_email_address_for_username',
+                      default=u'If checked, the value in the "email" field will be used as a username/login. If unchecked, your content type must provide a "username" field.'),
         required=False
     )
 

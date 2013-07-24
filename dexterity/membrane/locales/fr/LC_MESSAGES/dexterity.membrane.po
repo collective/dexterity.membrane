@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-07-15 09:55+0000\n"
+"POT-Creation-Date: 2013-07-24 07:30+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -41,13 +41,9 @@ msgstr "Page personnelle externe"
 msgid "First Name"
 msgstr "Prénom"
 
-#: ./behavior/settings.py:42
+#: ./behavior/settings.py:43
 msgid "If checked, the UUID value for the adapted object will be used for a userid. Otherwise, the username will be used for the userid."
 msgstr "Si cochée, le UUID de l'objet adapté sera utilisé en tant que userid. Sinon, le username sera utilisé en tant que userid."
-
-#: ./behavior/settings.py:36
-msgid "If checked, the value in the "email" field will be used as a username/login. If unchecked, your content type must provide a "username" field."
-msgstr "Si cochée, la valeur du champ "email" sera utilisé en tant que nom d'utilisateur/login. Si decochée, votre type de contenue doit fournir un champ "username"."
 
 #: ./content/member.py:123
 msgid "Last Name"
@@ -101,7 +97,12 @@ msgstr "Le mot de passe et la confirmation ne sont pas pareil."
 msgid "Use email address for username?"
 msgstr "Utiliser l'adresse email pour le nom d'utilisateur ?"
 
-#: ./behavior/settings.py:41
+#: ./behavior/settings.py:42
 msgid "Use object UUID for the userid?"
 msgstr "Utiliser le UUID de l'objet pour le userid ?"
+
+#. Default: "If checked, the value in the \"email\" field will be used as a username/login. If unchecked, your content type must provide a \"username\" field."
+#: ./behavior/settings.py:36
+msgid "use_email_address_for_username"
+msgstr "Si cochée, la valeur du champ \"email\" sera utilisé en tant que nom d'utilisateur/login. Si non cochée, votre type de contenu doit fournir un champ \"username\"."
 

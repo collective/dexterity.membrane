@@ -239,14 +239,15 @@ class MyUserProperties(grok.Adapter, MembraneUser):
     grok.context(IMembraneUser)
     grok.implements(IMembraneUserProperties)
 
-    _default = {'properties_whitelist': [],}
+    _default = {'properties_whitelist': []}
 
     # Map from memberdata property to member field:
     property_map = dict(
         email='email',
         home_page='homepage',
-        #description='bio', # bio is richText and doesn't work with pluggable property
-        )
+        #description='bio',
+        # bio is richText and doesn't work with pluggable property
+    )
 
     @property
     def fullname(self):

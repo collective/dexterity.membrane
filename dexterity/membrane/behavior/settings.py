@@ -7,6 +7,19 @@ from plone.z3cform import layout
 
 from dexterity.membrane import _
 
+local_roles_desc = u"""
+The list of additional local roles members will be granted in the context
+of their own profile objects
+"""
+use_email_as_username_desc = u"""
+If checked, the value in the "email" field will be used as a username/login.
+If unchecked, your content type must provide a "username" field.
+"""
+use_uuid_as_userid_desc = u"""
+If checked, the UUID value for the adapted object will be used for a userid.
+Otherwise, the username will be used for the userid.
+"""
+
 
 class IDexterityMembraneSettings(Interface):
     """ Enables through-the-web configuration of some aspects of the
@@ -24,7 +37,7 @@ class IDexterityMembraneSettings(Interface):
 
     local_roles = schema.Set(
         title=_(u'Local Roles'),
-        description=_(u'The list of additional local roles members will be granted in the context of their own profile objects'),
+        description=_(local_roles_desc),
         value_type=schema.TextLine(),
         required=False,
         missing_value=set([]),
@@ -34,13 +47,13 @@ class IDexterityMembraneSettings(Interface):
     use_email_as_username = schema.Bool(
         title=_(u'Use email address for username?'),
         description=_(u'use_email_address_for_username',
-                      default=u'If checked, the value in the "email" field will be used as a username/login. If unchecked, your content type must provide a "username" field.'),
+                      default=use_email_as_username_desc),
         required=False
     )
 
     use_uuid_as_userid = schema.Bool(
         title=_(u'Use object UUID for the userid?'),
-        description=_(u'If checked, the UUID value for the adapted object will be used for a userid. Otherwise, the username will be used for the userid.'),
+        description=_(use_uuid_as_userid_desc),
         required=False
     )
 

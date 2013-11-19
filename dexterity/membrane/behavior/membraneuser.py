@@ -239,12 +239,15 @@ class MyUserProperties(grok.Adapter, MembraneUser):
     grok.context(IMembraneUser)
     grok.implements(IMembraneUserProperties)
 
+    _default = {'properties_whitelist': []}
+
     # Map from memberdata property to member field:
     property_map = dict(
         email='email',
         home_page='homepage',
-        description='bio',
-        )
+        #description='bio',
+        # bio is richText and doesn't work with pluggable property
+    )
 
     @property
     def fullname(self):
@@ -264,6 +267,7 @@ class MyUserProperties(grok.Adapter, MembraneUser):
         Also, it looks like we can ignore the user argument and just
         check self.context.
         """
+
         properties = dict(
             fullname=self.fullname,
             )
@@ -274,6 +278,15 @@ class MyUserProperties(grok.Adapter, MembraneUser):
                 # ValueError: Property home_page: unknown type
                 value = u''
             properties[prop_name] = value
+        whitelist = self._reg_setting('properties_whitelist')
+        if 'schema' in whitelist:
+            # schema is used in UserPropertySheet and can not be used
+            del whitelist['schema']
+        for w_property in whitelist:
+            value = getattr(self.context, w_property, None)
+            if value is None:
+                value = u''
+            properties[w_property] = value
         return MutablePropertySheet(self.context.getId(),
                                     **properties)
 
@@ -293,6 +306,10 @@ class MyUserProperties(grok.Adapter, MembraneUser):
             value = properties.get(prop_name, '').strip()
             logger.debug("Setting field %s: %r", field_name, value)
             setattr(self.context, field_name, value)
+        whitelist = self._reg_setting('properties_whitelist')
+        for w_property in whitelist:
+            value = properties.get(w_property, '').strip()
+            setattr(self.context, w_property, value)
 
     def deleteUser(self, user_id):
         """
@@ -304,6 +321,13 @@ class MyUserProperties(grok.Adapter, MembraneUser):
         special handling.
         """
         pass
+
+    def _reg_setting(self, setting):
+        reg = getUtility(IRegistry)
+        config = reg.forInterface(settings.IDexterityMembraneSettings, False)
+        if config and getattr(config, setting, None) is not None:
+            return getattr(config, setting)
+        return self._default[setting]
 
 
 from borg.localrole.interfaces import ILocalRoleProvider

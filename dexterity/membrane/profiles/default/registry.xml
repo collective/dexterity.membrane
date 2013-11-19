@@ -1,6 +1,12 @@
 <?xml version="1.0"?>
 <registry>
  <!-- <records interface="dexterity.membrane.behavior.settings.IDexterityMembraneSettings"/> -->
+ <record name="dexterity.membrane.behavior.settings.IDexterityMembraneSettings.properties_whitelist">
+   <field type="plone.registry.field.Set">
+     <value_type type="plone.registry.field.ASCIILine" />
+   </field>
+   <value></value>
+ </record>
   <record name="dexterity.membrane.behavior.settings.IDexterityMembraneSettings.local_roles">
     <field type="plone.registry.field.Set">
       <value_type type="plone.registry.field.TextLine" />

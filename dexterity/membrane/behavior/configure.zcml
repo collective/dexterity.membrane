@@ -17,7 +17,7 @@
       provides=".membraneuser.IMembraneUser"
       marker=".membraneuser.IMembraneUser"
       factory=".membraneuser.MembraneUser"
-      for="dexterity.membrane.content.member.IEmail"
+      for="plone.dexterity.interfaces.IDexterityContent"
       />
 
   <plone:behavior
@@ -34,7 +34,7 @@
       description="Use the full name as name (basis for the id)"
       provides=".membraneuser.INameFromFullName"
       factory=".membraneuser.NameFromFullName"
-      for="dexterity.membrane.content.member.IMember"
+      for="plone.dexterity.interfaces.IDexterityContent"
       />
 
   <plone:behavior

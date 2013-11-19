@@ -4,10 +4,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: dexterity.membrane\n"
-"POT-Creation-Date: 2013-05-24 22:10+0000\n"
+"POT-Creation-Date: 2013-07-24 07:30+0000\n"
 "PO-Revision-Date: 2013-05-24 19:15-0300\n"
 "Last-Translator: Andre Nogueira <agnogueira@gmail.com>\n"
-"First-Translator: Héctor Velarde <hector.velarde@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -17,56 +16,94 @@ msgstr ""
 "Language-Name: Portugues do Brasil\n"
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: dexterity.membrane\n"
+"First-Translator: Héctor Velarde <hector.velarde@gmail.com>\n"
 
-#: ./dexterity/membrane/content/member.py:136
+#: ./content/member.py:136
 msgid "Biography"
 msgstr "Biografia"
 
-#: ./dexterity/membrane/behavior/membraneuser.py:172
+#: ./behavior/membraneuser.py:172
 msgid "Confirm Password"
 msgstr "Confirme a senha"
 
-#: ./dexterity/membrane/profiles/behavior/controlpanel.xml
+#: ./profiles/default/controlpanel.xml
 msgid "Dexterity Membrane Behavior Settings"
 msgstr "Configuração do behavior do Dexterity Membrane"
 
-#: ./dexterity/membrane/content/member.py:90
+#: ./content/member.py:90
 msgid "E-mail Address"
 msgstr "Endereço de email"
 
-#: ./dexterity/membrane/content/member.py:129
+#: ./content/member.py:129
 msgid "External Homepage"
 msgstr "Homepage externo"
 
-#: ./dexterity/membrane/content/member.py:118
+#: ./content/member.py:118
 msgid "First Name"
 msgstr "Nome"
 
-#: ./dexterity/membrane/content/member.py:123
+#: ./behavior/settings.py:43
+msgid "If checked, the UUID value for the adapted object will be used for a userid. Otherwise, the username will be used for the userid."
+msgstr ""
+
+#: ./content/member.py:123
 msgid "Last Name"
 msgstr "Sobrenome"
 
-#: ./dexterity/membrane/profiles/default/types/dexterity.membrane.member.xml
+#: ./behavior/settings.py:26
+msgid "Local Roles"
+msgstr ""
+
+#: ./profiles/example/types/dexterity.membrane.member.xml
 msgid "Member"
 msgstr "Membro"
 
-#: ./dexterity/membrane/behavior/membraneuser.py:159
+#: ./behavior/membraneuser.py:159
 msgid "Membership"
 msgstr "Dados de acesso"
 
-#: ./dexterity/membrane/content/member.py:77
+#: ./content/member.py:77
 msgid "Not a valid link"
 msgstr "Não é um link válido"
 
-#: ./dexterity/membrane/content/member.py:38
+#: ./content/member.py:38
 msgid "Not an email address"
 msgstr "Não é um endereço de email válido"
 
-#: ./dexterity/membrane/behavior/membraneuser.py:167
+#: ./behavior/membraneuser.py:167
 msgid "Password"
 msgstr "Senha"
 
-#: ./dexterity/membrane/behavior/membraneuser.py:183
+#: ./behavior/settings.py:17
+msgid "Properties whitelist"
+msgstr ""
+
+#: ./behavior/settings.py:19
+msgid "Property"
+msgstr ""
+
+#: ./behavior/settings.py:27
+msgid "The list of additional local roles members will be granted in the context of their own profile objects"
+msgstr ""
+
+#: ./behavior/settings.py:18
+msgid "The list of properties to fetch in the user object."
+msgstr ""
+
+#: ./behavior/membraneuser.py:183
 msgid "The password and confirmation do not match."
 msgstr "A senha e sua confirmação não coincidem."
+
+#: ./behavior/settings.py:35
+msgid "Use email address for username?"
+msgstr ""
+
+#: ./behavior/settings.py:42
+msgid "Use object UUID for the userid?"
+msgstr ""
+
+#. Default: "If checked, the value in the \"email\" field will be used as a username/login. If unchecked, your content type must provide a \"username\" field."
+#: ./behavior/settings.py:36
+msgid "use_email_address_for_username"
+msgstr ""
 

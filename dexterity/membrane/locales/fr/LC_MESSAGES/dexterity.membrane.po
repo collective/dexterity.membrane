@@ -3,10 +3,10 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
-"Project-Id-Version: dexterity.membrane\n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2013-07-24 07:30+0000\n"
-"PO-Revision-Date: 2013-05-24 19:12-0300\n"
-"Last-Translator: Héctor Velarde <hector.velarde@gmail.com>\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -19,90 +19,90 @@ msgstr ""
 
 #: ./content/member.py:136
 msgid "Biography"
-msgstr "Biografía"
+msgstr "Biographie"
 
 #: ./behavior/membraneuser.py:172
 msgid "Confirm Password"
-msgstr "Confirme la contraseña"
+msgstr "Confirmez le mot de passe"
 
 #: ./profiles/default/controlpanel.xml
 msgid "Dexterity Membrane Behavior Settings"
-msgstr "Configuración del behavior de Dexterity Membrane"
+msgstr "Paramètres des comportements de Dexterity Membrane"
 
 #: ./content/member.py:90
 msgid "E-mail Address"
-msgstr "Dirección de correo electrónico"
+msgstr "Addresse e-mail"
 
 #: ./content/member.py:129
 msgid "External Homepage"
-msgstr "Página web externa"
+msgstr "Page personnelle externe"
 
 #: ./content/member.py:118
 msgid "First Name"
-msgstr "Nombre"
+msgstr "Prénom"
 
 #: ./behavior/settings.py:43
 msgid "If checked, the UUID value for the adapted object will be used for a userid. Otherwise, the username will be used for the userid."
-msgstr ""
+msgstr "Si cochée, le UUID de l'objet adapté sera utilisé en tant que userid. Sinon, le username sera utilisé en tant que userid."
 
 #: ./content/member.py:123
 msgid "Last Name"
-msgstr "Apellido"
+msgstr "Nom"
 
 #: ./behavior/settings.py:26
 msgid "Local Roles"
-msgstr ""
+msgstr "Roles locaux"
 
 #: ./profiles/example/types/dexterity.membrane.member.xml
 msgid "Member"
-msgstr "Miembro"
+msgstr "Membre"
 
 #: ./behavior/membraneuser.py:159
 msgid "Membership"
-msgstr "Membresía"
+msgstr "Adhésion"
 
 #: ./content/member.py:77
 msgid "Not a valid link"
-msgstr "No es un vínculo válido"
+msgstr "Le lien n'est pas valide"
 
 #: ./content/member.py:38
 msgid "Not an email address"
-msgstr "No es una dirección de correo electrónico"
+msgstr "L'e-mail n'est pas valide"
 
 #: ./behavior/membraneuser.py:167
 msgid "Password"
-msgstr "Contraseña"
+msgstr "Mot de passe"
 
 #: ./behavior/settings.py:17
 msgid "Properties whitelist"
-msgstr ""
+msgstr "Liste blanche des propriétés"
 
 #: ./behavior/settings.py:19
 msgid "Property"
-msgstr ""
+msgstr "Propriété"
 
 #: ./behavior/settings.py:27
 msgid "The list of additional local roles members will be granted in the context of their own profile objects"
-msgstr ""
+msgstr "La liste des roles locaux additionels donnés aux membres dans le contexte de leur propre objet profil."
 
 #: ./behavior/settings.py:18
 msgid "The list of properties to fetch in the user object."
-msgstr ""
+msgstr "La liste des propriétés à recupérer de l'objet utilisateur."
 
 #: ./behavior/membraneuser.py:183
 msgid "The password and confirmation do not match."
-msgstr "La contraseña y su confirmación no coinciden."
+msgstr "Le mot de passe et la confirmation ne sont pas pareil."
 
 #: ./behavior/settings.py:35
 msgid "Use email address for username?"
-msgstr ""
+msgstr "Utiliser l'adresse email pour le nom d'utilisateur ?"
 
 #: ./behavior/settings.py:42
 msgid "Use object UUID for the userid?"
-msgstr ""
+msgstr "Utiliser le UUID de l'objet pour le userid ?"
 
 #. Default: "If checked, the value in the \"email\" field will be used as a username/login. If unchecked, your content type must provide a \"username\" field."
 #: ./behavior/settings.py:36
 msgid "use_email_address_for_username"
-msgstr ""
+msgstr "Si cochée, la valeur du champ \"email\" sera utilisé en tant que nom d'utilisateur/login. Si non cochée, votre type de contenu doit fournir un champ \"username\"."
 

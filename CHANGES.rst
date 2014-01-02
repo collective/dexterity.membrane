@@ -6,6 +6,8 @@ Changelog
 
 - Nothing changed yet.
 
+- Add French translations.
+  [cedricmessiant]
 
 0.4 (2013-07-18)
 ----------------

@@ -1,0 +1,71 @@
+# --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
+# SOME DESCRIPTIVE TITLE.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: dexterity.membrane\n"
+"POT-Creation-Date: 2014-01-02 15:57+0000\n"
+"PO-Revision-Date: 2014-01-02 17:04+0100\n"
+"Last-Translator: Cédric Messiant <cedric.messiant@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Language-Code: fr\n"
+"Language-Name: French\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: dexterity.membrane\n"
+"X-Generator: Poedit 1.5.4\n"
+
+#: content/member.py:136
+msgid "Biography"
+msgstr "Biographie"
+
+#: behavior/membraneuser.py:175
+msgid "Confirm Password"
+msgstr "Confirmer le mot de passe"
+
+#: profiles/default/controlpanel.xml
+msgid "Dexterity Membrane Behavior Settings"
+msgstr "Paramètres du comportement Dexterity Membrane"
+
+#: content/member.py:90
+msgid "E-mail Address"
+msgstr "Adresse courriel"
+
+#: content/member.py:129
+msgid "External Homepage"
+msgstr "Page personnelle"
+
+#: content/member.py:118
+msgid "First Name"
+msgstr "Prénom"
+
+#: content/member.py:123
+msgid "Last Name"
+msgstr "Nom"
+
+#: profiles/example/types/dexterity.membrane.member.xml
+msgid "Member"
+msgstr "Membre"
+
+#: behavior/membraneuser.py:162
+msgid "Membership"
+msgstr ""
+
+#: content/member.py:77
+msgid "Not a valid link"
+msgstr "Lien non valide"
+
+#: content/member.py:38
+msgid "Not an email address"
+msgstr "Adresse courriel non valide"
+
+#: behavior/membraneuser.py:170
+msgid "Password"
+msgstr "Mot de passe"
+
+#: behavior/membraneuser.py:186
+msgid "The password and confirmation do not match."
+msgstr "Le mot de passe et la confirmation ne correspondent pas."

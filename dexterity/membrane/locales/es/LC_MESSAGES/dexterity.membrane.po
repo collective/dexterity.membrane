@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: dexterity.membrane\n"
-"POT-Creation-Date: 2013-07-24 07:30+0000\n"
+"POT-Creation-Date: 2014-01-15 09:09+0000\n"
 "PO-Revision-Date: 2013-05-24 19:12-0300\n"
 "Last-Translator: Héctor Velarde <hector.velarde@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,7 +21,7 @@ msgstr ""
 msgid "Biography"
 msgstr "Biografía"
 
-#: ./behavior/membraneuser.py:172
+#: ./behavior/membraneuser.py:171
 msgid "Confirm Password"
 msgstr "Confirme la contraseña"
 
@@ -41,15 +41,11 @@ msgstr "Página web externa"
 msgid "First Name"
 msgstr "Nombre"
 
-#: ./behavior/settings.py:43
-msgid "If checked, the UUID value for the adapted object will be used for a userid. Otherwise, the username will be used for the userid."
-msgstr ""
-
 #: ./content/member.py:123
 msgid "Last Name"
 msgstr "Apellido"
 
-#: ./behavior/settings.py:26
+#: ./behavior/settings.py:39
 msgid "Local Roles"
 msgstr ""
 
@@ -57,7 +53,7 @@ msgstr ""
 msgid "Member"
 msgstr "Miembro"
 
-#: ./behavior/membraneuser.py:159
+#: ./behavior/membraneuser.py:158
 msgid "Membership"
 msgstr "Membresía"
 
@@ -69,40 +65,44 @@ msgstr "No es un vínculo válido"
 msgid "Not an email address"
 msgstr "No es una dirección de correo electrónico"
 
-#: ./behavior/membraneuser.py:167
+#: ./behavior/membraneuser.py:166
 msgid "Password"
 msgstr "Contraseña"
 
-#: ./behavior/settings.py:17
+#: ./behavior/settings.py:30
 msgid "Properties whitelist"
 msgstr ""
 
-#: ./behavior/settings.py:19
+#: ./behavior/settings.py:32
 msgid "Property"
 msgstr ""
 
-#: ./behavior/settings.py:27
-msgid "The list of additional local roles members will be granted in the context of their own profile objects"
-msgstr ""
-
-#: ./behavior/settings.py:18
+#: ./behavior/settings.py:31
 msgid "The list of properties to fetch in the user object."
 msgstr ""
 
-#: ./behavior/membraneuser.py:183
+#: ./behavior/membraneuser.py:182
 msgid "The password and confirmation do not match."
 msgstr "La contraseña y su confirmación no coinciden."
 
-#: ./behavior/settings.py:35
+#: ./behavior/settings.py:49
 msgid "Use email address for username?"
 msgstr ""
 
-#: ./behavior/settings.py:42
+#: ./behavior/settings.py:56
 msgid "Use object UUID for the userid?"
 msgstr ""
 
+#: ./behavior/settings.py:40
+msgid "local_roles"
+msgstr ""
+
 #. Default: "If checked, the value in the \"email\" field will be used as a username/login. If unchecked, your content type must provide a \"username\" field."
-#: ./behavior/settings.py:36
+#: ./behavior/settings.py:50
 msgid "use_email_address_for_username"
+msgstr ""
+
+#: ./behavior/settings.py:57
+msgid "use_uuid_as_userid_desc"
 msgstr ""
 

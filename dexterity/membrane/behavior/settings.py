@@ -37,7 +37,8 @@ class IDexterityMembraneSettings(Interface):
 
     local_roles = schema.Set(
         title=_(u'Local Roles'),
-        description=_(local_roles_desc),
+        description=_(u'local_roles',
+                      default=local_roles_desc),
         value_type=schema.TextLine(),
         required=False,
         missing_value=set([]),
@@ -53,7 +54,8 @@ class IDexterityMembraneSettings(Interface):
 
     use_uuid_as_userid = schema.Bool(
         title=_(u'Use object UUID for the userid?'),
-        description=_(use_uuid_as_userid_desc),
+        description=_(u'use_uuid_as_userid_desc',
+                      default=use_uuid_as_userid_desc),
         required=False
     )
 

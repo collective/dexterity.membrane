@@ -48,7 +48,7 @@ msgstr "Nom"
 
 #: ./behavior/settings.py:39
 msgid "Local Roles"
-msgstr ""
+msgstr "Roles locaux"
 
 #: ./profiles/example/types/dexterity.membrane.member.xml
 msgid "Member"
@@ -72,15 +72,15 @@ msgstr "Mot de passe"
 
 #: ./behavior/settings.py:30
 msgid "Properties whitelist"
-msgstr ""
+msgstr "Liste blanche de propriété"
 
 #: ./behavior/settings.py:32
 msgid "Property"
-msgstr ""
+msgstr "Propriété"
 
 #: ./behavior/settings.py:31
 msgid "The list of properties to fetch in the user object."
-msgstr ""
+msgstr "La liste des propriétés à rapporter de l'objet utilisateur"
 
 #: ./behavior/membraneuser.py:182
 msgid "The password and confirmation do not match."
@@ -88,21 +88,21 @@ msgstr "Le mot de passe et la confirmation ne correspondent pas."
 
 #: ./behavior/settings.py:49
 msgid "Use email address for username?"
-msgstr ""
+msgstr "Utiliser les adresses de courriel comme nom d'utilisateur ?"
 
 #: ./behavior/settings.py:56
 msgid "Use object UUID for the userid?"
-msgstr ""
+msgstr "Utiliser le UUID de l'object pour l'id de l'utilisateur ?"
 
 #: ./behavior/settings.py:40
 msgid "local_roles"
-msgstr ""
+msgstr "La liste des roles locaux additionnels qui seront donnés à l'utilisateur dans le contexte de leur propre objet de profil."
 
 #: ./behavior/settings.py:50
 msgid "use_email_address_for_username"
-msgstr ""
+msgstr "Si coché, la valeur du champ \"email\" sera utilisé en tant que nom d'utilisateur/login. Si non-coché, le type de contenu doit fournir un champ \"username\"."
 
 #: ./behavior/settings.py:57
 msgid "use_uuid_as_userid_desc"
-msgstr ""
+msgstr "Si coché, le UUID de l'objet adapté sera utilisé en tant que \"userid\". Sinon, le \"username\" sera utilisé comme \"userid\"."
 

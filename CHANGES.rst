@@ -4,11 +4,14 @@ Changelog
 0.5 (unreleased)
 ----------------
 
+- Add extensibles properties.
+  [Gagaro]
+
 - Make get_full_name a method of MembraneUser so it can be easily customized.
   [cedricmessiant, vincentfretin]
 
 - Add French translations.
-  [cedricmessiant]
+  [cedricmessiant, Gagaro]
 
 0.4 (2013-07-18)
 ----------------

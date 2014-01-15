@@ -3,8 +3,8 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
-"Project-Id-Version: dexterity.membrane\n"
-"POT-Creation-Date: 2013-05-24 22:10+0000\n"
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2014-01-15 09:09+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,55 +17,91 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: dexterity.membrane\n"
 
-#: ./dexterity/membrane/content/member.py:136
+#: ./content/member.py:136
 msgid "Biography"
 msgstr ""
 
-#: ./dexterity/membrane/behavior/membraneuser.py:172
+#: ./behavior/membraneuser.py:171
 msgid "Confirm Password"
 msgstr ""
 
-#: ./dexterity/membrane/profiles/behavior/controlpanel.xml
+#: ./profiles/default/controlpanel.xml
 msgid "Dexterity Membrane Behavior Settings"
 msgstr ""
 
-#: ./dexterity/membrane/content/member.py:90
+#: ./content/member.py:90
 msgid "E-mail Address"
 msgstr ""
 
-#: ./dexterity/membrane/content/member.py:129
+#: ./content/member.py:129
 msgid "External Homepage"
 msgstr ""
 
-#: ./dexterity/membrane/content/member.py:118
+#: ./content/member.py:118
 msgid "First Name"
 msgstr ""
 
-#: ./dexterity/membrane/content/member.py:123
+#: ./content/member.py:123
 msgid "Last Name"
 msgstr ""
 
-#: ./dexterity/membrane/profiles/default/types/dexterity.membrane.member.xml
+#: ./behavior/settings.py:39
+msgid "Local Roles"
+msgstr ""
+
+#: ./profiles/example/types/dexterity.membrane.member.xml
 msgid "Member"
 msgstr ""
 
-#: ./dexterity/membrane/behavior/membraneuser.py:159
+#: ./behavior/membraneuser.py:158
 msgid "Membership"
 msgstr ""
 
-#: ./dexterity/membrane/content/member.py:77
+#: ./content/member.py:77
 msgid "Not a valid link"
 msgstr ""
 
-#: ./dexterity/membrane/content/member.py:38
+#: ./content/member.py:38
 msgid "Not an email address"
 msgstr ""
 
-#: ./dexterity/membrane/behavior/membraneuser.py:167
+#: ./behavior/membraneuser.py:166
 msgid "Password"
 msgstr ""
 
-#: ./dexterity/membrane/behavior/membraneuser.py:183
+#: ./behavior/settings.py:30
+msgid "Properties whitelist"
+msgstr ""
+
+#: ./behavior/settings.py:32
+msgid "Property"
+msgstr ""
+
+#: ./behavior/settings.py:31
+msgid "The list of properties to fetch in the user object."
+msgstr ""
+
+#: ./behavior/membraneuser.py:182
 msgid "The password and confirmation do not match."
+msgstr ""
+
+#: ./behavior/settings.py:49
+msgid "Use email address for username?"
+msgstr ""
+
+#: ./behavior/settings.py:56
+msgid "Use object UUID for the userid?"
+msgstr ""
+
+#: ./behavior/settings.py:40
+msgid "local_roles"
+msgstr ""
+
+#: ./behavior/settings.py:50
+msgid "use_email_address_for_username"
+msgstr ""
+
+#: ./behavior/settings.py:57
+msgid "use_uuid_as_userid_desc"
 msgstr ""
 

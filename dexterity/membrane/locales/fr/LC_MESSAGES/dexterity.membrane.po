@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: dexterity.membrane\n"
-"POT-Creation-Date: 2014-01-02 15:57+0000\n"
+"POT-Creation-Date: 2014-01-15 09:09+0000\n"
 "PO-Revision-Date: 2014-01-02 17:04+0100\n"
 "Last-Translator: Cédric Messiant <cedric.messiant@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,54 +18,91 @@ msgstr ""
 "Domain: dexterity.membrane\n"
 "X-Generator: Poedit 1.5.4\n"
 
-#: content/member.py:136
+#: ./content/member.py:136
 msgid "Biography"
 msgstr "Biographie"
 
-#: behavior/membraneuser.py:175
+#: ./behavior/membraneuser.py:171
 msgid "Confirm Password"
 msgstr "Confirmer le mot de passe"
 
-#: profiles/default/controlpanel.xml
+#: ./profiles/default/controlpanel.xml
 msgid "Dexterity Membrane Behavior Settings"
 msgstr "Paramètres du comportement Dexterity Membrane"
 
-#: content/member.py:90
+#: ./content/member.py:90
 msgid "E-mail Address"
 msgstr "Adresse courriel"
 
-#: content/member.py:129
+#: ./content/member.py:129
 msgid "External Homepage"
 msgstr "Page personnelle"
 
-#: content/member.py:118
+#: ./content/member.py:118
 msgid "First Name"
 msgstr "Prénom"
 
-#: content/member.py:123
+#: ./content/member.py:123
 msgid "Last Name"
 msgstr "Nom"
 
-#: profiles/example/types/dexterity.membrane.member.xml
+#: ./behavior/settings.py:39
+msgid "Local Roles"
+msgstr "Roles locaux"
+
+#: ./profiles/example/types/dexterity.membrane.member.xml
 msgid "Member"
 msgstr "Membre"
 
-#: behavior/membraneuser.py:162
+#: ./behavior/membraneuser.py:158
 msgid "Membership"
 msgstr ""
 
-#: content/member.py:77
+#: ./content/member.py:77
 msgid "Not a valid link"
 msgstr "Lien non valide"
 
-#: content/member.py:38
+#: ./content/member.py:38
 msgid "Not an email address"
 msgstr "Adresse courriel non valide"
 
-#: behavior/membraneuser.py:170
+#: ./behavior/membraneuser.py:166
 msgid "Password"
 msgstr "Mot de passe"
 
-#: behavior/membraneuser.py:186
+#: ./behavior/settings.py:30
+msgid "Properties whitelist"
+msgstr "Liste blanche de propriété"
+
+#: ./behavior/settings.py:32
+msgid "Property"
+msgstr "Propriété"
+
+#: ./behavior/settings.py:31
+msgid "The list of properties to fetch in the user object."
+msgstr "La liste des propriétés à rapporter de l'objet utilisateur"
+
+#: ./behavior/membraneuser.py:182
 msgid "The password and confirmation do not match."
 msgstr "Le mot de passe et la confirmation ne correspondent pas."
+
+#: ./behavior/settings.py:49
+msgid "Use email address for username?"
+msgstr "Utiliser les adresses de courriel comme nom d'utilisateur ?"
+
+#: ./behavior/settings.py:56
+msgid "Use object UUID for the userid?"
+msgstr "Utiliser le UUID de l'object pour l'id de l'utilisateur ?"
+
+#: ./behavior/settings.py:40
+msgid "local_roles"
+msgstr "La liste des roles locaux additionnels qui seront donnés à l'utilisateur dans le contexte de leur propre objet de profil."
+
+#: ./behavior/settings.py:50
+msgid "use_email_address_for_username"
+msgstr "Si coché, la valeur du champ \"email\" sera utilisé en tant que nom d'utilisateur/login. Si non-coché, le type de contenu doit fournir un champ \"username\"."
+
+#: ./behavior/settings.py:57
+msgid "use_uuid_as_userid_desc"
+msgstr "Si coché, le UUID de l'objet adapté sera utilisé en tant que \"userid\". Sinon, le \"username\" sera utilisé comme \"userid\"."
+

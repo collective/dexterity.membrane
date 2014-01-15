@@ -21,14 +21,15 @@ class TestSettings(TestCase):
         # accessed by anonymous users
         from AccessControl import Unauthorized
         self.logout()
-        self.assertRaises(Unauthorized, self.portal.restrictedTraverse,
-                                    '@@dexteritymembrane-settings')
+        self.assertRaises(
+            Unauthorized, self.portal.restrictedTraverse,
+            '@@dexteritymembrane-settings'
+        )
 
     def test_entry_in_controlpanel(self):
         # Check that there is a dexterity.membrane entry in the control panel
         controlpanel = getToolByName(self.portal, "portal_controlpanel")
-        actions = [a.getAction(self)['id']
-                            for a in controlpanel.listActions()]
+        actions = [a.getAction(self)['id'] for a in controlpanel.listActions()]
         self.assertTrue('DexterityMembraneSettings' in actions)
 
     def test_registry_defaults(self):
@@ -36,6 +37,8 @@ class TestSettings(TestCase):
         reg = getUtility(IRegistry)
         config = reg.forInterface(settings.IDexterityMembraneSettings, False)
         self.assertTrue(config)
+        self.assertTrue(hasattr(config, 'properties_whitelist'))
+        self.assertTrue(len(config.properties_whitelist) == 0)
         self.assertTrue(hasattr(config, 'local_roles'))
         for default in default_localroles:
             self.assertTrue(default in config.local_roles)

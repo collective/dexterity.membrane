@@ -1,6 +1,7 @@
 import unittest
 
 from Products.CMFCore.utils import getToolByName
+from Products.membrane.interfaces import IMembraneUserObject
 from plone.app.content.interfaces import INameFromTitle
 from plone.app.dexterity.behaviors import metadata
 from plone.app.referenceablebehavior.referenceable import IReferenceable
@@ -9,7 +10,6 @@ from plone.behavior.interfaces import IBehaviorAssignable
 from dexterity.membrane.behavior.membraneuser import IMembraneUser
 from dexterity.membrane.behavior.membraneuser import INameFromFullName
 from dexterity.membrane.behavior.membraneuser import IProvidePasswords
-from dexterity.membrane.behavior.membraneuser import get_full_name
 from dexterity.membrane.membrane_helpers import get_user_id_for_email
 from dexterity.membrane.tests.base import TestCase
 
@@ -283,7 +283,7 @@ class TestMember(TestCase):
         self.assertEqual(name_title.title, u'User')
         member.first_name = u"Joe"
         self.assertEqual(name_title.title, u'Joe User')
-        self.assertEqual(get_full_name(member), u'Joe User')
+        self.assertEqual(IMembraneUserObject(member).get_full_name(), u'Joe User')
 
 
 def test_suite():

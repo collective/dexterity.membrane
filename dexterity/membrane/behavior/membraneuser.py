@@ -34,14 +34,6 @@ class IMembraneUser(Interface):
     """
 
 
-def get_full_name(context):
-    names = [
-        context.first_name,
-        context.last_name,
-        ]
-    return u' '.join([name for name in names if name])
-
-
 class INameFromFullName(INameFromTitle):
     """Get the name from the full name.
 
@@ -63,7 +55,7 @@ class NameFromFullName(object):
 
     @property
     def title(self):
-        return get_full_name(self.context)
+        return IMembraneUserObject(self.context).get_full_name()
 
 
 class IMembraneUserWorkflow(Interface):
@@ -83,6 +75,13 @@ class MembraneUser(object):
 
     def __init__(self, context):
         self.context = context
+
+    def get_full_name(self):
+        names = [
+            self.context.first_name,
+            self.context.last_name,
+            ]
+        return u' '.join([name for name in names if name])
 
     def in_right_state(self):
         workflow = getToolByName(self.context, 'portal_workflow')
@@ -254,7 +253,7 @@ class MyUserProperties(grok.Adapter, MembraneUser):
         # Note: we only define a getter; a setter would be too tricky
         # due to the multiple fields that are behind this one
         # property.
-        return get_full_name(self.context)
+        return IMembraneUserObject(self.context).get_full_name()
 
     def getPropertiesForUser(self, user, request=None):
         """Get properties for this user.

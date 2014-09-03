@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: dexterity.membrane\n"
-"POT-Creation-Date: 2013-05-24 22:10+0000\n"
+"POT-Creation-Date: 2014-09-03 15:31+0000\n"
 "PO-Revision-Date: 2013-05-24 19:12-0300\n"
 "Last-Translator: Héctor Velarde <hector.velarde@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,55 +17,59 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: dexterity.membrane\n"
 
-#: ./dexterity/membrane/content/member.py:136
+#: ./content/member.py:136
 msgid "Biography"
 msgstr "Biografía"
 
-#: ./dexterity/membrane/behavior/membraneuser.py:172
+#: ./behavior/membraneuser.py:171
 msgid "Confirm Password"
 msgstr "Confirme la contraseña"
 
-#: ./dexterity/membrane/profiles/behavior/controlpanel.xml
+#: ./profiles/default/controlpanel.xml
 msgid "Dexterity Membrane Behavior Settings"
 msgstr "Configuración del behavior de Dexterity Membrane"
 
-#: ./dexterity/membrane/content/member.py:90
+#: ./content/member.py:90
 msgid "E-mail Address"
 msgstr "Dirección de correo electrónico"
 
-#: ./dexterity/membrane/content/member.py:129
+#: ./membrane_helpers.py:89
+msgid "Email ${email} is already in use."
+msgstr ""
+
+#: ./content/member.py:129
 msgid "External Homepage"
 msgstr "Página web externa"
 
-#: ./dexterity/membrane/content/member.py:118
+#: ./content/member.py:118
 msgid "First Name"
 msgstr "Nombre"
 
-#: ./dexterity/membrane/content/member.py:123
+#: ./content/member.py:123
 msgid "Last Name"
 msgstr "Apellido"
 
-#: ./dexterity/membrane/profiles/default/types/dexterity.membrane.member.xml
+#: ./profiles/example/types/dexterity.membrane.member.xml
 msgid "Member"
 msgstr "Miembro"
 
-#: ./dexterity/membrane/behavior/membraneuser.py:159
+#: ./behavior/membraneuser.py:158
 msgid "Membership"
 msgstr "Membresía"
 
-#: ./dexterity/membrane/content/member.py:77
+#: ./content/member.py:77
 msgid "Not a valid link"
 msgstr "No es un vínculo válido"
 
-#: ./dexterity/membrane/content/member.py:38
+#: ./content/member.py:38
 msgid "Not an email address"
 msgstr "No es una dirección de correo electrónico"
 
-#: ./dexterity/membrane/behavior/membraneuser.py:167
+#: ./behavior/membraneuser.py:166
 msgid "Password"
 msgstr "Contraseña"
 
-#: ./dexterity/membrane/behavior/membraneuser.py:183
+#: ./behavior/membraneuser.py:182
 msgid "The password and confirmation do not match."
 msgstr "La contraseña y su confirmación no coinciden."
 

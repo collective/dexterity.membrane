@@ -5,6 +5,9 @@ from Products.CMFCore.utils import getToolByName
 from Products.membrane.config import TOOLNAME
 #from Products.ZCatalog.Catalog import CatalogSearchArgumentsMap
 
+from dexterity.membrane import _
+
+
 logger = logging.getLogger(__name__)
 
 
@@ -83,7 +86,7 @@ def validate_unique_email(email, context=None):
 
     # There is a match but it is not this member or we cannot get
     # the object.
-    msg = "Email %s is already in use." % email
+    msg = _("Email ${email} is already in use.", mapping={'email': email})
     logger.debug(msg)
     return msg
 

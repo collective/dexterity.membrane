@@ -6,7 +6,7 @@
     i18n_domain="dexterity.membrane">
 
   <!-- Grok schemata -->
-  <grok:grok package="." />
+  <grok:grok package=".membraneuser" />
 
   <!-- -*- extra stuff goes here -*- -->
 
@@ -21,6 +21,14 @@
       />
 
   <plone:behavior
+      title="Name from full name"
+      description="Use the full name as name (basis for the id)"
+      provides=".membraneuser.INameFromFullName"
+      factory=".membraneuser.NameFromFullName"
+      for="dexterity.membrane.content.member.IMember"
+      />
+
+  <plone:behavior
       title="Membrane Group"
       description="Use this content as a membrane group"
       provides=".membranegroup.IMembraneGroup"
@@ -30,25 +38,22 @@
       />
 
   <plone:behavior
-      title="Name from full name"
-      description="Use the full name as name (basis for the id)"
-      provides=".membraneuser.INameFromFullName"
-      factory=".membraneuser.NameFromFullName"
-      for="dexterity.membrane.content.member.IMember"
-      />
-
-  <plone:behavior
       title="Password"
       description="Store password on this content"
-      provides=".membraneuser.IProvidePasswords"
-      factory=".membraneuser.PasswordProvider"
+      provides=".membranepassword.IProvidePasswords"
+      factory=".membranepassword.PasswordProvider"
       for="plone.dexterity.interfaces.IDexterityContent"
+      marker=".membranepassword.IProvidePasswords"
       />
 
   <adapter
       factory=".membraneuser.MembraneRoleProvider"
       name="dexterity.membrane.behavior.membraneuser.MembraneRoleProvider"
       />
+
+  <!-- password related-->
+  <adapter factory=".membranepassword.MembraneUserAuthentication" />
+  <adapter factory=".membranepassword.MembraneUserPasswordChanger" />
 
   <!-- Control panel -->
   <browser:page

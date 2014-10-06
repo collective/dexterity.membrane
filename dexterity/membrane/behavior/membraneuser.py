@@ -1,29 +1,18 @@
 # -*- coding: utf-8 -*-
-from AccessControl.AuthEncoding import pw_encrypt
-from AccessControl.AuthEncoding import pw_validate
 from Products.CMFCore.utils import getToolByName
 from Products.PlonePAS.sheet import MutablePropertySheet
-from Products.membrane.interfaces import IMembraneUserAuth
-from Products.membrane.interfaces import IMembraneUserChanger
 from Products.membrane.interfaces import IMembraneUserObject
 from Products.membrane.interfaces import IMembraneUserProperties
 from borg.localrole.interfaces import ILocalRoleProvider
-from dexterity.membrane import _
 from dexterity.membrane.behavior import settings
 from five import grok
 from plone.app.content.interfaces import INameFromTitle
-from plone.directives import form
 from plone.registry.interfaces import IRegistry
 from plone.uuid.interfaces import IUUID
-from z3c.form.interfaces import IAddForm
-from zope import schema
+from zope.interface import implementer
 from zope.component import adapter
 from zope.component import getUtility
 from zope.interface import Interface
-from zope.interface import Invalid
-from zope.interface import implementer
-from zope.interface import invariant
-from zope.interface import provider
 import logging
 
 logger = logging.getLogger(__name__)
@@ -66,7 +55,7 @@ class NameFromFullName(object):
 class IMembraneUserWorkflow(Interface):
     """Adapts a membrane user to provide workflow-related info."""
 
-    def is_right_state(self):
+    def in_right_state(self):
         """Returns true if the user is in a state considered active."""
 
 
@@ -81,17 +70,17 @@ class MembraneUser(object):
     def __init__(self, context):
         self.context = context
 
+    def in_right_state(self):
+        workflow = getToolByName(self.context, 'portal_workflow')
+        state = workflow.getInfoFor(self.context, 'review_state')
+        return state in self.allowed_states
+
     def get_full_name(self):
         names = [
             self.context.first_name,
             self.context.last_name,
             ]
         return u' '.join([name for name in names if name])
-
-    def in_right_state(self):
-        workflow = getToolByName(self.context, 'portal_workflow')
-        state = workflow.getInfoFor(self.context, 'review_state')
-        return state in self.allowed_states
 
     def getUserId(self):
         if self._use_uuid_as_userid():
@@ -125,111 +114,6 @@ class MembraneUserAdapter(grok.Adapter, MembraneUser):
 class MembraneUserWorkflow(grok.Adapter, MembraneUser):
     grok.context(IMembraneUser)
     grok.implements(IMembraneUserWorkflow)
-
-
-class MyUserAuthentication(grok.Adapter):
-    grok.context(IMembraneUser)
-    grok.implements(IMembraneUserAuth)
-
-    def verifyCredentials(self, credentials):
-        """Returns True is password is authenticated, False if not.
-        """
-        user = IMembraneUserObject(self.context)
-        if credentials.get('login') != user.getUserName():
-            # Should never happen, as the code should then never end
-            # up here, but better safe than sorry.
-            return False
-        password_provider = IProvidePasswords(self.context)
-        if not password_provider:
-            return False
-        return pw_validate(password_provider.password,
-                           credentials.get('password', ''))
-
-    def authenticateCredentials(self, credentials):
-        # Should not authenticate when the user is not enabled.
-        workflow_info = IMembraneUserWorkflow(self.context)
-        if not workflow_info.in_right_state():
-            return
-        if self.verifyCredentials(credentials):
-            # return (self.getUserId(), self.getUserName())
-            user = IMembraneUserObject(self.context)
-            return (user.getUserId(), user.getUserName())
-
-
-@provider(form.IFormFieldProvider)
-class IProvidePasswords(form.Schema):
-    """Add password fields"""
-
-    # Putting this in a separate fieldset for the moment:
-    form.fieldset('membership', label=_(u"Membership"),
-                  fields=['password', 'confirm_password'])
-
-    # Note that the passwords fields are not required; this means we
-    # can add members without having to add passwords at that time.
-    # The password reset tool should hopefully be able to deal with
-    # that.
-    password = schema.Password(
-        title=_(u"Password"),
-        required=False,
-    )
-
-    confirm_password = schema.Password(
-        title=_(u"Confirm Password"),
-        required=False,
-    )
-
-    @invariant
-    def password_matches_confirmation(data):
-        """password field must match confirm_password field.
-        """
-        password = getattr(data, 'password', None)
-        confirm_password = getattr(data, 'confirm_password', None)
-        if (password or confirm_password) and (password != confirm_password):
-            raise Invalid(_(u"The password and confirmation do not match."))
-
-    form.omitted('password', 'confirm_password')
-    form.no_omit(IAddForm, 'password', 'confirm_password')
-
-
-class PasswordProvider(object):
-
-    def __init__(self, context):
-        self.context = context
-
-    def _get_password(self):
-        return getattr(self.context, 'password', None)
-
-    def _set_password(self, password):
-        # When editing, the password field is empty in the browser; do
-        # not do anything then.
-        if password is not None:
-            self.context.password = pw_encrypt(password)
-
-    def _get_confirm_password(self):
-        # Just return the original password.
-        return self._get_password()
-
-    def _set_confirm_password(self, confirm_password):
-        # No need to store this.
-        return
-
-    password = property(_get_password, _set_password)
-    confirm_password = property(_get_confirm_password, _set_confirm_password)
-
-
-class PasswordProviderAdapter(grok.Adapter, PasswordProvider):
-    grok.context(IMembraneUser)
-    grok.implements(IProvidePasswords)
-
-
-class MyUserPasswordChanger(grok.Adapter, MembraneUser):
-    """Supports resetting a member's password via the password reset form."""
-    grok.context(IMembraneUser)
-    grok.implements(IMembraneUserChanger)
-
-    def doChangeUser(self, user_id, password, **kwargs):
-        password_provider = IProvidePasswords(self.context)
-        password_provider.password = password
 
 
 class MyUserProperties(grok.Adapter, MembraneUser):

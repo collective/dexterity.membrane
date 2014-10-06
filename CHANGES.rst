@@ -4,6 +4,12 @@ Changelog
 0.5 (unreleased)
 ----------------
 
+- Remove grok dependency, refactor a bit to reduce complexity in one module.
+  [jensens]
+
+- Cleanup, pep8, plone-code-style, make tests fly again.
+  [jensens]
+
 - Make get_full_name a method of MembraneUser so it can be easily customized.
   [cedricmessiant, vincentfretin]
 

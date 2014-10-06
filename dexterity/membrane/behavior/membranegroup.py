@@ -1,14 +1,18 @@
 # -*- coding: utf-8 -*-
 from Products.CMFCore.utils import getToolByName
-from Products.membrane.interfaces import IGroup, IMembraneUserAuth
-from five import grok
+from Products.membrane.interfaces import IGroup
+from Products.membrane.interfaces import IMembraneUserAuth
 from zope.interface import Interface
+from zope.component import adapter
+from zope.interface import implementer
 
 
 class IMembraneGroup(Interface):
     """Marker interface for Membrane Group"""
 
 
+@implementer(IGroup)
+@adapter(IMembraneGroup)
 class MembraneGroup(object):
 
     def __init__(self, context):
@@ -25,14 +29,8 @@ class MembraneGroup(object):
 
     def getGroupMembers(self):
         mt = getToolByName(self.context, 'membrane_tool')
-        usr = mt.unrestrictedSearchResults
-        members = {}
-        for m in usr(object_implements=IMembraneUserAuth.__identifier__,
-                     path='/'.join(self.context.getPhysicalPath())):
-            members[m.getUserId] = 1
-        return tuple(members.keys())
-
-
-class MembraneGroupAdapter(grok.Adapter, MembraneGroup):
-    grok.context(IMembraneGroup)
-    grok.implements(IGroup)
+        brains = mt.unrestrictedSearchResults(
+            object_implements=IMembraneUserAuth.__identifier__,
+            path='/'.join(self.context.getPhysicalPath())
+        )
+        return tuple(set([_.m.getUserId for _ in brains]))

@@ -37,7 +37,7 @@
      <element value="dexterity.membrane.behavior.membraneuser.INameFromFullName" />
      <element value="plone.app.referenceablebehavior.referenceable.IReferenceable" />
      <element value="dexterity.membrane.behavior.membraneuser.IMembraneUser" />
-     <element value="dexterity.membrane.behavior.membraneuser.IProvidePasswords" />
+     <element value="dexterity.membrane.behavior.membranepassword.IProvidePasswords" />
  </property>
 
   <!-- View information -->

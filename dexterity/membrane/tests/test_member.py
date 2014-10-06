@@ -3,7 +3,7 @@ from Products.CMFCore.utils import getToolByName
 from Products.membrane.interfaces import IMembraneUserObject
 from dexterity.membrane.behavior.membraneuser import IMembraneUser
 from dexterity.membrane.behavior.membraneuser import INameFromFullName
-from dexterity.membrane.behavior.membraneuser import IProvidePasswords
+from dexterity.membrane.behavior.membranepassword import IProvidePasswords
 from dexterity.membrane.membrane_helpers import get_user_id_for_email
 from dexterity.membrane.testing import DEXTERITY_MEMBRANE_FUNCTIONAL_TESTING
 from plone.app.content.interfaces import INameFromTitle

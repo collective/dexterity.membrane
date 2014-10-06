@@ -17,18 +17,14 @@ from zope.interface import invariant
 from zope.interface import provider
 
 
-@provider(form.IFormFieldProvider)
-class IProvidePasswords(form.Schema):
+class IProvidePasswordsSchema(form.Schema):
     """Add password fields"""
-
-    # Putting this in a separate fieldset for the moment:
-    form.fieldset('membership', label=_(u"Membership"),
-                  fields=['password', 'confirm_password'])
 
     # Note that the passwords fields are not required; this means we
     # can add members without having to add passwords at that time.
     # The password reset tool should hopefully be able to deal with
     # that.
+
     password = schema.Password(
         title=_(u"Password"),
         required=False,
@@ -48,11 +44,20 @@ class IProvidePasswords(form.Schema):
         if (password or confirm_password) and (password != confirm_password):
             raise Invalid(_(u"The password and confirmation do not match."))
 
+
+@provider(form.IFormFieldProvider)
+class IProvidePasswords(IProvidePasswordsSchema):
+    """Add password fields"""
+
+    # Putting this in a separate fieldset for the moment:
+    form.fieldset('membership', label=_(u"Membership"),
+                  fields=['password', 'confirm_password'])
+
     form.omitted('password', 'confirm_password')
     form.no_omit(IAddForm, 'password', 'confirm_password')
 
 
-@implementer(IProvidePasswords)
+@implementer(IProvidePasswordsSchema)
 @adapter(IMembraneUser)
 class PasswordProvider(object):
 
@@ -96,7 +101,7 @@ class MembraneUserAuthentication(object):
             # Should never happen, as the code should then never end
             # up here, but better safe than sorry.
             return False
-        if not IProvidePasswords.providedBy(self.context):
+        if not IProvidePasswordsSchema.providedBy(self.context):
             return False
         return pw_validate(self.context.password,
                            credentials.get('password', ''))
@@ -112,7 +117,7 @@ class MembraneUserAuthentication(object):
             return (user.getUserId(), user.getUserName())
 
 
-@adapter(IProvidePasswords)
+@adapter(IProvidePasswordsSchema)
 @implementer(IMembraneUserChanger)
 class MembraneUserPasswordChanger(object):
     """Supports resetting a member's password via the password reset form."""

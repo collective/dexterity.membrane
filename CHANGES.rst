@@ -4,6 +4,9 @@ Changelog
 0.5 (unreleased)
 ----------------
 
+- make it easier to inherit passowrd for own behavior
+  [jensens]
+
 - Remove grok dependency, refactor a bit to reduce complexity in one module.
   Attention: password related behaviour is now in own module. Needs update of
   customizations/own code after upgrade.

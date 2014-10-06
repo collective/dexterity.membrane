@@ -11,10 +11,23 @@ from plone.directives import form
 from z3c.form.interfaces import IAddForm
 from zope import schema
 from zope.component import adapter
+from zope.component import queryUtility
 from zope.interface import Invalid
+from zope.interface import Interface
 from zope.interface import implementer
 from zope.interface import invariant
 from zope.interface import provider
+
+
+class IPasswordChecker(Interface):
+    """Check password strength or related
+    """
+
+    def check(password):
+        """checks password if it is ok.
+
+        returns False or an unicode/msgid why its wrong
+        """
 
 
 class IProvidePasswordsSchema(form.Schema):
@@ -43,6 +56,12 @@ class IProvidePasswordsSchema(form.Schema):
         confirm_password = getattr(data, 'confirm_password', None)
         if (password or confirm_password) and (password != confirm_password):
             raise Invalid(_(u"The password and confirmation do not match."))
+        pwchecker = queryUtility(IPasswordChecker)
+        if not pwchecker:
+            return
+        result = pwchecker.check(password)
+        if result:
+            raise Invalid(result)
 
 
 @provider(form.IFormFieldProvider)

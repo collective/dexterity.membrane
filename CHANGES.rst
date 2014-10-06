@@ -4,6 +4,11 @@ Changelog
 0.5 (unreleased)
 ----------------
 
+- add a hook using a utility to add a password checker in own customization 
+  code. we may want to provide an default, but yet not sure how it should 
+  look like.
+  [jensens]
+
 - make it easier to inherit passowrd for own behavior
   [jensens]
 

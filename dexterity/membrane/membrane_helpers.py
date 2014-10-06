@@ -1,11 +1,10 @@
-import logging
-from zope.component.hooks import getSite
+# -*- coding: utf-8 -*-
 from AccessControl import Unauthorized
 from Products.CMFCore.utils import getToolByName
 from Products.membrane.config import TOOLNAME
-#from Products.ZCatalog.Catalog import CatalogSearchArgumentsMap
-
 from dexterity.membrane import _
+from zope.component.hooks import getSite
+import logging
 
 
 logger = logging.getLogger(__name__)

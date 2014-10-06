@@ -1,36 +1,28 @@
+# -*- coding: utf-8 -*-
+from dexterity.membrane.testing import DEXTERITY_MEMBRANE_FUNCTIONAL_TESTING
+from plone.testing import layered
+import doctest
 import unittest
 
-#from zope.testing import doctestunit
-import doctest
-from zope.component import testing
-#from Testing import ZopeTestCase as ztc
+optionflags = (doctest.ELLIPSIS | doctest.NORMALIZE_WHITESPACE)
 
-#from dexterity.membrane.tests import base
+testfiles = [
+]
 
 
 def test_suite():
-    return unittest.TestSuite([
-
-        # Unit tests
-        #doctest.DocFileSuite(
-        #    'README.txt', package='dexterity.membrane',
-        #    setUp=testing.setUp, tearDown=testing.tearDown),
-
-        doctest.DocTestSuite(
-            module='dexterity.membrane.content.member',
-            setUp=testing.setUp, tearDown=testing.tearDown),
-
-
-        # Integration tests that use PloneTestCase
-        #ztc.ZopeDocFileSuite(
-        #    'README.txt', package='dexterity.membrane',
-        #    test_class=base.TestCase),
-
-        #ztc.FunctionalDocFileSuite(
-        #    'browser.txt', package='dexterity.membrane',
-        #    test_class=base.FunctionalTestCase),
-
-        ])
+    suite = unittest.TestSuite()
+    for testfile in testfiles:
+        suite.addTest(
+            layered(
+                doctest.DocFileSuite(
+                    testfile,
+                    package='dexterity.membrane'
+                ),
+                layer=DEXTERITY_MEMBRANE_FUNCTIONAL_TESTING
+            )
+        )
+    return suite
 
 if __name__ == '__main__':
     unittest.main(defaultTest='test_suite')

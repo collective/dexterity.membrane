@@ -1,5 +1,4 @@
-import logging
-
+# -*- coding: utf-8 -*-
 from AccessControl.AuthEncoding import pw_encrypt
 from AccessControl.AuthEncoding import pw_validate
 from Products.CMFCore.utils import getToolByName
@@ -8,18 +7,24 @@ from Products.membrane.interfaces import IMembraneUserAuth
 from Products.membrane.interfaces import IMembraneUserChanger
 from Products.membrane.interfaces import IMembraneUserObject
 from Products.membrane.interfaces import IMembraneUserProperties
+from borg.localrole.interfaces import ILocalRoleProvider
+from dexterity.membrane import _
+from dexterity.membrane.behavior import settings
 from five import grok
 from plone.app.content.interfaces import INameFromTitle
 from plone.directives import form
+from plone.registry.interfaces import IRegistry
 from plone.uuid.interfaces import IUUID
 from z3c.form.interfaces import IAddForm
 from zope import schema
-from zope.component import adapts
+from zope.component import adapter
 from zope.component import getUtility
-from zope.interface import alsoProvides, implements
-from zope.interface import Interface, invariant, Invalid
-
-from dexterity.membrane import _
+from zope.interface import Interface
+from zope.interface import Invalid
+from zope.interface import implementer
+from zope.interface import invariant
+from zope.interface import provider
+import logging
 
 logger = logging.getLogger(__name__)
 
@@ -46,9 +51,9 @@ class INameFromFullName(INameFromTitle):
     """
 
 
+@implementer(INameFromFullName)
+@adapter(IMembraneUser)
 class NameFromFullName(object):
-    implements(INameFromFullName)
-    adapts(IMembraneUser)
 
     def __init__(self, context):
         self.context = context
@@ -151,6 +156,7 @@ class MyUserAuthentication(grok.Adapter):
             return (user.getUserId(), user.getUserName())
 
 
+@provider(form.IFormFieldProvider)
 class IProvidePasswords(form.Schema):
     """Add password fields"""
 
@@ -183,9 +189,6 @@ class IProvidePasswords(form.Schema):
 
     form.omitted('password', 'confirm_password')
     form.no_omit(IAddForm, 'password', 'confirm_password')
-
-
-alsoProvides(IProvidePasswords, form.IFormFieldProvider)
 
 
 class PasswordProvider(object):
@@ -305,16 +308,11 @@ class MyUserProperties(grok.Adapter, MembraneUser):
         pass
 
 
-from borg.localrole.interfaces import ILocalRoleProvider
-from plone.registry.interfaces import IRegistry
-from dexterity.membrane.behavior import settings
-
-
+@implementer(ILocalRoleProvider)
+@adapter(IMembraneUser)
 class MembraneRoleProvider(object):
     # Give a membrane user some extra local roles in his/her own member
     # object.
-    implements(ILocalRoleProvider)
-    adapts(IMembraneUser)
 
     _default_roles = ('Reader', 'Editor', 'Creator')
 

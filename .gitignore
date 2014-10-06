@@ -17,3 +17,6 @@ eggs
 fake-eggs
 parts
 var
+/lib/
+/local/
+/include/

@@ -1,34 +1,43 @@
+# -*- coding: utf-8 -*-
+from Products.CMFCore.utils import getToolByName
+from dexterity.membrane.behavior import settings
+from dexterity.membrane.testing import DEXTERITY_MEMBRANE_FUNCTIONAL_TESTING
+from plone.app.testing import logout
 from plone.registry.interfaces import IRegistry
 from zope.component import getMultiAdapter
 from zope.component import getUtility
-from Products.CMFCore.utils import getToolByName
-
-from dexterity.membrane.behavior import settings
-from dexterity.membrane.tests.base import TestCase
+import unittest
 
 
-class TestSettings(TestCase):
+class TestSettings(unittest.TestCase):
+
+    layer = DEXTERITY_MEMBRANE_FUNCTIONAL_TESTING
 
     def test_controlpanel_view(self):
         # Test the setting control panel view works
-        view = getMultiAdapter((self.portal, self.portal.REQUEST),
+        portal = self.layer['portal']
+        view = getMultiAdapter((portal, portal.REQUEST),
                                name="dexteritymembrane-settings")
-        view = view.__of__(self.portal)
+        view = view.__of__(portal)
         self.assertTrue(view())
 
     def test_controlpanel_view_protected(self):
         # Test that the setting control panel view can not be
         # accessed by anonymous users
         from AccessControl import Unauthorized
-        self.logout()
-        self.assertRaises(Unauthorized, self.portal.restrictedTraverse,
-                                    '@@dexteritymembrane-settings')
+        logout()
+        self.assertRaises(
+            Unauthorized,
+            self.layer['portal'].restrictedTraverse,
+            '@@dexteritymembrane-settings'
+        )
 
     def test_entry_in_controlpanel(self):
         # Check that there is a dexterity.membrane entry in the control panel
-        controlpanel = getToolByName(self.portal, "portal_controlpanel")
+        portal = self.layer['portal']
+        controlpanel = getToolByName(portal, "portal_controlpanel")
         actions = [a.getAction(self)['id']
-                            for a in controlpanel.listActions()]
+                   for a in controlpanel.listActions()]
         self.assertTrue('DexterityMembraneSettings' in actions)
 
     def test_registry_defaults(self):

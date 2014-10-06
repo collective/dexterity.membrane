@@ -1,11 +1,10 @@
-import re
-
+# -*- coding: utf-8 -*-
+from dexterity.membrane import _
+from dexterity.membrane.membrane_helpers import validate_unique_email
 from plone.directives import form
 from zope import schema
 from zope.interface import Invalid, invariant
-
-from dexterity.membrane import _
-from dexterity.membrane.membrane_helpers import validate_unique_email
+import re
 
 
 def is_email(value):

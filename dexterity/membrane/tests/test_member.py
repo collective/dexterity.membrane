@@ -1,28 +1,45 @@
-import unittest
-
+# -*- coding: utf-8 -*-
 from Products.CMFCore.utils import getToolByName
 from Products.membrane.interfaces import IMembraneUserObject
-from plone.app.content.interfaces import INameFromTitle
-from plone.app.dexterity.behaviors import metadata
-from plone.app.referenceablebehavior.referenceable import IReferenceable
-from plone.behavior.interfaces import IBehaviorAssignable
-
 from dexterity.membrane.behavior.membraneuser import IMembraneUser
 from dexterity.membrane.behavior.membraneuser import INameFromFullName
 from dexterity.membrane.behavior.membraneuser import IProvidePasswords
 from dexterity.membrane.membrane_helpers import get_user_id_for_email
-from dexterity.membrane.tests.base import TestCase
+from dexterity.membrane.testing import DEXTERITY_MEMBRANE_FUNCTIONAL_TESTING
+from plone.app.content.interfaces import INameFromTitle
+from plone.app.dexterity.behaviors import metadata
+from plone.app.referenceablebehavior.referenceable import IReferenceable
+from plone.app.testing import TEST_USER_NAME
+from plone.app.testing import TEST_USER_ID
+from plone.app.testing import login
+from plone.app.testing import logout
+from plone.app.testing import setRoles
+from plone.behavior.interfaces import IBehaviorAssignable
+import unittest
 
 
-class TestMember(TestCase):
+class TestMember(unittest.TestCase):
+
+    layer = DEXTERITY_MEMBRANE_FUNCTIONAL_TESTING
+
+    def _createType(self, context, portal_type, id):
+        """create an object in the proper context
+        """
+        login(self.layer['portal'], TEST_USER_NAME)
+        setRoles(self.layer['portal'], TEST_USER_ID, ['Contributor'])
+        ttool = getToolByName(context, 'portal_types')
+        fti = ttool.getTypeInfo(portal_type)
+        fti.constructInstance(context, id)
+        obj = getattr(context.aq_inner.aq_explicit, id)
+        return obj
 
     def test_create_member(self):
         member = self._createType(
-            self.portal, 'dexterity.membrane.member', 'jane')
+            self.layer['portal'], 'dexterity.membrane.member', 'jane')
         self.assertEqual(member.portal_type, 'dexterity.membrane.member')
 
     def test_member_is_membrane_type(self):
-        membrane = getToolByName(self.portal, 'membrane_tool')
+        membrane = getToolByName(self.layer['portal'], 'membrane_tool')
         self.assertTrue('dexterity.membrane.member' in
                         membrane.listMembraneTypes())
         # Fine, it is a membrane_type, but does it actually work?  We
@@ -34,7 +51,7 @@ class TestMember(TestCase):
         # somewhere.
         start_count = len(membrane.unrestrictedSearchResults())
         member = self._createType(
-            self.portal, 'dexterity.membrane.member', 'jane')
+            self.layer['portal'], 'dexterity.membrane.member', 'jane')
         # Need to reindex the new object manually in the tests (or
         # maybe notify an event).  We would want to just do
         # 'member.reindexObject()' but that is apparently not enough
@@ -49,19 +66,25 @@ class TestMember(TestCase):
         # Some properties from portal_memberdate can be queried from
         # the member content item.
         member = self._createType(
-            self.portal, 'dexterity.membrane.member', 'joe')
+            self.layer['portal'],
+            'dexterity.membrane.member',
+            'joe'
+        )
         member.first_name = 'Joe'
         member.last_name = 'User'
         member.email = 'joe@example.org'
         member.homepage = 'http://example.org/'
         member.bio = u'I am Joe.  I want to set a good example.'
-        membrane = getToolByName(self.portal, 'membrane_tool')
+        membrane = getToolByName(self.layer['portal'], 'membrane_tool')
         membrane.reindexObject(member)
         # Currently the user_id is an intid, so we need to query for
         # that by email/login name:
-        user_id = get_user_id_for_email(self.portal, 'joe@example.org')
+        user_id = get_user_id_for_email(
+            self.layer['portal'],
+            'joe@example.org'
+        )
         self.assertTrue(user_id)
-        memship = getToolByName(self.portal, 'portal_membership')
+        memship = getToolByName(self.layer['portal'], 'portal_membership')
         user = memship.getMemberById(user_id)
         self.failUnless(user)
         self.assertEqual(user.getProperty('fullname'), 'Joe User')
@@ -73,43 +96,57 @@ class TestMember(TestCase):
     def test_user_name(self):
         # Some upper and lower case issues.
         member = self._createType(
-            self.portal, 'dexterity.membrane.member', 'joe')
+            self.layer['portal'], 'dexterity.membrane.member', 'joe')
         member.email = 'JOE@example.org'
         member.password = 'secret'
         member.confirm_password = 'secret'
-        membrane = getToolByName(self.portal, 'membrane_tool')
+        membrane = getToolByName(self.layer['portal'], 'membrane_tool')
         membrane.reindexObject(member)
 
         # Uppercase:
-        user_id = get_user_id_for_email(self.portal, 'JOE@EXAMPLE.ORG')
+        user_id = get_user_id_for_email(
+            self.layer['portal'],
+            'JOE@EXAMPLE.ORG'
+        )
         self.assertFalse(user_id)
 
         # Lowercase:
-        user_id = get_user_id_for_email(self.portal, 'joe@example.org')
+        user_id = get_user_id_for_email(
+            self.layer['portal'],
+            'joe@example.org'
+        )
         self.assertFalse(user_id)
 
         # Mixed case:
-        user_id = get_user_id_for_email(self.portal, 'joe@EXAMPLE.org')
+        user_id = get_user_id_for_email(
+            self.layer['portal'],
+            'joe@EXAMPLE.org'
+        )
         self.assertFalse(user_id)
 
         # Mixed case:
-        user_id = get_user_id_for_email(self.portal, 'JOE@example.org')
+        user_id = get_user_id_for_email(
+            self.layer['portal'],
+            'JOE@example.org'
+        )
         self.assertTrue(user_id)
 
         # Real authentication is pickier on the case unfortunately.
-        auth = self.portal.acl_users.membrane_users.authenticateCredentials
+        aclu = self.layer['portal'].acl_users
+        auth = aclu.membrane_users.authenticateCredentials
         credentials = {'login': 'JOE@example.org', 'password': 'secret'}
         # First the member needs to be enabled before authentication
         # can succeed.
         self.assertEqual(auth(credentials), None)
-        wf_tool = getToolByName(self.portal, 'portal_workflow')
-        self.setRoles(['Reviewer'])
+        wf_tool = getToolByName(self.layer['portal'], 'portal_workflow')
+        login(self.layer['portal'], TEST_USER_NAME)
+        setRoles(self.layer['portal'], TEST_USER_ID, ['Reviewer'])
         wf_tool.doActionFor(member, 'approve')
-        self.setRoles([])
+        logout()
         self.assertEqual(auth(credentials), (user_id, 'JOE@example.org'))
 
         # It would be nice if we could get the next test to pass by
-        # setting self.portal.membrane_tool.case_sensitive_auth to
+        # setting self.layer['portal'].membrane_tool.case_sensitive_auth to
         # False, but this does not work as advertised.
         #credentials = {'login': 'JOE@EXAMPLE.ORG', 'password': 'secret'}
         #self.assertEqual(auth(credentials), (user_id, 'joe@example.org'))
@@ -125,42 +162,64 @@ class TestMember(TestCase):
         # needs to be available for this, and its monkey patches
         # applied, which should happen automatically on startup.
         member = self._createType(
-            self.portal, 'dexterity.membrane.member', 'joe')
+            self.layer['portal'],
+            'dexterity.membrane.member',
+            'joe'
+        )
         member.email = 'joe@example.org'
-        membrane = getToolByName(self.portal, 'membrane_tool')
+        membrane = getToolByName(self.layer['portal'], 'membrane_tool')
         membrane.reindexObject(member)
-        self.assertEqual(len(membrane.unrestrictedSearchResults(
-            exact_getUserName='joe@example.org')), 1)
+        self.assertEqual(
+            len(membrane.unrestrictedSearchResults(
+                exact_getUserName='joe@example.org')),
+            1
+        )
         member.unindexObject()
-        self.assertEqual(len(membrane.unrestrictedSearchResults(
-            exact_getUserName='joe@example.org')), 0)
+        self.assertEqual(
+            len(membrane.unrestrictedSearchResults(
+                exact_getUserName='joe@example.org')),
+            0)
 
     def test_reset_password(self):
         member = self._createType(
-            self.portal, 'dexterity.membrane.member', 'joe')
+            self.layer['portal'], 'dexterity.membrane.member', 'joe')
         member.email = 'joe@example.org'
-        self.portal.membrane_tool.reindexObject(member)
-        user_id = get_user_id_for_email(self.portal, 'joe@example.org')
-        self.portal.acl_users.userSetPassword(user_id, 'foobar')
+        self.layer['portal'].membrane_tool.reindexObject(member)
+        user_id = get_user_id_for_email(
+            self.layer['portal'],
+            'joe@example.org'
+        )
+        self.layer['portal'].acl_users.userSetPassword(user_id, 'foobar')
         from AccessControl.AuthEncoding import pw_validate
         self.assertTrue(pw_validate(member.password, 'foobar'))
 
     def test_default_local_roles(self):
         # Members get extra local roles on their own object.
         # Get tools:
-        membrane = getToolByName(self.portal, 'membrane_tool')
-        memship = getToolByName(self.portal, 'portal_membership')
+        membrane = getToolByName(self.layer['portal'], 'membrane_tool')
+        memship = getToolByName(self.layer['portal'], 'portal_membership')
         # Create joe:
-        joe = self._createType(self.portal, 'dexterity.membrane.member', 'joe')
+        joe = self._createType(
+            self.layer['portal'],
+            'dexterity.membrane.member',
+            'joe'
+        )
         joe.email = 'joe@example.org'
         membrane.reindexObject(joe)
-        joe_id = get_user_id_for_email(self.portal, 'joe@example.org')
+        joe_id = get_user_id_for_email(
+            self.layer['portal'],
+            'joe@example.org'
+        )
         self.assertTrue(joe_id)
         # Create bob:
-        bob = self._createType(self.portal, 'dexterity.membrane.member', 'bob')
+        bob = self._createType(
+            self.layer['portal'],
+            'dexterity.membrane.member',
+            'bob'
+        )
         bob.email = 'bob@example.org'
         membrane.reindexObject(bob)
-        bob_id = get_user_id_for_email(self.portal, 'bob@example.org')
+        bob_id = get_user_id_for_email(self.layer['portal'], 'bob@example.org')
         self.assertTrue(bob_id)
         # Get members:
         joe_member = memship.getMemberById(joe_id)
@@ -170,22 +229,35 @@ class TestMember(TestCase):
         # At first, no one gets an extra local role, because the
         # members are not enabled.
         # Test roles of fresh joe:
-        self.assertEqual(joe_member.getRolesInContext(self.portal),
-                         ['Authenticated'])
-        self.assertEqual(joe_member.getRolesInContext(self.portal.bob),
-                         ['Authenticated'])
-        self.assertEqual(sorted(joe_member.getRolesInContext(self.portal.joe)),
-                         ['Authenticated'])
+        self.assertEqual(
+            joe_member.getRolesInContext(self.layer['portal']),
+            ['Authenticated']
+        )
+        self.assertEqual(
+            joe_member.getRolesInContext(self.layer['portal'].bob),
+            ['Authenticated']
+        )
+        self.assertEqual(
+            sorted(joe_member.getRolesInContext(self.layer['portal'].joe)),
+            ['Authenticated']
+        )
         # Test roles of fresh bob:
-        self.assertEqual(bob_member.getRolesInContext(self.portal),
-                         ['Authenticated'])
-        self.assertEqual(sorted(bob_member.getRolesInContext(self.portal.bob)),
-                         ['Authenticated'])
-        self.assertEqual(bob_member.getRolesInContext(self.portal.joe),
-                         ['Authenticated'])
+        self.assertEqual(
+            bob_member.getRolesInContext(self.layer['portal']),
+            ['Authenticated']
+        )
+        self.assertEqual(
+            sorted(bob_member.getRolesInContext(self.layer['portal'].bob)),
+            ['Authenticated']
+        )
+        self.assertEqual(
+            bob_member.getRolesInContext(self.layer['portal'].joe),
+            ['Authenticated']
+        )
         # We enable/approve both members now.
-        wf_tool = getToolByName(self.portal, 'portal_workflow')
-        self.setRoles(['Reviewer'])
+        wf_tool = getToolByName(self.layer['portal'], 'portal_workflow')
+        login(self.layer['portal'], TEST_USER_NAME)
+        setRoles(self.layer['portal'], TEST_USER_ID, ['Reviewer'])
         wf_tool.doActionFor(joe, 'approve')
         wf_tool.doActionFor(bob, 'approve')
         # Do some reindexing for good measure (alternatively: fire
@@ -193,42 +265,68 @@ class TestMember(TestCase):
         #membrane.reindexObject(joe)
         #membrane.reindexObject(bob)
         # Test roles of enabled joe:
-        self.assertEqual(joe_member.getRolesInContext(self.portal),
-                         ['Authenticated'])
-        self.assertEqual(joe_member.getRolesInContext(self.portal.bob),
-                         ['Authenticated'])
-        self.assertEqual(sorted(joe_member.getRolesInContext(self.portal.joe)),
-                         ['Authenticated', 'Creator', 'Editor', 'Reader'])
+        self.assertEqual(
+            joe_member.getRolesInContext(self.layer['portal']),
+            ['Authenticated']
+        )
+        self.assertEqual(
+            joe_member.getRolesInContext(self.layer['portal'].bob),
+            ['Authenticated']
+        )
+        self.assertEqual(
+            sorted(joe_member.getRolesInContext(self.layer['portal'].joe)),
+            ['Authenticated', 'Creator', 'Editor', 'Reader']
+        )
         # Test roles of enabled bob:
-        self.assertEqual(bob_member.getRolesInContext(self.portal),
-                         ['Authenticated'])
-        self.assertEqual(sorted(bob_member.getRolesInContext(self.portal.bob)),
-                         ['Authenticated', 'Creator', 'Editor', 'Reader'])
-        self.assertEqual(bob_member.getRolesInContext(self.portal.joe),
-                         ['Authenticated'])
+        self.assertEqual(
+            bob_member.getRolesInContext(self.layer['portal']),
+            ['Authenticated']
+        )
+        self.assertEqual(
+            sorted(bob_member.getRolesInContext(self.layer['portal'].bob)),
+            ['Authenticated', 'Creator', 'Editor', 'Reader']
+        )
+        self.assertEqual(
+            bob_member.getRolesInContext(self.layer['portal'].joe),
+            ['Authenticated']
+        )
         # Now disable both members:
         wf_tool.doActionFor(joe, 'disable')
         wf_tool.doActionFor(bob, 'disable')
         # Test the most important roles again:
-        self.assertEqual(sorted(joe_member.getRolesInContext(self.portal.joe)),
-                         ['Authenticated'])
-        self.assertEqual(sorted(bob_member.getRolesInContext(self.portal.bob)),
-                         ['Authenticated'])
+        self.assertEqual(
+            sorted(joe_member.getRolesInContext(self.layer['portal'].joe)),
+            ['Authenticated']
+        )
+        self.assertEqual(
+            sorted(bob_member.getRolesInContext(self.layer['portal'].bob)),
+            ['Authenticated']
+        )
+        logout()
 
     def test_local_roles_are_configurable(self):
-        memship = getToolByName(self.portal, 'portal_membership')
+        membrane = getToolByName(self.layer['portal'], 'membrane_tool')
+        memship = getToolByName(self.layer['portal'], 'portal_membership')
         # Create joe, approve him, and get him indexed with membrane
-        joe = self._createType(self.portal, 'dexterity.membrane.member', 'joe')
+        joe = self._createType(
+            self.layer['portal'],
+            'dexterity.membrane.member',
+            'joe'
+        )
         joe.email = 'joe@example.org'
-        wf_tool = getToolByName(self.portal, 'portal_workflow')
-        self.setRoles(['Reviewer'])
+        wf_tool = getToolByName(self.layer['portal'], 'portal_workflow')
+        login(self.layer['portal'], TEST_USER_NAME)
+        setRoles(self.layer['portal'], TEST_USER_ID, ['Reviewer'])
         wf_tool.doActionFor(joe, 'approve')
-        joe.reindexObject()
-        joe_id = get_user_id_for_email(self.portal, 'joe@example.org')
+
+        membrane.reindexObject(joe)
+        joe_id = get_user_id_for_email(self.layer['portal'], 'joe@example.org')
         joe_member = memship.getMemberById(joe_id)
         # Test default roles:
-        self.assertEqual(sorted(joe_member.getRolesInContext(self.portal.joe)),
-                         ['Authenticated', 'Creator', 'Editor', 'Reader'])
+        self.assertEqual(
+            sorted(joe_member.getRolesInContext(self.layer['portal'].joe)),
+            ['Authenticated', 'Creator', 'Editor', 'Reader']
+        )
         # Adjust the registry setting
         from zope.component import getUtility
         from plone.registry.interfaces import IRegistry
@@ -237,15 +335,18 @@ class TestMember(TestCase):
         config = reg.forInterface(settings.IDexterityMembraneSettings, False)
         config.local_roles = set([u'Reader'])
         # Roles should now be trimmed down
-        self.assertEqual(sorted(joe_member.getRolesInContext(self.portal.joe)),
-                         ['Authenticated', 'Reader'])
+        self.assertEqual(
+            sorted(joe_member.getRolesInContext(self.layer['portal'].joe)),
+            ['Authenticated', 'Reader']
+        )
+        logout()
 
     def test_member_behaviors(self):
         behaviors = [INameFromFullName, IReferenceable,
                      metadata.ICategorization, metadata.IPublication,
                      metadata.IOwnership, IMembraneUser, IProvidePasswords]
         member = self._createType(
-            self.portal, 'dexterity.membrane.member', 'les')
+            self.layer['portal'], 'dexterity.membrane.member', 'les')
         assignable = IBehaviorAssignable(member)
         for b in behaviors:
             self.assertTrue(assignable.supports(b),
@@ -258,11 +359,13 @@ class TestMember(TestCase):
         # well, but it cannot be, as it gets pulled in as base class
         # of INameFromFullName.
         member = self._createType(
-            self.portal, 'dexterity.membrane.member', 'les')
+            self.layer['portal'], 'dexterity.membrane.member', 'les')
         assignable = IBehaviorAssignable(member)
         for b in black_list:
-            self.assertFalse(assignable.supports(b),
-                            "member type should NOT support %s behavior" % b)
+            self.assertFalse(
+                assignable.supports(b),
+                "member type should NOT support %s behavior" % b
+            )
 
     def test_name_from_full_name(self):
         # We do not want to set a title but instead have the first and
@@ -271,7 +374,7 @@ class TestMember(TestCase):
         # get the fullname and get a name (basis for id) based on our
         # title.
         member = self._createType(
-            self.portal, 'dexterity.membrane.member', 'joe')
+            self.layer['portal'], 'dexterity.membrane.member', 'joe')
         name_title = INameFromTitle(member)
         self.assertEqual(name_title.title, u'')
         member.title = u"Title field"
@@ -280,7 +383,10 @@ class TestMember(TestCase):
         self.assertEqual(name_title.title, u'User')
         member.first_name = u"Joe"
         self.assertEqual(name_title.title, u'Joe User')
-        self.assertEqual(IMembraneUserObject(member).get_full_name(), u'Joe User')
+        self.assertEqual(
+            IMembraneUserObject(member).get_full_name(),
+            u'Joe User'
+        )
 
 
 def test_suite():

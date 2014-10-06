@@ -16,7 +16,7 @@
       description="Use this content as a membrane user"
       provides=".membraneuser.IMembraneUser"
       marker=".membraneuser.IMembraneUser"
-      factory=".membraneuser.MembraneUser"
+      factory=".membraneuser.DxUserObject"
       for="dexterity.membrane.content.member.IEmail"
       />
 
@@ -46,10 +46,20 @@
       marker=".membranepassword.IProvidePasswords"
       />
 
+  <!-- user related -->
   <adapter
-      factory=".membraneuser.MembraneRoleProvider"
-      name="dexterity.membrane.behavior.membraneuser.MembraneRoleProvider"
-      />
+    factory=".membraneuser.MembraneUserWorkflow"
+    provides=".membraneuser.IMembraneUserWorkflow"
+    />
+  <adapter
+    factory=".membraneuser.MembraneUserProperties"
+    provides="Products.membrane.interfaces.IMembraneUserProperties"
+    />
+  <adapter
+    factory=".membraneuser.MembraneRoleProvider"
+    name="dexterity.membrane.behavior.membraneuser.MembraneRoleProvider"
+    />
+
 
   <!-- password related-->
   <adapter factory=".membranepassword.MembraneUserAuthentication" />

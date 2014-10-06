@@ -5,6 +5,8 @@ Changelog
 ----------------
 
 - Remove grok dependency, refactor a bit to reduce complexity in one module.
+  Attention: password related behaviour is now in own module. Needs update of
+  customizations/own code after upgrade.
   [jensens]
 
 - Cleanup, pep8, plone-code-style, make tests fly again.

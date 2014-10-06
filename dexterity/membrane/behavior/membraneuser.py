@@ -5,14 +5,13 @@ from Products.membrane.interfaces import IMembraneUserObject
 from Products.membrane.interfaces import IMembraneUserProperties
 from borg.localrole.interfaces import ILocalRoleProvider
 from dexterity.membrane.behavior import settings
-from five import grok
 from plone.app.content.interfaces import INameFromTitle
 from plone.registry.interfaces import IRegistry
 from plone.uuid.interfaces import IUUID
-from zope.interface import implementer
 from zope.component import adapter
 from zope.component import getUtility
 from zope.interface import Interface
+from zope.interface import implementer
 import logging
 
 logger = logging.getLogger(__name__)
@@ -20,6 +19,8 @@ logger = logging.getLogger(__name__)
 
 class IMembraneUser(Interface):
     """Marker/Form interface for Membrane User
+
+    XXX: Bad Name, since its used for something different in Products.Membrane
 
     The main content schema of the membrane user must contain fields named
     'first_name', 'last_name', and 'email'.
@@ -40,8 +41,15 @@ class INameFromFullName(INameFromTitle):
     """
 
 
+class IMembraneUserWorkflow(Interface):
+    """Adapts a membrane user to provide workflow-related info."""
+
+    def in_right_state(self):
+        """Returns true if the user is in a state considered active."""
+
+
 @implementer(INameFromFullName)
-@adapter(IMembraneUser)
+@adapter(IMembraneUserObject)
 class NameFromFullName(object):
 
     def __init__(self, context):
@@ -52,35 +60,16 @@ class NameFromFullName(object):
         return IMembraneUserObject(self.context).get_full_name()
 
 
-class IMembraneUserWorkflow(Interface):
-    """Adapts a membrane user to provide workflow-related info."""
-
-    def in_right_state(self):
-        """Returns true if the user is in a state considered active."""
-
-
-class MembraneUser(object):
-    """Methods for Membrane User
+@implementer(IMembraneUserObject)
+class DxUserObject(object):
+    """Base Behavioral Methods for Membrane User
     """
 
-    allowed_states = ('enabled',)
     _default = {'use_email_as_username': True,
                 'use_uuid_as_userid': True}
 
     def __init__(self, context):
         self.context = context
-
-    def in_right_state(self):
-        workflow = getToolByName(self.context, 'portal_workflow')
-        state = workflow.getInfoFor(self.context, 'review_state')
-        return state in self.allowed_states
-
-    def get_full_name(self):
-        names = [
-            self.context.first_name,
-            self.context.last_name,
-            ]
-        return u' '.join([name for name in names if name])
 
     def getUserId(self):
         if self._use_uuid_as_userid():
@@ -91,6 +80,13 @@ class MembraneUser(object):
         if self._use_email_as_username():
             return self.context.email
         return self.context.username
+
+    def get_full_name(self):
+        names = [
+            self.context.first_name,
+            self.context.last_name,
+            ]
+        return u' '.join([name for name in names if name])
 
     def _use_email_as_username(self):
         return self._reg_setting('use_email_as_username')
@@ -106,24 +102,25 @@ class MembraneUser(object):
         return self._default(setting)
 
 
-class MembraneUserAdapter(grok.Adapter, MembraneUser):
-    grok.context(IMembraneUser)
-    grok.implements(IMembraneUserObject)
+@implementer(IMembraneUserWorkflow)
+@adapter(IMembraneUser)
+class MembraneUserWorkflow(DxUserObject):
+
+    allowed_states = ('enabled',)
+
+    def in_right_state(self):
+        workflow = getToolByName(self.context, 'portal_workflow')
+        state = workflow.getInfoFor(self.context, 'review_state')
+        return state in self.allowed_states
 
 
-class MembraneUserWorkflow(grok.Adapter, MembraneUser):
-    grok.context(IMembraneUser)
-    grok.implements(IMembraneUserWorkflow)
-
-
-class MyUserProperties(grok.Adapter, MembraneUser):
+@implementer(IMembraneUserProperties)
+@adapter(IMembraneUser)
+class MembraneUserProperties(DxUserObject):
     """User properties for this membrane context.
 
     Adapted from Products/membrane/at/properties.py
     """
-
-    grok.context(IMembraneUser)
-    grok.implements(IMembraneUserProperties)
 
     # Map from memberdata property to member field:
     property_map = dict(
@@ -137,7 +134,7 @@ class MyUserProperties(grok.Adapter, MembraneUser):
         # Note: we only define a getter; a setter would be too tricky
         # due to the multiple fields that are behind this one
         # property.
-        return IMembraneUserObject(self.context).get_full_name()
+        return self.get_full_name()
 
     def getPropertiesForUser(self, user, request=None):
         """Get properties for this user.
@@ -160,8 +157,7 @@ class MyUserProperties(grok.Adapter, MembraneUser):
                 # ValueError: Property home_page: unknown type
                 value = u''
             properties[prop_name] = value
-        return MutablePropertySheet(self.context.getId(),
-                                    **properties)
+        return MutablePropertySheet(self.context.getId(), **properties)
 
     def setPropertiesForUser(self, user, propertysheet):
         """

@@ -54,7 +54,9 @@ class IProvidePasswordsSchema(form.Schema):
         """
         password = getattr(data, 'password', None)
         confirm_password = getattr(data, 'confirm_password', None)
-        if (password or confirm_password) and (password != confirm_password):
+        if not password and not confirm_password:
+            return
+        if password != confirm_password:
             raise Invalid(_(u"The password and confirmation do not match."))
         pwchecker = queryUtility(IPasswordChecker)
         if not pwchecker:

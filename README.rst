@@ -1,14 +1,7 @@
 Introduction
 ============
 
-This is very much alpha code.  But it seems to work fine in a client
-project.  Or at least the client code where this package got copied from
-seems to work fine.  It could be that too much client code has been
-left behind here or removed, but it seems to be okay.
-
-The code is inspired by parts of the ``fsd.membrane`` package (being
-developed by the WebLion group) and the membrane documentation at
-http://packages.python.org/Products.membrane/content.html
+dexterity.membrane enables dexterity content items to be used as users and groups in Plone sites and integrates with Products.membrane.
 
 
 Compatibility

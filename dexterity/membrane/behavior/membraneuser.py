@@ -49,7 +49,7 @@ class IMembraneUserWorkflow(Interface):
 
 
 @implementer(INameFromFullName)
-@adapter(IMembraneUserObject)
+@adapter(IMembraneUser)
 class NameFromFullName(object):
 
     def __init__(self, context):
@@ -60,7 +60,6 @@ class NameFromFullName(object):
         return IMembraneUserObject(self.context).get_full_name()
 
 
-@implementer(IMembraneUserObject)
 class DxUserObject(object):
     """Base Behavioral Methods for Membrane User
     """
@@ -102,6 +101,12 @@ class DxUserObject(object):
         return self._default(setting)
 
 
+@implementer(IMembraneUserObject)
+@adapter(IMembraneUser)
+class MembraneUserObject(DxUserObject):
+    pass
+
+
 @implementer(IMembraneUserWorkflow)
 @adapter(IMembraneUser)
 class MembraneUserWorkflow(DxUserObject):
@@ -134,7 +139,7 @@ class MembraneUserProperties(DxUserObject):
         # Note: we only define a getter; a setter would be too tricky
         # due to the multiple fields that are behind this one
         # property.
-        return self.get_full_name()
+        return IMembraneUserObject(self.context).get_full_name()
 
     def getPropertiesForUser(self, user, request=None):
         """Get properties for this user.

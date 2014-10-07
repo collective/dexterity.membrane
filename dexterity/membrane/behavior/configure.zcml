@@ -5,11 +5,6 @@
     xmlns:browser="http://namespaces.zope.org/browser"
     i18n_domain="dexterity.membrane">
 
-  <!-- Grok schemata -->
-  <grok:grok package=".membraneuser" />
-
-  <!-- -*- extra stuff goes here -*- -->
-
   <!-- behavior -->
   <plone:behavior
       title="Membrane User"
@@ -33,7 +28,7 @@
       description="Use this content as a membrane group"
       provides=".membranegroup.IMembraneGroup"
       marker=".membranegroup.IMembraneGroup"
-      factory=".membranegroup.MembraneGroup"
+      factory=".membranegroup.IMembraneGroup"
       for="plone.dexterity.interfaces.IDexterityContent"
       />
 
@@ -41,12 +36,16 @@
       title="Password"
       description="Store password on this content"
       provides=".membranepassword.IProvidePasswords"
+      marker=".membranepassword.IProvidePasswords"
       factory=".membranepassword.PasswordProvider"
       for="plone.dexterity.interfaces.IDexterityContent"
-      marker=".membranepassword.IProvidePasswords"
       />
 
   <!-- user related -->
+  <adapter
+    factory=".membraneuser.MembraneUserObject"
+    provides=".membraneuser.IMembraneUserObject"
+    />
   <adapter
     factory=".membraneuser.MembraneUserWorkflow"
     provides=".membraneuser.IMembraneUserWorkflow"
@@ -59,7 +58,6 @@
     factory=".membraneuser.MembraneRoleProvider"
     name="dexterity.membrane.behavior.membraneuser.MembraneRoleProvider"
     />
-
 
   <!-- password related-->
   <adapter factory=".membranepassword.MembraneUserAuthentication" />

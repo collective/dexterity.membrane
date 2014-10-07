@@ -70,7 +70,7 @@ Behaviors
   makes the content behave as a membrane user, defining a way to get
   the user id (``getUserId``) and login name (``getUserName``).
 
-- ``dexterity.membrane.behavior.membraneuser.IProvidePasswords``:
+- ``dexterity.membrane.behavior.membranepassword.IProvidePasswords``:
   adds a password and confirmation field to your dexterity content.
   This is used during authentication.
 

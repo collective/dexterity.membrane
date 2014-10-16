@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.5 (unreleased)
+1.0 (2014-10-16)
 ----------------
 
 - add a hook using a utility to add a password checker in own customization 

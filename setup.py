@@ -41,6 +41,7 @@ setup(
         'collective.indexing',
         'plone.app.dexterity',
         'plone.app.referenceablebehavior',
+        'plone.directives.form',
         'setuptools',
     ],
     extras_require={

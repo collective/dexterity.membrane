@@ -4,7 +4,8 @@ Changelog
 1.1 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Declare plone.directives.form dependency.
+  [vincentfretin]
 
 
 1.0 (2014-10-16)

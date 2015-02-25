@@ -32,6 +32,11 @@ class IPasswordChecker(Interface):
         """
 
 
+class IPasswordCapable(Interface):
+    """Marker Interface for content capable of providing passwords
+    """
+
+
 class IProvidePasswordsSchema(model.Schema):
     """Add password fields"""
 
@@ -95,7 +100,7 @@ class PasswordProvider(object):
         return getattr(self.context, 'password', None)
 
     @password.setter
-    def _set_password(self, password):
+    def password(self, password):
         # When editing, the password field is empty in the browser; do
         # not do anything then.
         if password is not None:
@@ -104,10 +109,10 @@ class PasswordProvider(object):
     @property
     def confirm_password(self):
         # Just return the original password.
-        return self._get_password()
+        return self.password
 
     @confirm_password.setter
-    def _set_confirm_password(self, confirm_password):
+    def confirm_password(self, confirm_password):
         # No need to store this.
         return
 
@@ -127,10 +132,13 @@ class MembraneUserAuthentication(object):
             # Should never happen, as the code should then never end
             # up here, but better safe than sorry.
             return False
-        if not IProvidePasswordsSchema.providedBy(self.context):
+        password_provider = IProvidePasswordsSchema(self.context)
+        if not password_provider:
             return False
-        return pw_validate(self.context.password,
-                           credentials.get('password', ''))
+        return pw_validate(
+            password_provider.password,
+            credentials.get('password', '')
+        )
 
     def authenticateCredentials(self, credentials):
         # Should not authenticate when the user is not enabled.
@@ -143,7 +151,7 @@ class MembraneUserAuthentication(object):
             return (user.getUserId(), user.getUserName())
 
 
-@adapter(IProvidePasswordsSchema)
+@adapter(IPasswordCapable)
 @implementer(IMembraneUserChanger)
 class MembraneUserPasswordChanger(object):
     """Supports resetting a member's password via the password reset form."""
@@ -152,4 +160,5 @@ class MembraneUserPasswordChanger(object):
         self.context = context
 
     def doChangeUser(self, user_id, password, **kwargs):
-        self.context.password = password
+        password_provider = IProvidePasswordsSchema(self.context)
+        password_provider.password = password

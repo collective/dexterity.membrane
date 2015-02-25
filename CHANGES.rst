@@ -4,6 +4,10 @@ Changelog
 1.1 (unreleased)
 ----------------
 
+- fix: make ``PasswordProvider`` work. The whole was inactive and broken after
+  activation.
+  [jensens]
+
 - Get rid of deprecated plone.directives and use plone core functionality to 
   achieve same goals. Also minor modernization of buildout.
   [jensens]

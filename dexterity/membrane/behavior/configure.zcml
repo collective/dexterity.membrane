@@ -36,7 +36,7 @@
       title="Password"
       description="Store password on this content"
       provides=".membranepassword.IProvidePasswords"
-      marker=".membranepassword.IProvidePasswords"
+      marker=".membranepassword.IPasswordCapable"
       factory=".membranepassword.PasswordProvider"
       for="plone.dexterity.interfaces.IDexterityContent"
       />

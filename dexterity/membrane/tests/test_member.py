@@ -182,7 +182,9 @@ class TestMember(unittest.TestCase):
 
     def test_reset_password(self):
         member = self._createType(
-            self.layer['portal'], 'dexterity.membrane.member', 'joe')
+            self.layer['portal'],
+            'dexterity.membrane.member', 'joe'
+        )
         member.email = 'joe@example.org'
         self.layer['portal'].membrane_tool.reindexObject(member)
         user_id = get_user_id_for_email(

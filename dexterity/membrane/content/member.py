@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 from dexterity.membrane import _
 from dexterity.membrane.membrane_helpers import validate_unique_email
-from plone.directives import form
+from plone.autoform import directives
+from plone.supermodel import model
 from zope import schema
 from zope.interface import Invalid, invariant
 import re
@@ -33,7 +34,7 @@ def is_email(value):
     Invalid: Not an email address
 
     """
-    if not isinstance(value, basestring) or not '@' in value:
+    if not isinstance(value, basestring) or '@' not in value:
         raise Invalid(_(u"Not an email address"))
     return True
 
@@ -76,7 +77,7 @@ def is_url(value):
     raise Invalid(_(u"Not a valid link"))
 
 
-class IEmail(form.Schema):
+class IEmail(model.Schema):
     """Email address schema.
 
     If you have this field, we can make you a member.  To authenticate
@@ -130,7 +131,7 @@ class IMember(IEmail):
         constraint=is_url,
         )
 
-    form.widget(bio="plone.app.z3cform.wysiwyg.WysiwygFieldWidget")
+    directives.widget(bio="plone.app.z3cform.wysiwyg.WysiwygFieldWidget")
     bio = schema.Text(
         title=_(u"Biography"),
         required=False,

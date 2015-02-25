@@ -4,6 +4,10 @@ Changelog
 1.1 (unreleased)
 ----------------
 
+- Get rid of deprecated plone.directives and use plone core functionality to 
+  achieve same goals. Also minor modernization of buildout.
+  [jensens]
+
 - Declare plone.directives.form dependency.
   [vincentfretin]
 

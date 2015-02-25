@@ -7,13 +7,15 @@ from Products.membrane.interfaces import IMembraneUserObject
 from dexterity.membrane import _
 from dexterity.membrane.behavior.membraneuser import IMembraneUser
 from dexterity.membrane.behavior.membraneuser import IMembraneUserWorkflow
-from plone.directives import form
+from plone.autoform import directives
+from plone.autoform.interfaces import IFormFieldProvider
+from plone.supermodel import model
 from z3c.form.interfaces import IAddForm
 from zope import schema
 from zope.component import adapter
 from zope.component import queryUtility
-from zope.interface import Invalid
 from zope.interface import Interface
+from zope.interface import Invalid
 from zope.interface import implementer
 from zope.interface import invariant
 from zope.interface import provider
@@ -30,7 +32,7 @@ class IPasswordChecker(Interface):
         """
 
 
-class IProvidePasswordsSchema(form.Schema):
+class IProvidePasswordsSchema(model.Schema):
     """Add password fields"""
 
     # Note that the passwords fields are not required; this means we
@@ -66,16 +68,19 @@ class IProvidePasswordsSchema(form.Schema):
             raise Invalid(result)
 
 
-@provider(form.IFormFieldProvider)
+@provider(IFormFieldProvider)
 class IProvidePasswords(IProvidePasswordsSchema):
     """Add password fields"""
 
     # Putting this in a separate fieldset for the moment:
-    form.fieldset('membership', label=_(u"Membership"),
-                  fields=['password', 'confirm_password'])
+    model.fieldset(
+        'membership',
+        label=_(u"Membership"),
+        fields=['password', 'confirm_password']
+    )
 
-    form.omitted('password', 'confirm_password')
-    form.no_omit(IAddForm, 'password', 'confirm_password')
+    directives.omitted('password', 'confirm_password')
+    directives.no_omit(IAddForm, 'password', 'confirm_password')
 
 
 @implementer(IProvidePasswordsSchema)

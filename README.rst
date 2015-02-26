@@ -7,25 +7,21 @@ dexterity.membrane enables dexterity content items to be used as users and group
 Compatibility
 -------------
 
-This package has been developed for Plone 4.1.  In fact it will only
-work on that version (or higher) as we require uuid support.
+This package has been developed for Plone 4.1.
+In fact it will only work on that version (or higher) as we require uuid support.
 
-We depend on Products.membrane 2.0.2 or higher as that contains a fix
-to make sure members that are deleted are also removed from the
-membrane_tool catalog.
+We depend on Products.membrane 2.0.2 or higher as that contains a fix to make sure members that are deleted are also removed from the membrane_tool catalog.
 
 
 User id
 -------
 
 As user id we use the uuid that is generated for the content item.
-This only works on Plone 4.1 and higher.  See the definition of
-``getUserId`` in the ``membraneuser.py`` behavior.
+This only works on Plone 4.1 and higher.
+See the definition of ``getUserId`` in the ``user.py`` behavior.
 
-If you define your own member content type, you should enable the
-``plone.app.referenceablebehavior.referenceable.IReferenceable``
-behavior on it as that gives uuid support.  This also means members
-can be referenced from Archetypes content.
+If you define your own member content type, you should enable the ``plone.app.referenceablebehavior.referenceable.IReferenceable`` behavior on it as that gives uuid support.
+This also means members can be referenced from Archetypes content.
 
 
 Email as login name
@@ -66,15 +62,15 @@ behaviors or create your own adaptations of them.
 Behaviors
 ---------
 
-- ``dexterity.membrane.behavior.membraneuser.IMembraneUser``: this
+- ``dexterity.membrane.behavior.user.IMembraneUser``: this
   makes the content behave as a membrane user, defining a way to get
   the user id (``getUserId``) and login name (``getUserName``).
 
-- ``dexterity.membrane.behavior.membranepassword.IProvidePasswords``:
+- ``dexterity.membrane.behavior.password.IProvidePasswords``:
   adds a password and confirmation field to your dexterity content.
   This is used during authentication.
 
-- ``dexterity.membrane.behavior.membranegroup.IMembraneGroup``: this
+- ``dexterity.membrane.behavior.group.IMembraneGroup``: this
   makes the content behave as a membrane group, defining a way to get
   the group id (``getGroupId``) and group name (``getGroupName``).
 

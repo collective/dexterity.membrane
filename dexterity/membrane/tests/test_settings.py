@@ -16,8 +16,10 @@ class TestSettings(unittest.TestCase):
     def test_controlpanel_view(self):
         # Test the setting control panel view works
         portal = self.layer['portal']
-        view = getMultiAdapter((portal, portal.REQUEST),
-                               name="dexteritymembrane-settings")
+        view = getMultiAdapter(
+            (portal, portal.REQUEST),
+            name="dexteritymembrane-settings"
+        )
         view = view.__of__(portal)
         self.assertTrue(view())
 

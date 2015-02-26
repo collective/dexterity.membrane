@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 from Products.CMFCore.utils import getToolByName
 from Products.membrane.interfaces import IMembraneUserObject
-from dexterity.membrane.behavior.membraneuser import IMembraneUser
-from dexterity.membrane.behavior.membraneuser import INameFromFullName
-from dexterity.membrane.behavior.membranepassword import IProvidePasswords
+from dexterity.membrane.behavior.user import IMembraneUser
+from dexterity.membrane.behavior.user import INameFromFullName
+from dexterity.membrane.behavior.password import IProvidePasswords
 from dexterity.membrane.membrane_helpers import get_user_id_for_email
 from dexterity.membrane.testing import DEXTERITY_MEMBRANE_FUNCTIONAL_TESTING
 from plone.app.content.interfaces import INameFromTitle
@@ -40,8 +40,9 @@ class TestMember(unittest.TestCase):
 
     def test_member_is_membrane_type(self):
         membrane = getToolByName(self.layer['portal'], 'membrane_tool')
-        self.assertTrue('dexterity.membrane.member' in
-                        membrane.listMembraneTypes())
+        self.assertTrue(
+            'dexterity.membrane.member' in membrane.listMembraneTypes()
+        )
         # Fine, it is a membrane_type, but does it actually work?  We
         # add a member and see if we can find it again using the
         # membrane_tool.
@@ -51,7 +52,10 @@ class TestMember(unittest.TestCase):
         # somewhere.
         start_count = len(membrane.unrestrictedSearchResults())
         member = self._createType(
-            self.layer['portal'], 'dexterity.membrane.member', 'jane')
+            self.layer['portal'],
+            'dexterity.membrane.member',
+            'jane'
+        )
         # Need to reindex the new object manually in the tests (or
         # maybe notify an event).  We would want to just do
         # 'member.reindexObject()' but that is apparently not enough
@@ -59,8 +63,10 @@ class TestMember(unittest.TestCase):
         # a member in the live site works though and we do not need to
         # redo the membrane or collective.indexing tests here.
         membrane.reindexObject(member)
-        self.assertEqual(len(membrane.unrestrictedSearchResults()),
-                         start_count + 1)
+        self.assertEqual(
+            len(membrane.unrestrictedSearchResults()),
+            start_count + 1
+        )
 
     def test_member_properties(self):
         # Some properties from portal_memberdate can be queried from
@@ -90,13 +96,18 @@ class TestMember(unittest.TestCase):
         self.assertEqual(user.getProperty('fullname'), 'Joe User')
         self.assertEqual(user.getProperty('email'), 'joe@example.org')
         self.assertEqual(user.getProperty('home_page'), 'http://example.org/')
-        self.assertEqual(user.getProperty('description'),
-                         u'I am Joe.  I want to set a good example.')
+        self.assertEqual(
+            user.getProperty('description'),
+            u'I am Joe.  I want to set a good example.'
+        )
 
     def test_user_name(self):
         # Some upper and lower case issues.
         member = self._createType(
-            self.layer['portal'], 'dexterity.membrane.member', 'joe')
+            self.layer['portal'],
+            'dexterity.membrane.member',
+            'joe'
+        )
         member.email = 'JOE@example.org'
         member.password = 'secret'
         member.confirm_password = 'secret'
@@ -148,8 +159,8 @@ class TestMember(unittest.TestCase):
         # It would be nice if we could get the next test to pass by
         # setting self.layer['portal'].membrane_tool.case_sensitive_auth to
         # False, but this does not work as advertised.
-        #credentials = {'login': 'JOE@EXAMPLE.ORG', 'password': 'secret'}
-        #self.assertEqual(auth(credentials), (user_id, 'joe@example.org'))
+        # credentials = {'login': 'JOE@EXAMPLE.ORG', 'password': 'secret'}
+        # self.assertEqual(auth(credentials), (user_id, 'joe@example.org'))
 
         # Sanity check:
         credentials = {'login': 'otherjoe@example.org', 'password': 'secret'}
@@ -170,20 +181,27 @@ class TestMember(unittest.TestCase):
         membrane = getToolByName(self.layer['portal'], 'membrane_tool')
         membrane.reindexObject(member)
         self.assertEqual(
-            len(membrane.unrestrictedSearchResults(
-                exact_getUserName='joe@example.org')),
+            len(
+                membrane.unrestrictedSearchResults(
+                    exact_getUserName='joe@example.org'
+                )
+            ),
             1
         )
         member.unindexObject()
         self.assertEqual(
-            len(membrane.unrestrictedSearchResults(
-                exact_getUserName='joe@example.org')),
-            0)
+            len(
+                membrane.unrestrictedSearchResults(
+                    exact_getUserName='joe@example.org')
+                ),
+            0
+        )
 
     def test_reset_password(self):
         member = self._createType(
             self.layer['portal'],
-            'dexterity.membrane.member', 'joe'
+            'dexterity.membrane.member',
+            'joe'
         )
         member.email = 'joe@example.org'
         self.layer['portal'].membrane_tool.reindexObject(member)
@@ -262,10 +280,7 @@ class TestMember(unittest.TestCase):
         setRoles(self.layer['portal'], TEST_USER_ID, ['Reviewer'])
         wf_tool.doActionFor(joe, 'approve')
         wf_tool.doActionFor(bob, 'approve')
-        # Do some reindexing for good measure (alternatively: fire
-        # some events).
-        #membrane.reindexObject(joe)
-        #membrane.reindexObject(bob)
+
         # Test roles of enabled joe:
         self.assertEqual(
             joe_member.getRolesInContext(self.layer['portal']),
@@ -344,15 +359,26 @@ class TestMember(unittest.TestCase):
         logout()
 
     def test_member_behaviors(self):
-        behaviors = [INameFromFullName, IReferenceable,
-                     metadata.ICategorization, metadata.IPublication,
-                     metadata.IOwnership, IMembraneUser, IProvidePasswords]
+        behaviors = [
+            INameFromFullName,
+            IReferenceable,
+            metadata.ICategorization,
+            metadata.IPublication,
+            metadata.IOwnership,
+            IMembraneUser,
+            IProvidePasswords
+        ]
         member = self._createType(
-            self.layer['portal'], 'dexterity.membrane.member', 'les')
+            self.layer['portal'],
+            'dexterity.membrane.member',
+            'les'
+        )
         assignable = IBehaviorAssignable(member)
-        for b in behaviors:
-            self.assertTrue(assignable.supports(b),
-                            "member type should support %s behavior" % b)
+        for behavior in behaviors:
+            self.assertTrue(
+                assignable.supports(behavior),
+                "member type should support %s behavior" % behavior
+            )
 
     def test_member_behavior_blacklist(self):
         # Some behaviors should definitely NOT be provided.
@@ -361,7 +387,10 @@ class TestMember(unittest.TestCase):
         # well, but it cannot be, as it gets pulled in as base class
         # of INameFromFullName.
         member = self._createType(
-            self.layer['portal'], 'dexterity.membrane.member', 'les')
+            self.layer['portal'],
+            'dexterity.membrane.member',
+            'les'
+        )
         assignable = IBehaviorAssignable(member)
         for b in black_list:
             self.assertFalse(
@@ -376,7 +405,10 @@ class TestMember(unittest.TestCase):
         # get the fullname and get a name (basis for id) based on our
         # title.
         member = self._createType(
-            self.layer['portal'], 'dexterity.membrane.member', 'joe')
+            self.layer['portal'],
+            'dexterity.membrane.member',
+            'joe'
+        )
         name_title = INameFromTitle(member)
         self.assertEqual(name_title.title, u'')
         member.title = u"Title field"

@@ -42,6 +42,7 @@ setup(
         'plone.app.dexterity',
         'plone.app.referenceablebehavior',
         'setuptools',
+        'zope.deprecation',
     ],
     extras_require={
         'test': [

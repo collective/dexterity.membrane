@@ -5,8 +5,8 @@ from Products.membrane.interfaces import IMembraneUserAuth
 from Products.membrane.interfaces import IMembraneUserChanger
 from Products.membrane.interfaces import IMembraneUserObject
 from dexterity.membrane import _
-from dexterity.membrane.behavior.membraneuser import IMembraneUser
-from dexterity.membrane.behavior.membraneuser import IMembraneUserWorkflow
+from dexterity.membrane.behavior.user import IMembraneUser
+from dexterity.membrane.behavior.user import IMembraneUserWorkflow
 from plone.autoform import directives
 from plone.autoform.interfaces import IFormFieldProvider
 from plone.supermodel import model

@@ -4,11 +4,15 @@ Changelog
 1.1 (unreleased)
 ----------------
 
+- renaming with bbb imports: remove last ``membrane`` from all
+  ``dexterity.membrane.behavior.membrane*``.
+  [jensens]
+
 - fix: make ``PasswordProvider`` work. The whole was inactive and broken after
   activation.
   [jensens]
 
-- Get rid of deprecated plone.directives and use plone core functionality to 
+- Get rid of deprecated plone.directives and use plone core functionality to
   achieve same goals. Also minor modernization of buildout.
   [jensens]
 
@@ -19,8 +23,8 @@ Changelog
 1.0 (2014-10-16)
 ----------------
 
-- add a hook using a utility to add a password checker in own customization 
-  code. we may want to provide an default, but yet not sure how it should 
+- add a hook using a utility to add a password checker in own customization
+  code. we may want to provide an default, but yet not sure how it should
   look like.
   [jensens]
 

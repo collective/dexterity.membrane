@@ -1,7 +1,7 @@
-from plone.indexer.decorator import indexer
-
+# -*- coding: utf-8 -*-
+from dexterity.membrane.behavior.user import INameFromFullName
 from dexterity.membrane.content.member import IMember
-from dexterity.membrane.behavior.membraneuser import INameFromFullName
+from plone.indexer.decorator import indexer
 
 
 @indexer(IMember)

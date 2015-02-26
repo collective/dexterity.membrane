@@ -34,10 +34,10 @@
      <element value="plone.app.dexterity.behaviors.metadata.IPublication" />
      <element value="plone.app.dexterity.behaviors.metadata.IOwnership" />
      <!--element value="plone.app.content.interfaces.INameFromTitle" /-->
-     <element value="dexterity.membrane.behavior.membraneuser.INameFromFullName" />
+     <element value="dexterity.membrane.behavior.user.INameFromFullName" />
      <element value="plone.app.referenceablebehavior.referenceable.IReferenceable" />
-     <element value="dexterity.membrane.behavior.membraneuser.IMembraneUser" />
-     <element value="dexterity.membrane.behavior.membranepassword.IProvidePasswords" />
+     <element value="dexterity.membrane.behavior.user.IMembraneUser" />
+     <element value="dexterity.membrane.behavior.password.IProvidePasswords" />
  </property>
 
   <!-- View information -->

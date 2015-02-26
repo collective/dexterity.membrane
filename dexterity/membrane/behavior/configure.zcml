@@ -9,59 +9,59 @@
   <plone:behavior
       title="Membrane User"
       description="Use this content as a membrane user"
-      provides=".membraneuser.IMembraneUser"
-      marker=".membraneuser.IMembraneUser"
-      factory=".membraneuser.DxUserObject"
+      provides=".user.IMembraneUser"
+      marker=".user.IMembraneUser"
+      factory=".user.DxUserObject"
       for="dexterity.membrane.content.member.IEmail"
       />
 
   <plone:behavior
       title="Name from full name"
       description="Use the full name as name (basis for the id)"
-      provides=".membraneuser.INameFromFullName"
-      factory=".membraneuser.NameFromFullName"
+      provides=".user.INameFromFullName"
+      factory=".user.NameFromFullName"
       for="dexterity.membrane.content.member.IMember"
       />
 
   <plone:behavior
       title="Membrane Group"
       description="Use this content as a membrane group"
-      provides=".membranegroup.IMembraneGroup"
-      marker=".membranegroup.IMembraneGroup"
-      factory=".membranegroup.IMembraneGroup"
+      provides=".group.IMembraneGroup"
+      marker=".group.IMembraneGroup"
+      factory=".group.IMembraneGroup"
       for="plone.dexterity.interfaces.IDexterityContent"
       />
 
   <plone:behavior
       title="Password"
       description="Store password on this content"
-      provides=".membranepassword.IProvidePasswords"
-      marker=".membranepassword.IPasswordCapable"
-      factory=".membranepassword.PasswordProvider"
+      provides=".password.IProvidePasswords"
+      marker=".password.IPasswordCapable"
+      factory=".password.PasswordProvider"
       for="plone.dexterity.interfaces.IDexterityContent"
       />
 
   <!-- user related -->
   <adapter
-    factory=".membraneuser.MembraneUserObject"
-    provides=".membraneuser.IMembraneUserObject"
+    factory=".user.MembraneUserObject"
+    provides=".user.IMembraneUserObject"
     />
   <adapter
-    factory=".membraneuser.MembraneUserWorkflow"
-    provides=".membraneuser.IMembraneUserWorkflow"
+    factory=".user.MembraneUserWorkflow"
+    provides=".user.IMembraneUserWorkflow"
     />
   <adapter
-    factory=".membraneuser.MembraneUserProperties"
+    factory=".user.MembraneUserProperties"
     provides="Products.membrane.interfaces.IMembraneUserProperties"
     />
   <adapter
-    factory=".membraneuser.MembraneRoleProvider"
-    name="dexterity.membrane.behavior.membraneuser.MembraneRoleProvider"
+    factory=".user.MembraneRoleProvider"
+    name="dexterity.membrane.behavior.user.MembraneRoleProvider"
     />
 
   <!-- password related-->
-  <adapter factory=".membranepassword.MembraneUserAuthentication" />
-  <adapter factory=".membranepassword.MembraneUserPasswordChanger" />
+  <adapter factory=".password.MembraneUserAuthentication" />
+  <adapter factory=".password.MembraneUserPasswordChanger" />
 
   <!-- Control panel -->
   <browser:page

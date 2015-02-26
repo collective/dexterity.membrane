@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2014-09-03 15:31+0000\n"
+"POT-Creation-Date: 2015-02-26 09:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,7 +21,7 @@ msgstr ""
 msgid "Biography"
 msgstr ""
 
-#: ./behavior/membraneuser.py:171
+#: ./behavior/password.py:54
 msgid "Confirm Password"
 msgstr ""
 
@@ -33,7 +33,7 @@ msgstr ""
 msgid "E-mail Address"
 msgstr ""
 
-#: ./membrane_helpers.py:89
+#: ./membrane_helpers.py:88
 msgid "Email ${email} is already in use."
 msgstr ""
 
@@ -53,7 +53,7 @@ msgstr ""
 msgid "Member"
 msgstr ""
 
-#: ./behavior/membraneuser.py:158
+#: ./behavior/password.py:83
 msgid "Membership"
 msgstr ""
 
@@ -65,11 +65,11 @@ msgstr ""
 msgid "Not an email address"
 msgstr ""
 
-#: ./behavior/membraneuser.py:166
+#: ./behavior/password.py:49
 msgid "Password"
 msgstr ""
 
-#: ./behavior/membraneuser.py:182
+#: ./behavior/password.py:67
 msgid "The password and confirmation do not match."
 msgstr ""
 

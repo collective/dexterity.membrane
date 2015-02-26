@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: dexterity.membrane\n"
-"POT-Creation-Date: 2014-09-03 15:31+0000\n"
+"POT-Creation-Date: 2015-02-26 09:39+0000\n"
 "PO-Revision-Date: 2013-05-24 19:15-0300\n"
 "Last-Translator: Andre Nogueira <agnogueira@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,7 +22,7 @@ msgstr ""
 msgid "Biography"
 msgstr "Biografia"
 
-#: ./behavior/membraneuser.py:171
+#: ./behavior/password.py:54
 msgid "Confirm Password"
 msgstr "Confirme a senha"
 
@@ -34,7 +34,7 @@ msgstr "Configuração do behavior do Dexterity Membrane"
 msgid "E-mail Address"
 msgstr "Endereço de email"
 
-#: ./membrane_helpers.py:89
+#: ./membrane_helpers.py:88
 msgid "Email ${email} is already in use."
 msgstr ""
 
@@ -54,7 +54,7 @@ msgstr "Sobrenome"
 msgid "Member"
 msgstr "Membro"
 
-#: ./behavior/membraneuser.py:158
+#: ./behavior/password.py:83
 msgid "Membership"
 msgstr "Dados de acesso"
 
@@ -66,11 +66,11 @@ msgstr "Não é um link válido"
 msgid "Not an email address"
 msgstr "Não é um endereço de email válido"
 
-#: ./behavior/membraneuser.py:166
+#: ./behavior/password.py:49
 msgid "Password"
 msgstr "Senha"
 
-#: ./behavior/membraneuser.py:182
+#: ./behavior/password.py:67
 msgid "The password and confirmation do not match."
 msgstr "A senha e sua confirmação não coincidem."
 

@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2014-09-03 15:31+0000\n"
+"POT-Creation-Date: 2015-02-26 09:39+0000\n"
 "PO-Revision-Date: 2011-05-04 03:00+0200\n"
 "Last-Translator: Maurits van Rees <maurits@vanrees.org>\n"
 "Language-Team: plone-nl@lists.plone.org\n"
@@ -19,7 +19,7 @@ msgstr ""
 msgid "Biography"
 msgstr "Biografie"
 
-#: ./behavior/membraneuser.py:171
+#: ./behavior/password.py:54
 msgid "Confirm Password"
 msgstr "Bevestig wachtwoord"
 
@@ -31,7 +31,7 @@ msgstr ""
 msgid "E-mail Address"
 msgstr "E-mailadres"
 
-#: ./membrane_helpers.py:89
+#: ./membrane_helpers.py:88
 msgid "Email ${email} is already in use."
 msgstr ""
 
@@ -51,7 +51,7 @@ msgstr "Achternaam"
 msgid "Member"
 msgstr "Lid"
 
-#: ./behavior/membraneuser.py:158
+#: ./behavior/password.py:83
 msgid "Membership"
 msgstr "Lidmaatschap"
 
@@ -63,11 +63,11 @@ msgstr "Geen geldige link"
 msgid "Not an email address"
 msgstr "Geen e-mailadres"
 
-#: ./behavior/membraneuser.py:166
+#: ./behavior/password.py:49
 msgid "Password"
 msgstr "Wachtwoord"
 
-#: ./behavior/membraneuser.py:182
+#: ./behavior/password.py:67
 msgid "The password and confirmation do not match."
 msgstr "Het wachtwoord en de bevestigen komen niet overeen."
 

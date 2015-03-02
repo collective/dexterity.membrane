@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.1.0b0 (unreleased)
+1.1.0b0 (2015-03-02)
 --------------------
 
 - support special characters/umlauts in passwords

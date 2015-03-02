@@ -2,7 +2,7 @@
 from setuptools import find_packages
 from setuptools import setup
 
-version = '1.1.0-beta'
+version = '1.1.0b0'
 
 setup(
     name='dexterity.membrane',

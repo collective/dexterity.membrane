@@ -1,8 +1,8 @@
 Changelog
 =========
 
-1.1.0-beta (2015-03-02)
------------------------
+1.1.0b0 (2015-03-02)
+--------------------
 
 - support special characters/umlauts in passwords
   [agitator]

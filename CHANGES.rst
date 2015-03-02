@@ -2,10 +2,10 @@ Changelog
 =========
 
 
-1.1.0b1 (unreleased)
+1.1.0b1 (2015-03-02)
 --------------------
 
-- Nothing changed yet.
+- fix release
 
 
 1.1.0b0 (2015-03-02)

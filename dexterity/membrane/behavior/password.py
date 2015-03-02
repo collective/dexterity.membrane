@@ -1,22 +1,23 @@
 # -*- coding: utf-8 -*-
 from AccessControl.AuthEncoding import pw_encrypt
 from AccessControl.AuthEncoding import pw_validate
-from Products.membrane.interfaces import IMembraneUserAuth
-from Products.membrane.interfaces import IMembraneUserChanger
-from Products.membrane.interfaces import IMembraneUserObject
 from dexterity.membrane import _
 from dexterity.membrane.behavior.user import IMembraneUser
 from dexterity.membrane.behavior.user import IMembraneUserWorkflow
+from dexterity.membrane.membrane_helpers import safe_encode
 from plone.autoform import directives
 from plone.autoform.interfaces import IFormFieldProvider
 from plone.supermodel import model
+from Products.membrane.interfaces import IMembraneUserAuth
+from Products.membrane.interfaces import IMembraneUserChanger
+from Products.membrane.interfaces import IMembraneUserObject
 from z3c.form.interfaces import IAddForm
 from zope import schema
 from zope.component import adapter
 from zope.component import queryUtility
+from zope.interface import implementer
 from zope.interface import Interface
 from zope.interface import Invalid
-from zope.interface import implementer
 from zope.interface import invariant
 from zope.interface import provider
 
@@ -104,7 +105,7 @@ class PasswordProvider(object):
         # When editing, the password field is empty in the browser; do
         # not do anything then.
         if password is not None:
-            self.context.password = pw_encrypt(password)
+            self.context.password = pw_encrypt(safe_encode(password))
 
     @property
     def confirm_password(self):

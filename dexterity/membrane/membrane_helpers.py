@@ -41,8 +41,8 @@ def get_brains_for_email(context, email, request=None):
     #         # prefs_user_overview.  Just use None.
     #         pass
     kw = dict(exact_getUserName=email)
-    #args = CatalogSearchArgumentsMap(request, kw)
-    #users = user_catalog.search(args)
+    # args = CatalogSearchArgumentsMap(request, kw)
+    # users = user_catalog.search(args)
     users = user_catalog.unrestrictedSearchResults(**kw)
     return users
 
@@ -106,3 +106,12 @@ def get_membrane_user(context, principal_id, member_type='nd.content.member',
     if get_object:
         return brain.getObject()
     return brain
+
+
+def safe_encode(string):
+    """Safely unicode objects to UTF-8. If it's a binary string, just return
+    it.
+    """
+    if isinstance(string, unicode):
+        string = string.encode('utf-8')
+    return string

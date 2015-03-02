@@ -4,6 +4,9 @@ Changelog
 1.1 (unreleased)
 ----------------
 
+- support special characters/umlauts in passwords
+  [agitator]
+
 - renaming with bbb imports: remove last ``membrane`` from all
   ``dexterity.membrane.behavior.membrane*``.
   [jensens]

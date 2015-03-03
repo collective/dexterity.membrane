@@ -5,7 +5,8 @@ Changelog
 1.1.0b2 (unreleased)
 --------------------
 
-- Nothing changed yet.
+- added BBB class for IMembraneGroup, IProvidePasswordsSchema and IMembraneUser
+  [agitator]
 
 
 1.1.0b1 (2015-03-02)

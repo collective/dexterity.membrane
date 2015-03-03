@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.1.0b2 (unreleased)
+1.1.0b2 (2015-03-03)
 --------------------
 
 - added BBB class for IMembraneGroup, IProvidePasswordsSchema and IMembraneUser

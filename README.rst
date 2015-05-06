@@ -35,7 +35,7 @@ Other implementations are possible, so we do not force you to use the email addr
 By default, this is on, but you can switch it off in our control panel.
 The setting is saved in the Plone registry.
 
-Next to this, it is probably a good idea to also switch on the use_email_as_login property of Plone itself.
+Aside from this, it is probably a good idea to also switch on the use_email_as_login property of Plone itself.
 The only effect this has as far as this package is concerned, is that some text in login forms is changed:
 you see ``email address`` as label instead of ``login name``, mostly.
 To enable this, you can put this in ``propertiestool.xml``, possibly in a custom package for your project::

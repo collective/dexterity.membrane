@@ -58,14 +58,14 @@ feel free to create a different type and only use the behaviors or create your o
 Behaviors
 ---------
 
-``dexterity.membrane.behavior.user.IMembraneUser``
+``dexterity.membrane.behavior.membraneuser.IMembraneUser``
     this makes the content behave as a membrane user, defining a way to get the user id (``getUserId``) and login name (``getUserName``).
 
-``dexterity.membrane.behavior.password.IProvidePasswords``
+``dexterity.membrane.behavior.membranepassword.IProvidePasswords``
     adds a password and confirmation field to your dexterity content.
     This is used during authentication.
 
-``dexterity.membrane.behavior.group.IMembraneGroup``
+``dexterity.membrane.behavior.membranegroup.IMembraneGroup``
     this makes the content behave as a membrane group, defining a way to get the group id (``getGroupId``) and group name (``getGroupName``).
 
 

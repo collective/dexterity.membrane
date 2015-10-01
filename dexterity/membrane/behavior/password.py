@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from AccessControl.AuthEncoding import pw_encrypt
-from AccessControl.AuthEncoding import pw_validate
+import bcrypt
+from AccessControl import AuthEncoding
 from dexterity.membrane import _
 from dexterity.membrane.behavior.user import IMembraneUser
 from dexterity.membrane.behavior.user import IMembraneUserWorkflow
@@ -20,6 +20,23 @@ from zope.interface import Interface
 from zope.interface import Invalid
 from zope.interface import invariant
 from zope.interface import provider
+
+
+class BCRYPTEncryptionScheme(object):
+    """A BCRYPT AuthEncoding."""
+
+    def encrypt(self, pw):
+        return bcrypt.hashpw(pw, bcrypt.gensalt())
+
+    def validate(self, reference, attempt):
+        try:
+            valid = bcrypt.hashpw(attempt, reference) == reference
+        except ValueError:
+            valid = False
+        return valid
+
+
+AuthEncoding.registerScheme('BCRYPT', BCRYPTEncryptionScheme())
 
 
 class IPasswordChecker(Interface):
@@ -105,7 +122,9 @@ class PasswordProvider(object):
         # When editing, the password field is empty in the browser; do
         # not do anything then.
         if password is not None:
-            self.context.password = pw_encrypt(safe_encode(password))
+            self.context.password = AuthEncoding.pw_encrypt(
+                safe_encode(password),
+                encoding='BCRYPT')
 
     @property
     def confirm_password(self):
@@ -136,7 +155,7 @@ class MembraneUserAuthentication(object):
         password_provider = IProvidePasswordsSchema(self.context)
         if not password_provider:
             return False
-        return pw_validate(
+        return AuthEncoding.pw_validate(
             password_provider.password,
             credentials.get('password', '')
         )

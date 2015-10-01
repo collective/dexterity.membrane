@@ -38,6 +38,7 @@ setup(
     install_requires=[
         'Products.CMFPlone>=4.2',
         'Products.membrane>=2.0.2',
+        'bcrypt>=2.0',
         'collective.indexing',
         'plone.app.dexterity',
         'plone.app.referenceablebehavior',

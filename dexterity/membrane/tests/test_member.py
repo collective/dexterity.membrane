@@ -69,7 +69,7 @@ class TestMember(unittest.TestCase):
         )
 
     def test_member_properties(self):
-        # Some properties from portal_memberdate can be queried from
+        # Some properties from portal_memberdata can be queried from
         # the member content item.
         member = self._createType(
             self.layer['portal'],

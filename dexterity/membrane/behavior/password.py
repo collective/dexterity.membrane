@@ -22,6 +22,14 @@ from zope.interface import invariant
 from zope.interface import provider
 
 
+def register_auth_encoding(identity):
+    def register_once(cls):
+        if identity not in set(AuthEncoding.listSchemes()):
+            AuthEncoding.registerScheme(identity, cls())
+    return register_once
+
+
+@register_auth_encoding(b'BCRYPT')
 class BCRYPTEncryptionScheme(object):
     """A BCRYPT AuthEncoding."""
 
@@ -34,9 +42,6 @@ class BCRYPTEncryptionScheme(object):
         except ValueError:
             valid = False
         return valid
-
-
-AuthEncoding.registerScheme('BCRYPT', BCRYPTEncryptionScheme())
 
 
 class IPasswordChecker(Interface):

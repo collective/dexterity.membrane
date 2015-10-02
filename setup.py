@@ -42,7 +42,7 @@ setup(
         'bcrypt>=2.0',
         'collective.indexing>=2.0b1',
         'plone.app.dexterity',
-        'plone.app.referenceablebehavior',
+        'plone.app.referenceablebehavior>=0.7.0',
         'setuptools',
         'zope.deprecation',
     ],

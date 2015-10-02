@@ -24,6 +24,12 @@ class DexterityMembrane(PloneSandboxLayer):
             dexterity.membrane,
             context=configurationContext
         )
+        import plone.app.referenceablebehavior
+        xmlconfig.file(
+            'configure.zcml',
+            plone.app.referenceablebehavior,
+            context=configurationContext
+        )
         z2.installProduct(app, 'Products.membrane')
         z2.installProduct(app, 'collective.indexing')
 

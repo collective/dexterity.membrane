@@ -197,8 +197,13 @@ class TestMember(unittest.TestCase):
             0
         )
 
+    def _legacy_set_password(self, member, password):
+        from AccessControl import AuthEncoding
+        # Default AuthEncoding 'encryption' uses SSHA
+        member.password = AuthEncoding.pw_encrypt(password)
+        self.layer['portal'].membrane_tool.reindexObject(member)
+
     def test_legacy_password_authentication(self):
-        from AccessControl.AuthEncoding import pw_encrypt
         from Products.membrane.interfaces import IMembraneUserAuth
         member = self._createType(
             self.layer['portal'],
@@ -206,8 +211,7 @@ class TestMember(unittest.TestCase):
             'joe'
         )
         member.email = 'joe@example.com'
-        member.password = pw_encrypt(b'foobar')
-        self.layer['portal'].membrane_tool.reindexObject(member)
+        self._legacy_set_password(member, b'foobar')
         pw_auth = IMembraneUserAuth(member)
         self.assertTrue(
             pw_auth.verifyCredentials(dict(login=u'joe@example.com',
@@ -216,20 +220,18 @@ class TestMember(unittest.TestCase):
         )
 
     def test_legacy_password_validates(self):
-        from AccessControl.AuthEncoding import pw_encrypt, pw_validate
+        from AccessControl import AuthEncoding
         member = self._createType(
             self.layer['portal'],
             'dexterity.membrane.member',
             'joe'
         )
         member.email = 'joe@example.org'
-        member.password = pw_encrypt(b'foobar')
-        self.layer['portal'].membrane_tool.reindexObject(member)
-        self.assertTrue(pw_validate(member.password, b'foobar'))
+        self._legacy_set_password(member, b'foobar')
+        self.assertTrue(AuthEncoding.pw_validate(member.password, b'foobar'))
 
     def test_reset_password(self):
         from AccessControl import AuthEncoding
-        from dexterity.membrane.behavior.password import BCRYPTEncryptionScheme
         member = self._createType(
             self.layer['portal'],
             'dexterity.membrane.member',
@@ -244,10 +246,8 @@ class TestMember(unittest.TestCase):
         self.layer['portal'].acl_users.userSetPassword(user_id, b'foobar')
         self.assertTrue(AuthEncoding.is_encrypted(member.password))
         scheme_prefix = '{BCRYPT}'
-        bcrypt_encscheme = BCRYPTEncryptionScheme()
-        pwhash = member.password[len(scheme_prefix):]
         self.assertTrue(member.password.startswith(scheme_prefix))
-        self.assertTrue(bcrypt_encscheme.validate(pwhash, b'foobar'))
+        self.assertTrue(AuthEncoding.pw_validate(member.password, b'foobar'))
 
     def test_default_local_roles(self):
         # Members get extra local roles on their own object.

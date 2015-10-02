@@ -124,7 +124,8 @@ class PasswordProvider(object):
         if password is not None:
             self.context.password = AuthEncoding.pw_encrypt(
                 safe_encode(password),
-                encoding='BCRYPT')
+                encoding='BCRYPT'
+            )
 
     @property
     def confirm_password(self):

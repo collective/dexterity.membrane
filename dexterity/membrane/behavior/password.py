@@ -26,6 +26,7 @@ def register_auth_encoding(identity):
     def register_once(cls):
         if identity not in set(AuthEncoding.listSchemes()):
             AuthEncoding.registerScheme(identity, cls())
+        return cls
     return register_once
 
 

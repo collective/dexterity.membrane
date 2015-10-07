@@ -69,7 +69,7 @@ class TestMember(unittest.TestCase):
         )
 
     def test_member_properties(self):
-        # Some properties from portal_memberdate can be queried from
+        # Some properties from portal_memberdata can be queried from
         # the member content item.
         member = self._createType(
             self.layer['portal'],
@@ -197,7 +197,41 @@ class TestMember(unittest.TestCase):
             0
         )
 
+    def _legacy_set_password(self, member, password):
+        from AccessControl import AuthEncoding
+        # Default AuthEncoding 'encryption' uses SSHA
+        member.password = AuthEncoding.pw_encrypt(password)
+        self.layer['portal'].membrane_tool.reindexObject(member)
+
+    def test_legacy_password_authentication(self):
+        from Products.membrane.interfaces import IMembraneUserAuth
+        member = self._createType(
+            self.layer['portal'],
+            'dexterity.membrane.member',
+            'joe'
+        )
+        member.email = 'joe@example.com'
+        self._legacy_set_password(member, b'foobar')
+        pw_auth = IMembraneUserAuth(member)
+        self.assertTrue(
+            pw_auth.verifyCredentials(dict(login=u'joe@example.com',
+                                           password='foobar',
+                                           confirm_password='foobar'))
+        )
+
+    def test_legacy_password_validates(self):
+        from AccessControl import AuthEncoding
+        member = self._createType(
+            self.layer['portal'],
+            'dexterity.membrane.member',
+            'joe'
+        )
+        member.email = 'joe@example.org'
+        self._legacy_set_password(member, b'foobar')
+        self.assertTrue(AuthEncoding.pw_validate(member.password, b'foobar'))
+
     def test_reset_password(self):
+        from AccessControl import AuthEncoding
         member = self._createType(
             self.layer['portal'],
             'dexterity.membrane.member',
@@ -209,9 +243,11 @@ class TestMember(unittest.TestCase):
             self.layer['portal'],
             'joe@example.org'
         )
-        self.layer['portal'].acl_users.userSetPassword(user_id, 'foobar')
-        from AccessControl.AuthEncoding import pw_validate
-        self.assertTrue(pw_validate(member.password, 'foobar'))
+        self.layer['portal'].acl_users.userSetPassword(user_id, b'foobar')
+        self.assertTrue(AuthEncoding.is_encrypted(member.password))
+        scheme_prefix = '{BCRYPT}'
+        self.assertTrue(member.password.startswith(scheme_prefix))
+        self.assertTrue(AuthEncoding.pw_validate(member.password, b'foobar'))
 
     def test_default_local_roles(self):
         # Members get extra local roles on their own object.

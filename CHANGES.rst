@@ -5,7 +5,9 @@ Changelog
 1.1.0b3 (unreleased)
 --------------------
 
-- Nothing changed yet.
+- Switch to bcrypt encryption for passwords
+  (includes backwards-compatibility with existing SSHA passwords)
+  [mgrbyte]
 
 
 1.1.0b2 (2015-03-03)

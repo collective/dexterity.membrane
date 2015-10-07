@@ -92,3 +92,12 @@ Workflow
 
 We define a simple workflow with pending/approved states.
 A user can only login when in the approved state.
+
+
+Encryption
+----------
+
+As of 1.1.0b3, dexterity.membrane uses bcrypt_ to encrypt new passwords.
+This change maintains support for existing SSHA passwords.
+
+.. _bcrypt: https://en.wikipedia.org/wiki/Bcrypt

@@ -3,6 +3,9 @@ Introduction
 
 dexterity.membrane enables dexterity content items to be used as users and groups in Plone sites and integrates with Products.membrane.
 
+.. image:: https://travis-ci.org/collective/dexterity.membrane.png
+    :target: https://travis-ci.org/collective/dexterity.membrane
+
 
 Compatibility
 -------------

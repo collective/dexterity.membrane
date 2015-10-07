@@ -2,8 +2,8 @@ Changelog
 =========
 
 
-1.1.0b3 (unreleased)
---------------------
+1.1.0 (2015-10-07)
+------------------
 
 - Switch to bcrypt encryption for passwords
   (includes backwards-compatibility with existing SSHA passwords)

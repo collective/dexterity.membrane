@@ -33,4 +33,4 @@ class MembraneGroup(object):
             object_implements=IMembraneUserAuth.__identifier__,
             path='/'.join(self.context.getPhysicalPath())
         )
-        return tuple(set([_.m.getUserId for _ in brains]))
+        return tuple(set([_m.getUserId for _m in brains]))

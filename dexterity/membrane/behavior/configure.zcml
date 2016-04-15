@@ -63,6 +63,12 @@
   <adapter factory=".password.MembraneUserAuthentication" />
   <adapter factory=".password.MembraneUserPasswordChanger" />
 
+  <!-- group related -->
+  <adapter
+    factory=".group.MembraneGroup"
+    provides=".group.IGroup"
+    />
+
   <!-- Control panel -->
   <browser:page
     name="dexteritymembrane-settings"

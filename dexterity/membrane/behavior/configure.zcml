@@ -28,7 +28,7 @@
       description="Use this content as a membrane group"
       provides=".group.IMembraneGroup"
       marker=".group.IMembraneGroup"
-      factory=".group.IMembraneGroup"
+      factory=".group.MembraneGroup"
       for="plone.dexterity.interfaces.IDexterityContent"
       />
 

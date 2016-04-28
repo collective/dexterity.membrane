@@ -12,6 +12,7 @@
       provides=".user.IMembraneUser"
       marker=".user.IMembraneUser"
       factory=".user.DxUserObject"
+      for="dexterity.membrane.content.member.IEmail"
       />
 
   <plone:behavior
@@ -19,6 +20,7 @@
       description="Use the full name as name (basis for the id)"
       provides=".user.INameFromFullName"
       factory=".user.NameFromFullName"
+      for="dexterity.membrane.content.member.IMember"
       />
 
   <plone:behavior

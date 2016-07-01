@@ -5,7 +5,11 @@ Changelog
 1.1.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- A group might accidentally show up as a user.
+  ``portal_membership.listMembers`` then says: ``AttributeError:
+  'NoneType' object has no attribute '__of__'``.  We prevent this by
+  implementing getUserId and getUserName on groups, returning the
+  group id and group name.  [maurits]
 
 
 1.1.0 (2015-10-07)

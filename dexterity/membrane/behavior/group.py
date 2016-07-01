@@ -24,6 +24,13 @@ class MembraneGroup(object):
     def getGroupName(self):
         return self.context.title
 
+    # A group might accidentally show up as a user.
+    # portal_membership.listMembers then says:
+    # AttributeError: 'NoneType' object has no attribute '__of__'
+    # We prevent this by implementing getUserId and getUserName.
+    getUserId = getGroupId
+    getUserName = getGroupName
+
     def getRoles(self):
         return ()
 

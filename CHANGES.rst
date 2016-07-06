@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.1.1 (unreleased)
+1.1.1 (2016-07-06)
 ------------------
 
 - A group might accidentally show up as a user.

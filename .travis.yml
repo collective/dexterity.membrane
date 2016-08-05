@@ -12,6 +12,7 @@ matrix:
   fast_finish: true
 install:
   - sed -ie "s#travis-4.x.cfg#travis-$PLONE_VERSION.x.cfg#" travis.cfg
+  - if test "$PLONE_VERSION" = "4.2"; then echo >> travis.cfg; echo "Products.membrane = 2.1.13" >> travis.cfg; fi
   - mkdir -p buildout-cache/downloads
   - pip install zc.buildout
   - buildout -c travis.cfg annotate

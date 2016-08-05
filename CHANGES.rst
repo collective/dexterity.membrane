@@ -5,7 +5,10 @@ Changelog
 1.1.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Added backwards compatibility import for ``membranepasswords.IProvidePasswords``.
+  Otherwise z3c.relationfield may give problems when editing content.
+  Fixes https://github.com/collective/dexterity.membrane/issues/23
+  [mikejmets]
 
 
 1.1.1 (2016-07-06)

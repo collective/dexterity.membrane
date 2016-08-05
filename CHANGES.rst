@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.1.2 (unreleased)
+1.1.2 (2016-08-05)
 ------------------
 
 - Added backwards compatibility import for ``membranepasswords.IProvidePasswords``.

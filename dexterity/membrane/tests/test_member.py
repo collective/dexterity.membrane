@@ -5,7 +5,9 @@ from dexterity.membrane.behavior.user import IMembraneUser
 from dexterity.membrane.behavior.user import INameFromFullName
 from dexterity.membrane.behavior.password import IProvidePasswords
 from dexterity.membrane.membrane_helpers import get_user_id_for_email
+from dexterity.membrane.behavior.settings import IDexterityMembraneSettings
 from dexterity.membrane.testing import DEXTERITY_MEMBRANE_FUNCTIONAL_TESTING
+from plone import api
 from plone.app.content.interfaces import INameFromTitle
 from plone.app.dexterity.behaviors import metadata
 from plone.app.referenceablebehavior.referenceable import IReferenceable
@@ -457,6 +459,29 @@ class TestMember(unittest.TestCase):
             IMembraneUserObject(member).get_full_name(),
             u'Joe User'
         )
+
+    def test_username_login_no_uuid(self):
+        # we should be able to login by email without uuid enabled
+        api.portal.set_registry_record('use_email_as_username', True,
+                                       IDexterityMembraneSettings)
+        api.portal.set_registry_record('use_uuid_as_userid', False,
+                                       IDexterityMembraneSettings)
+        member = self._createType(
+            self.layer['portal'],
+            'dexterity.membrane.member',
+            'joe'
+        )
+        member.first_name = 'Joe'
+        member.last_name = 'User'
+        member.email = 'joe@example.name'
+        member.username = 'joe@example.id'
+        membrane = getToolByName(self.layer['portal'], 'membrane_tool')
+        membrane.reindexObject(member)
+        memship = getToolByName(self.layer['portal'], 'portal_membership')
+        # even though the username is joe@example.name the userid is not
+        self.assertFalse(memship.getMemberById('joe@example.name'))
+        # the user should be indexed on the actual userid
+        self.assertTrue(memship.getMemberById('joe@example.id'))
 
 
 def test_suite():

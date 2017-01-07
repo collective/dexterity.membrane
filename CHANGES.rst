@@ -5,7 +5,11 @@ Changelog
 1.1.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Enable use_email_as_username without use_uuid_as_userid.
+  This fixes getUserId, which fixes the indexed user values,
+  which fixes enumerateUsers.
+  Fixes https://github.com/collective/dexterity.membrane/issues/26
+  [gyst]
 
 
 1.1.2 (2016-08-05)

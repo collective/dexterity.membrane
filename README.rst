@@ -51,6 +51,17 @@ To enable this, you can put this in ``propertiestool.xml``, possibly in a custom
   </object>
 
 
+Warning about changing settings
+-------------------------------
+
+It is best to configure the settings once, and then not touch them anymore.
+If you change the settings when you already have created members, some reindexing may be needed.
+If there are just a few members, editing and saving them all will be the easiest way.
+If you have dozens or hundreds of members this is not very practical.
+Future versions might automate this.
+If you are interested in helping, a `pull request <https://github.com/collective/dexterity.membrane/pulls>`_ would be nice.
+
+
 Member content type
 -------------------
 

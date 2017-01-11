@@ -8,6 +8,8 @@ Changelog
 - Enable use_email_as_username without use_uuid_as_userid.
   This fixes getUserId, which fixes the indexed user values,
   which fixes enumerateUsers.
+  Warning: if you already have members and you change the settings,
+  this may need reindexing, or editing and saving all users manually.
   Fixes https://github.com/collective/dexterity.membrane/issues/26
   [gyst]
 

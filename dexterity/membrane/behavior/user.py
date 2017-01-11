@@ -85,7 +85,7 @@ class DxUserObject(object):
         names = [
             self.context.first_name,
             self.context.last_name,
-            ]
+        ]
         return u' '.join([name for name in names if name])
 
     def _use_email_as_username(self):
@@ -133,7 +133,7 @@ class MembraneUserProperties(DxUserObject):
         email='email',
         home_page='homepage',
         description='bio',
-        )
+    )
 
     @property
     def fullname(self):
@@ -155,7 +155,7 @@ class MembraneUserProperties(DxUserObject):
         """
         properties = dict(
             fullname=self.fullname,
-            )
+        )
         for prop_name, field_name in self.property_map.items():
             value = getattr(self.context, field_name, None)
             if value is None:

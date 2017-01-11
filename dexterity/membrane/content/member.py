@@ -90,7 +90,7 @@ class IEmail(model.Schema):
         title=_(u"E-mail Address"),
         required=True,
         constraint=is_email,
-        )
+    )
 
     @invariant
     def email_unique(data):
@@ -117,22 +117,22 @@ class IMember(IEmail):
     first_name = schema.TextLine(
         title=_(u"First Name"),
         required=True,
-        )
+    )
 
     last_name = schema.TextLine(
         title=_(u"Last Name"),
         required=True,
-        )
+    )
 
     homepage = schema.TextLine(
         # url format
         title=_(u"External Homepage"),
         required=False,
         constraint=is_url,
-        )
+    )
 
     directives.widget(bio="plone.app.z3cform.wysiwyg.WysiwygFieldWidget")
     bio = schema.Text(
         title=_(u"Biography"),
         required=False,
-        )
+    )

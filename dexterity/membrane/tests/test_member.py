@@ -195,7 +195,7 @@ class TestMember(unittest.TestCase):
             len(
                 membrane.unrestrictedSearchResults(
                     exact_getUserName='joe@example.org')
-                ),
+            ),
             0
         )
 

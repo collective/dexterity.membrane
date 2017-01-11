@@ -2,8 +2,8 @@ Changelog
 =========
 
 
-1.1.3 (unreleased)
-------------------
+1.2 (unreleased)
+----------------
 
 - No longer officially support Python 2.6.  See compatibility in readme.
   [maurits]

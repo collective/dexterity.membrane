@@ -5,6 +5,9 @@ Changelog
 1.1.3 (unreleased)
 ------------------
 
+- No longer officially support Python 2.6.  See compatibility in readme.
+  [maurits]
+
 - Enable use_email_as_username without use_uuid_as_userid.
   This fixes getUserId, which fixes the indexed user values,
   which fixes enumerateUsers.

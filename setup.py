@@ -13,7 +13,7 @@ setup(
         open("CHANGES.rst").read()
     ),
     classifiers=[
-        "Development Status :: 3 - Alpha",
+        "Development Status :: 5 - Production/Stable",
         "Environment :: Web Environment",
         "Framework :: Plone :: 4.2",
         "Framework :: Plone :: 4.3",
@@ -22,7 +22,6 @@ setup(
         "Intended Audience :: System Administrators",
         "License :: OSI Approved :: GNU General Public License v2 (GPLv2)",
         "Operating System :: OS Independent",
-        "Programming Language :: Python :: 2.6",
         "Programming Language :: Python :: 2.7",
         "Programming Language :: Python",
         "Topic :: Software Development :: Libraries :: Python Modules",

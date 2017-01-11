@@ -12,6 +12,8 @@ Compatibility
 
 This package has been tested and developed for Plone 4.2+
 In fact it will only work on that version (or higher) as we require uuid support.
+We highly recommend using Python 2.7.
+It may work on Python 2.6, but we are not testing with that version (and at least the tests have some code that only works on 2.7).
 
 We depend on Products.membrane 2.0.2 or higher as that contains a fix to make sure members that are deleted are also removed from the membrane_tool catalog.
 
@@ -41,7 +43,7 @@ The setting is saved in the Plone registry.
 Aside from this, it is probably a good idea to also switch on the use_email_as_login property of Plone itself.
 The only effect this has as far as this package is concerned, is that some text in login forms is changed:
 you see ``email address`` as label instead of ``login name``, mostly.
-To enable this, you can put this in ``propertiestool.xml``, possibly in a custom package for your project::
+To enable this, you can put this in ``propertiestool.xml`` (Plone 4), possibly in a custom package for your project::
 
   <?xml version="1.0"?>
   <object name="portal_properties" meta_type="Plone Properties Tool">

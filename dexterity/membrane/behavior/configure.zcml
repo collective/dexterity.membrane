@@ -28,7 +28,7 @@
       description="Use this content as a membrane group"
       provides=".group.IMembraneGroup"
       marker=".group.IMembraneGroup"
-      factory=".group.IMembraneGroup"
+      factory=".group.MembraneGroup"
       for="plone.dexterity.interfaces.IDexterityContent"
       />
 
@@ -62,6 +62,12 @@
   <!-- password related-->
   <adapter factory=".password.MembraneUserAuthentication" />
   <adapter factory=".password.MembraneUserPasswordChanger" />
+
+  <!-- group related -->
+  <adapter
+    factory=".group.MembraneGroup"
+    provides=".group.IGroup"
+    />
 
   <!-- Control panel -->
   <browser:page

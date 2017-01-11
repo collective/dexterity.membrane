@@ -49,6 +49,7 @@ setup(
         'test': [
             'plone.api',
             'plone.app.testing',
+            'plone.api'
         ],
     },
     entry_points="""

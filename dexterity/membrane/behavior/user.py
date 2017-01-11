@@ -73,9 +73,8 @@ class DxUserObject(object):
     def getUserId(self):
         if self._use_uuid_as_userid():
             return IUUID(self.context)
-        # issue #26: the username field is actually the userid
-        # avoid using getUserName since that might return the email address
-        return self.context.username
+        # #26: do not assume username == userid
+        return self.context.getId()
 
     def getUserName(self):
         if self._use_email_as_username():

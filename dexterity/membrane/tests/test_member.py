@@ -460,31 +460,94 @@ class TestMember(unittest.TestCase):
             u'Joe User'
         )
 
-    def test_username_login_no_uuid(self):
-        # we should be able to login by email without uuid enabled
+
+class TestUserAPI_no_uuid_with_email(unittest.TestCase):
+
+    layer = DEXTERITY_MEMBRANE_FUNCTIONAL_TESTING
+
+    def setUp(self):
+        self.configure()
+        self.member = self.setup_member()
+
+    def configure(self):
         api.portal.set_registry_record('use_email_as_username', True,
                                        IDexterityMembraneSettings)
         api.portal.set_registry_record('use_uuid_as_userid', False,
                                        IDexterityMembraneSettings)
+
+    def setup_member(self):
         member = self._createType(
             self.layer['portal'],
             'dexterity.membrane.member',
-            'joe'
+            'joe_id'
         )
         member.first_name = 'Joe'
         member.last_name = 'User'
-        member.email = 'joe@example.name'
-        member.username = 'joe@example.id'
+        member.email = 'joe@example.org'
+        member.username = 'joe_name'
         membrane = getToolByName(self.layer['portal'], 'membrane_tool')
         membrane.reindexObject(member)
+        return member
+
+    def _createType(self, context, portal_type, id):
+        """create an object in the proper context
+        """
+        login(self.layer['portal'], TEST_USER_NAME)
+        setRoles(self.layer['portal'], TEST_USER_ID, ['Contributor'])
+        ttool = getToolByName(context, 'portal_types')
+        fti = ttool.getTypeInfo(portal_type)
+        fti.constructInstance(context, id)
+        obj = getattr(context.aq_inner.aq_explicit, id)
+        return obj
+
+    def test_userid(self):
+        """All id-ish accessors behave the same regardless of email setting"""
         memship = getToolByName(self.layer['portal'], 'portal_membership')
-        # even though the username is joe@example.name the userid is not
-        self.assertFalse(memship.getMemberById('joe@example.name'))
-        # the user should be indexed on the actual userid
-        self.assertTrue(memship.getMemberById('joe@example.id'))
+        self.assertTrue(memship.getMemberById('joe_id'))
+        self.assertFalse(memship.getMemberById('joe_name'))
+        self.assertFalse(memship.getMemberById('joe@example.org'))
+        self.assertEqual(self.member.id, 'joe_id')
+        self.assertEqual(self.member.getId(), 'joe_id')
+        self.assertEqual(self.layer['portal']['joe_id'], self.member)
+        with self.assertRaises(AttributeError):
+            self.member.getUserId()
+        adapted = IMembraneUserObject(self.member)
+        self.assertEqual(adapted.getUserId(), 'joe_id')
+        with self.assertRaises(AttributeError):
+            adapted.id
+        with self.assertRaises(AttributeError):
+            adapted.getId()
+
+    def test_username(self):
+        with self.assertRaises(AttributeError):
+            self.member.getUserName()
+        adapted = IMembraneUserObject(self.member)
+        self.assertEqual(adapted.getUserName(), 'joe@example.org')
+
+
+class TestUserAPI_no_uuid_no_email(TestUserAPI_no_uuid_with_email):
+    """
+    Inherits setUp() and test_userid.
+    Only getUserName() behaves differently.
+    """
+    layer = DEXTERITY_MEMBRANE_FUNCTIONAL_TESTING
+
+    def configure(self):
+        api.portal.set_registry_record('use_email_as_username', False,
+                                       IDexterityMembraneSettings)
+        api.portal.set_registry_record('use_uuid_as_userid', False,
+                                       IDexterityMembraneSettings)
+
+    def test_username(self):
+        with self.assertRaises(AttributeError):
+            self.member.getUserName()
+        adapted = IMembraneUserObject(self.member)
+        self.assertEqual(adapted.getUserName(), 'joe_name')
 
 
 def test_suite():
     suite = unittest.TestSuite()
     suite.addTest(unittest.makeSuite(TestMember))
+    suite.addTest(unittest.makeSuite(TestUserAPI_no_uuid_no_email))
+    suite.addTest(unittest.makeSuite(TestUserAPI_no_uuid_with_email))
     return suite

@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.2 (unreleased)
+1.2 (2017-01-11)
 ----------------
 
 - No longer officially support Python 2.6.  See compatibility in readme.

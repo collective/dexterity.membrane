@@ -1,22 +1,23 @@
 # -*- coding: utf-8 -*-
-from Products.CMFCore.utils import getToolByName
-from Products.membrane.interfaces import IMembraneUserObject
+from dexterity.membrane.behavior.password import IProvidePasswords
+from dexterity.membrane.behavior.settings import IDexterityMembraneSettings
 from dexterity.membrane.behavior.user import IMembraneUser
 from dexterity.membrane.behavior.user import INameFromFullName
-from dexterity.membrane.behavior.password import IProvidePasswords
 from dexterity.membrane.membrane_helpers import get_user_id_for_email
-from dexterity.membrane.behavior.settings import IDexterityMembraneSettings
 from dexterity.membrane.testing import DEXTERITY_MEMBRANE_FUNCTIONAL_TESTING
 from plone import api
 from plone.app.content.interfaces import INameFromTitle
 from plone.app.dexterity.behaviors import metadata
 from plone.app.referenceablebehavior.referenceable import IReferenceable
-from plone.app.testing import TEST_USER_NAME
-from plone.app.testing import TEST_USER_ID
 from plone.app.testing import login
 from plone.app.testing import logout
 from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID
+from plone.app.testing import TEST_USER_NAME
 from plone.behavior.interfaces import IBehaviorAssignable
+from Products.CMFCore.utils import getToolByName
+from Products.membrane.interfaces import IMembraneUserObject
+
 import unittest
 
 
@@ -94,7 +95,7 @@ class TestMember(unittest.TestCase):
         self.assertTrue(user_id)
         memship = getToolByName(self.layer['portal'], 'portal_membership')
         user = memship.getMemberById(user_id)
-        self.failUnless(user)
+        self.assertTrue(user)
         self.assertEqual(user.getProperty('fullname'), 'Joe User')
         self.assertEqual(user.getProperty('email'), 'joe@example.org')
         self.assertEqual(user.getProperty('home_page'), 'http://example.org/')

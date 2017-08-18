@@ -1,23 +1,38 @@
 language: python
-python: 2.7
-sudo: false
+sudo: true
+dist: xenial
 cache:
+  pip: true
   directories:
-  - buildout-cache
+    - $HOME/buildout-cache
+python:
+  - 2.7.12
 env:
-  - PLONE_VERSION=4.2
-  - PLONE_VERSION=4.3
+  - PLONE_VERSION=4.3 QA=true
   - PLONE_VERSION=5.0
-matrix:
-  fast_finish: true
-install:
-  - sed -ie "s#travis-4.x.cfg#travis-$PLONE_VERSION.x.cfg#" travis.cfg
-  - if test "$PLONE_VERSION" = "4.2"; then echo >> travis.cfg; echo "Products.membrane = 2.1.13" >> travis.cfg; fi
-  - mkdir -p buildout-cache/downloads
-  - pip install zc.buildout
-  - buildout -c travis.cfg annotate
-  - buildout -c travis.cfg -N -q -t 3
-before_script:
+  - PLONE_VERSION=5.1
+before_install:
+#  - sudo apt-get update -qq
+#  - sudo apt-get install -qq python2.7 python2.7-virtualenv
+  - mkdir -p $HOME/buildout-cache/{eggs,downloads}
+  - mkdir $HOME/.buildout
+  - echo "[buildout]" > $HOME/.buildout/default.cfg
+  - echo "download-cache = $HOME/buildout-cache/downloads" >> $HOME/.buildout/default.cfg
+  - echo "eggs-directory = $HOME/buildout-cache/eggs" >> $HOME/.buildout/default.cfg
+  - python --version
+  - virtualenv --version
+  - pip install --upgrade virtualenv
+  - ./bootstrap-travis.sh
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
-script: bin/test
+install:
+  - sed -ie "s#plone-4.3.x.cfg#plone-$PLONE_VERSION.x.cfg#" travis.cfg
+  - bin/python --version
+  - bin/buildout -N -t 3 -c travis.cfg
+script:
+  - bin/code-analysis
+  - bin/test --all
+after_success:
+  - bin/createcoverage
+  - pip install -q coveralls
+  - coveralls

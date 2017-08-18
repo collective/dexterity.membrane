@@ -31,7 +31,6 @@ class DexterityMembrane(PloneSandboxLayer):
             context=configurationContext
         )
         z2.installProduct(app, 'Products.membrane')
-        z2.installProduct(app, 'collective.indexing')
 
     def setUpPloneSite(self, portal):
         applyProfile(portal, EXAMPLE_PROFILE)

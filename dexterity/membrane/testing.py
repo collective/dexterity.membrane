@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
+from plone.app.testing import applyProfile
 from plone.app.testing import FunctionalTesting
 from plone.app.testing import IntegrationTesting
 from plone.app.testing import PLONE_FIXTURE
 from plone.app.testing import PloneSandboxLayer
-from plone.app.testing import applyProfile
 from plone.testing import z2
-from zope.configuration import xmlconfig
+
 
 EXAMPLE_PROFILE = 'dexterity.membrane.content:example'
 
@@ -19,13 +19,13 @@ class DexterityMembrane(PloneSandboxLayer):
 
     def setUpZope(self, app, configurationContext):
         import dexterity.membrane
-        xmlconfig.file(
+        self.loadZCML(
             'configure.zcml',
             dexterity.membrane,
             context=configurationContext
         )
         import plone.app.referenceablebehavior
-        xmlconfig.file(
+        self.loadZCML(
             'configure.zcml',
             plone.app.referenceablebehavior,
             context=configurationContext

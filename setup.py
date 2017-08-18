@@ -39,7 +39,6 @@ setup(
         'Products.CMFPlone>=4.2',
         'Products.membrane>=2.0.2',
         'bcrypt>=2.0',
-        'collective.indexing>=2.0b1',
         'plone.app.dexterity',
         'plone.app.referenceablebehavior>=0.7.0',
         'setuptools',

@@ -2,10 +2,12 @@ Changelog
 =========
 
 
-1.2.1 (unreleased)
+1.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Removed collective.indexing dependency. Collective.indexing was merged into Plone 5.1
+  If you're using this package with a Plone version < than 5.1, please add collective.indexing manually.
+  [agitator]
 
 
 1.2 (2017-01-11)

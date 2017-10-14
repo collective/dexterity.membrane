@@ -191,7 +191,7 @@ class TestMember(unittest.TestCase):
             ),
             1
         )
-        member.unindexObject()
+        membrane.unindexObject(member)
         self.assertEqual(
             len(
                 membrane.unrestrictedSearchResults(

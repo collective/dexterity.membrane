@@ -20,3 +20,6 @@ var
 /lib/
 /local/
 /include/
+/.Python
+/pip-selfcheck.json
+/buildout.cfg

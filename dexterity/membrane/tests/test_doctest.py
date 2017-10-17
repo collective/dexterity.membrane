@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 from dexterity.membrane.testing import DEXTERITY_MEMBRANE_FUNCTIONAL_TESTING
 from plone.testing import layered
+
 import doctest
 import unittest
+
 
 optionflags = (doctest.ELLIPSIS | doctest.NORMALIZE_WHITESPACE)
 
@@ -23,6 +25,7 @@ def test_suite():
             )
         )
     return suite
+
 
 if __name__ == '__main__':
     unittest.main(defaultTest='test_suite')

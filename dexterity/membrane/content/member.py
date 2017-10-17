@@ -4,7 +4,9 @@ from dexterity.membrane.membrane_helpers import validate_unique_email
 from plone.autoform import directives
 from plone.supermodel import model
 from zope import schema
-from zope.interface import Invalid, invariant
+from zope.interface import Invalid
+from zope.interface import invariant
+
 import re
 
 

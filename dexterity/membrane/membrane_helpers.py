@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 from AccessControl import Unauthorized
+from dexterity.membrane import _
 from Products.CMFCore.utils import getToolByName
 from Products.membrane.config import TOOLNAME
-from dexterity.membrane import _
 from zope.component.hooks import getSite
+
 import logging
 
 
@@ -36,7 +37,7 @@ def get_brains_for_email(context, email, request=None):
     # if request is None:
     #     try:
     #         request = context.REQUEST
-    #     except:
+    #     except:  # noqa
     #         # Happens e.g. when submitting a change in the
     #         # prefs_user_overview.  Just use None.
     #         pass

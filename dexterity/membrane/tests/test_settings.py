@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
-from Products.CMFCore.utils import getToolByName
 from dexterity.membrane.behavior import settings
 from dexterity.membrane.testing import DEXTERITY_MEMBRANE_FUNCTIONAL_TESTING
 from plone.app.testing import logout
 from plone.registry.interfaces import IRegistry
+from Products.CMFCore.utils import getToolByName
 from zope.component import getMultiAdapter
 from zope.component import getUtility
+
 import unittest
 
 

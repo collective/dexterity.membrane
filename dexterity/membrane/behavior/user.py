@@ -1,18 +1,20 @@
 # -*- coding: utf-8 -*-
-from Products.CMFCore.utils import getToolByName
-from Products.PlonePAS.sheet import MutablePropertySheet
-from Products.membrane.interfaces import IMembraneUserObject
-from Products.membrane.interfaces import IMembraneUserProperties
 from borg.localrole.interfaces import ILocalRoleProvider
 from dexterity.membrane.behavior import settings
 from plone.app.content.interfaces import INameFromTitle
 from plone.registry.interfaces import IRegistry
 from plone.uuid.interfaces import IUUID
+from Products.CMFCore.utils import getToolByName
+from Products.membrane.interfaces import IMembraneUserObject
+from Products.membrane.interfaces import IMembraneUserProperties
+from Products.PlonePAS.sheet import MutablePropertySheet
 from zope.component import adapter
 from zope.component import getUtility
-from zope.interface import Interface
 from zope.interface import implementer
+from zope.interface import Interface
+
 import logging
+
 
 logger = logging.getLogger(__name__)
 

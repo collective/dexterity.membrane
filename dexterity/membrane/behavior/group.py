@@ -2,9 +2,9 @@
 from Products.CMFCore.utils import getToolByName
 from Products.membrane.interfaces import IGroup
 from Products.membrane.interfaces import IMembraneUserAuth
-from zope.interface import Interface
 from zope.component import adapter
 from zope.interface import implementer
+from zope.interface import Interface
 
 
 class IMembraneGroup(Interface):

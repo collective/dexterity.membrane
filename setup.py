@@ -2,7 +2,7 @@
 from setuptools import find_packages
 from setuptools import setup
 
-version = '1.2.1.dev0'
+version = '2.0.0.dev0'
 
 setup(
     name='dexterity.membrane',
@@ -18,6 +18,7 @@ setup(
         "Framework :: Plone :: 4.2",
         "Framework :: Plone :: 4.3",
         "Framework :: Plone :: 5.0",
+        "Framework :: Plone :: 5.1",
         "Framework :: Plone",
         "Intended Audience :: System Administrators",
         "License :: OSI Approved :: GNU General Public License v2 (GPLv2)",
@@ -36,10 +37,9 @@ setup(
     include_package_data=True,
     zip_safe=False,
     install_requires=[
-        'Products.CMFPlone>=4.2',
+        'Products.CMFPlone>=4.3',
         'Products.membrane>=2.0.2',
         'bcrypt>=2.0',
-        'collective.indexing>=2.0b1',
         'plone.app.dexterity',
         'plone.app.referenceablebehavior>=0.7.0',
         'setuptools',

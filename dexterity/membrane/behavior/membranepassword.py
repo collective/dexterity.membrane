@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from password import IProvidePasswordsSchema as BBBIProvidePasswordsSchema
 from password import IProvidePasswords as BBBIProvidePasswords
+from password import IProvidePasswordsSchema as BBBIProvidePasswordsSchema
 
 
 class IProvidePasswordsSchema(BBBIProvidePasswordsSchema):

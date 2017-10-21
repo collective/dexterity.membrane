@@ -34,16 +34,7 @@ def get_brains_for_email(context, email, request=None):
         logger.warn("membrane_tool not found.")
         return []
 
-    # if request is None:
-    #     try:
-    #         request = context.REQUEST
-    #     except:  # noqa
-    #         # Happens e.g. when submitting a change in the
-    #         # prefs_user_overview.  Just use None.
-    #         pass
     kw = dict(exact_getUserName=email)
-    # args = CatalogSearchArgumentsMap(request, kw)
-    # users = user_catalog.search(args)
     users = user_catalog.unrestrictedSearchResults(**kw)
     return users
 

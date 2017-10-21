@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import bcrypt
 from AccessControl import AuthEncoding
 from dexterity.membrane import _
 from dexterity.membrane.behavior.user import IMembraneUser
@@ -20,6 +19,8 @@ from zope.interface import Interface
 from zope.interface import Invalid
 from zope.interface import invariant
 from zope.interface import provider
+
+import bcrypt
 
 
 def register_auth_encoding(identity):

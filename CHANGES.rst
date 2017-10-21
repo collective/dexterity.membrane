@@ -2,10 +2,15 @@ Changelog
 =========
 
 
-1.2.1 (unreleased)
+2.0.0 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Removed collective.indexing dependency. Collective.indexing was merged into Plone 5.1
+  If you're using this package with a Plone version < than 5.1, please add collective.indexing manually and pin Products.membrane to < 4.
+  [agitator]
+
+- Dropping official support for Plone < 4.3, use 1.2.x for older versions of Plone.
+  [agitator]
 
 
 1.2 (2017-01-11)

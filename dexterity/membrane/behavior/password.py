@@ -6,6 +6,7 @@ from dexterity.membrane.behavior.user import IMembraneUserWorkflow
 from dexterity.membrane.membrane_helpers import safe_encode
 from plone.autoform import directives
 from plone.autoform.interfaces import IFormFieldProvider
+from plone.memoize import ram
 from plone.supermodel import model
 from Products.membrane.interfaces import IMembraneUserAuth
 from Products.membrane.interfaces import IMembraneUserChanger
@@ -23,6 +24,13 @@ from zope.interface import provider
 import bcrypt
 
 
+def _forever_cache_key(func, self, *args):
+    ''' Cache this function call forever.
+    String arguments case will be ignored.
+    '''
+    return (func.__name__, args)
+
+
 def register_auth_encoding(identity):
     def register_once(cls):
         if identity not in set(AuthEncoding.listSchemes()):
@@ -38,7 +46,10 @@ class BCRYPTEncryptionScheme(object):
     def encrypt(self, pw):
         return bcrypt.hashpw(pw, bcrypt.gensalt())
 
+    @ram.cache(_forever_cache_key)
     def validate(self, reference, attempt):
+        '''
+        '''
         try:
             valid = bcrypt.hashpw(attempt, reference) == reference
         except ValueError:

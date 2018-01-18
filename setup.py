@@ -2,6 +2,7 @@
 from setuptools import find_packages
 from setuptools import setup
 
+
 version = '2.0.1.dev0'
 
 setup(
@@ -41,6 +42,7 @@ setup(
         'bcrypt>=2.0',
         'plone.app.dexterity',
         'plone.app.referenceablebehavior>=0.7.0',
+        'plone.memoize',
         'setuptools',
         'zope.deprecation',
     ],

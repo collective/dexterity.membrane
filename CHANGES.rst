@@ -5,7 +5,8 @@ Changelog
 2.0.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Performance improvements: cache expensive bcrypt operations
+  [ale-rt]
 
 
 2.0 (2017-10-21)

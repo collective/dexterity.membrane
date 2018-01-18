@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-2.0.1 (unreleased)
+2.0.1 (2018-01-18)
 ------------------
 
 - Performance improvements: cache expensive bcrypt operations

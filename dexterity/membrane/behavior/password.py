@@ -26,7 +26,6 @@ import bcrypt
 
 def _forever_cache_key(func, self, *args):
     ''' Cache this function call forever.
-    String arguments case will be ignored.
     '''
     return (func.__name__, args)
 
@@ -48,7 +47,8 @@ class BCRYPTEncryptionScheme(object):
 
     @ram.cache(_forever_cache_key)
     def validate(self, reference, attempt):
-        '''
+        ''' The bcrypt hash of the `attempt` string should match
+        the `reference` string
         '''
         try:
             valid = bcrypt.hashpw(attempt, reference) == reference

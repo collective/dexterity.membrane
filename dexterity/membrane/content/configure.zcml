@@ -15,4 +15,10 @@
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
 
+
+  <adapter
+      factory=".converter.EmailConverter"
+      />
+
+
 </configure>

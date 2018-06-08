@@ -10,11 +10,13 @@ from zope.interface import invariant
 
 import re
 
+
 PLONE5 = getFSVersionTuple()[0] >= 5
 
 if PLONE5:
     from plone.app.textfield import RichText
     from plone.app.z3cform.widget import RichTextFieldWidget
+
 
 def is_email(value):
     """Is this an email address?
@@ -43,28 +45,28 @@ def is_email(value):
 
     """
     if not isinstance(value, basestring) or '@' not in value:
-        raise Invalid(_(u"Not an email address"))
+        raise Invalid(_(u'Not an email address'))
     return True
 
 
 def is_url(value):
     """Is this a URL?
 
-    >>> is_url("http://google.com/")
+    >>> is_url('http://google.com/')
     True
-    >>> is_url("https://google.com")
+    >>> is_url('https://google.com')
     True
-    >>> is_url("http://example.org/folder/somepage")
+    >>> is_url('http://example.org/folder/somepage')
     True
-    >>> is_url("ssh://google.com")
+    >>> is_url('ssh://google.com')
     Traceback (most recent call last):
     ...
     Invalid: Not a valid link
-    >>> is_url("nothing")
+    >>> is_url('nothing')
     Traceback (most recent call last):
     ...
     Invalid: Not a valid link
-    >>> is_url("")
+    >>> is_url('')
     Traceback (most recent call last):
     ...
     Invalid: Not a valid link
@@ -79,10 +81,10 @@ def is_url(value):
 
     """
     if isinstance(value, basestring):
-        pattern = re.compile(r"^https?://[^\s\r\n]+")
+        pattern = re.compile(r'^https?://[^\s\r\n]+')
         if pattern.search(value.strip()):
             return True
-    raise Invalid(_(u"Not a valid link"))
+    raise Invalid(_(u'Not a valid link'))
 
 
 class IEmail(model.Schema):
@@ -95,7 +97,7 @@ class IEmail(model.Schema):
     email = schema.TextLine(
         # String with validation in place looking for @, required.
         # Note that a person's email address will be their username.
-        title=_(u"E-mail Address"),
+        title=_(u'E-mail Address'),
         required=True,
         constraint=is_email,
     )
@@ -109,7 +111,7 @@ class IEmail(model.Schema):
         """
         user = data.__context__
         if user is not None:
-            if hasattr(user, 'email') and user.email == data.email:
+            if getattr(user, 'email', None) and user.email == data.email:
                 # No change, fine.
                 return
         error = validate_unique_email(data.email)
@@ -123,31 +125,31 @@ class IMember(IEmail):
     """
 
     first_name = schema.TextLine(
-        title=_(u"First Name"),
+        title=_(u'First Name'),
         required=True,
     )
 
     last_name = schema.TextLine(
-        title=_(u"Last Name"),
+        title=_(u'Last Name'),
         required=True,
     )
 
     homepage = schema.TextLine(
         # url format
-        title=_(u"External Homepage"),
+        title=_(u'External Homepage'),
         required=False,
         constraint=is_url,
     )
 
     if PLONE5:
-        directives.widget("bio", RichTextFieldWidget)
+        directives.widget('bio', RichTextFieldWidget)
         bio = RichText(
-            title=_(u"Biography"),
+            title=_(u'Biography'),
             required=False,
-        )        
+        )
     else:
-        directives.widget(bio="plone.app.z3cform.wysiwyg.WysiwygFieldWidget")
+        directives.widget(bio='plone.app.z3cform.wysiwyg.WysiwygFieldWidget')
         bio = schema.Text(
-            title=_(u"Biography"),
+            title=_(u'Biography'),
             required=False,
-)
+        )

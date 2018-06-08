@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from AccessControl import Unauthorized
 from dexterity.membrane import _
-from Products.CMFCore.utils import getToolByName
+from plone import api
 from Products.membrane.config import TOOLNAME
 from zope.component.hooks import getSite
 
@@ -29,7 +29,7 @@ def get_brains_for_email(context, email, request=None):
     if email == '' or '@' not in email:
         return []
 
-    user_catalog = getToolByName(context, TOOLNAME, None)
+    user_catalog = api.portal.get_tool(TOOLNAME)
     if user_catalog is None:
         logger.warn("membrane_tool not found.")
         return []
@@ -84,7 +84,7 @@ def validate_unique_email(email, context=None):
 
 def get_membrane_user(context, principal_id, member_type='nd.content.member',
                       get_object=False):
-    catalog = getToolByName(context, TOOLNAME, None)
+    catalog = api.portal.get_tool(TOOLNAME)
     if catalog is None:
         logger.debug("membrane_tool not found.")
         # Probably just the admin user, in which case we can just

@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 from dexterity.membrane.behavior import settings
 from dexterity.membrane.testing import DEXTERITY_MEMBRANE_FUNCTIONAL_TESTING
+from plone import api
 from plone.app.testing import logout
 from plone.registry.interfaces import IRegistry
-from Products.CMFCore.utils import getToolByName
 from zope.component import getMultiAdapter
 from zope.component import getUtility
 
@@ -19,7 +19,7 @@ class TestSettings(unittest.TestCase):
         portal = self.layer['portal']
         view = getMultiAdapter(
             (portal, portal.REQUEST),
-            name="dexteritymembrane-settings"
+            name='dexteritymembrane-settings',
         )
         view = view.__of__(portal)
         self.assertTrue(view())
@@ -32,13 +32,12 @@ class TestSettings(unittest.TestCase):
         self.assertRaises(
             Unauthorized,
             self.layer['portal'].restrictedTraverse,
-            '@@dexteritymembrane-settings'
+            '@@dexteritymembrane-settings',
         )
 
     def test_entry_in_controlpanel(self):
         # Check that there is a dexterity.membrane entry in the control panel
-        portal = self.layer['portal']
-        controlpanel = getToolByName(portal, "portal_controlpanel")
+        controlpanel = api.portal.get_tool('portal_controlpanel')
         actions = [a.getAction(self)['id']
                    for a in controlpanel.listActions()]
         self.assertTrue('DexterityMembraneSettings' in actions)
@@ -48,10 +47,10 @@ class TestSettings(unittest.TestCase):
         reg = getUtility(IRegistry)
         config = reg.forInterface(settings.IDexterityMembraneSettings, False)
         self.assertTrue(config)
-        self.assertTrue(hasattr(config, 'local_roles'))
+        self.assertTrue(getattr(config, 'local_roles', None))
         for default in default_localroles:
             self.assertTrue(default in config.local_roles)
-        self.assertTrue(hasattr(config, 'use_email_as_username'))
+        self.assertTrue(getattr(config, 'use_email_as_username', None))
         self.assertTrue(config.use_email_as_username)
-        self.assertTrue(hasattr(config, 'use_uuid_as_userid'))
+        self.assertTrue(getattr(config, 'use_uuid_as_userid', None))
         self.assertTrue(config.use_uuid_as_userid)

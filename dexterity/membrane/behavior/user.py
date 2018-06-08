@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 from borg.localrole.interfaces import ILocalRoleProvider
 from dexterity.membrane.behavior import settings
+from plone import api
 from plone.app.content.interfaces import INameFromTitle
 from plone.app.textfield.value import RichTextValue
 from plone.registry.interfaces import IRegistry
 from plone.uuid.interfaces import IUUID
-from Products.CMFCore.utils import getToolByName
 from Products.membrane.interfaces import IMembraneUserObject
 from Products.membrane.interfaces import IMembraneUserProperties
 from Products.PlonePAS.sheet import MutablePropertySheet
@@ -100,9 +100,7 @@ class DxUserObject(object):
     def _reg_setting(self, setting):
         reg = getUtility(IRegistry)
         config = reg.forInterface(settings.IDexterityMembraneSettings, False)
-        if config and hasattr(config, setting):
-            return getattr(config, setting)
-        return self._default(setting)
+        return getattr(config, setting, self._default[setting])
 
 
 @implementer(IMembraneUserObject)
@@ -118,7 +116,7 @@ class MembraneUserWorkflow(DxUserObject):
     allowed_states = ('enabled',)
 
     def in_right_state(self):
-        workflow = getToolByName(self.context, 'portal_workflow')
+        workflow = api.portal.get_tool('portal_workflow')
         state = workflow.getInfoFor(self.context, 'review_state')
         return state in self.allowed_states
 
@@ -165,7 +163,7 @@ class MembraneUserProperties(DxUserObject):
                 # Would give an error like this:
                 # ValueError: Property home_page: unknown type
                 value = u''
-            if type(value) is RichTextValue:
+            if isinstance(value, RichTextValue):
                 value = value.output
             properties[prop_name] = value
         return MutablePropertySheet(self.context.getId(), **properties)

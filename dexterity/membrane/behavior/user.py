@@ -2,6 +2,7 @@
 from borg.localrole.interfaces import ILocalRoleProvider
 from dexterity.membrane.behavior import settings
 from plone.app.content.interfaces import INameFromTitle
+from plone.app.textfield.value import RichTextValue
 from plone.registry.interfaces import IRegistry
 from plone.uuid.interfaces import IUUID
 from Products.CMFCore.utils import getToolByName
@@ -164,6 +165,8 @@ class MembraneUserProperties(DxUserObject):
                 # Would give an error like this:
                 # ValueError: Property home_page: unknown type
                 value = u''
+            if type(value) is RichTextValue:
+                value = value.output
             properties[prop_name] = value
         return MutablePropertySheet(self.context.getId(), **properties)
 

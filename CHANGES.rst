@@ -7,6 +7,8 @@ Changelog
 
 - Fixed some docstring
   [ale-rt]
+- Biography: plone.app.textfield RichText field for Plone 5
+  [ksuess]
 
 
 2.0.1 (2018-01-18)

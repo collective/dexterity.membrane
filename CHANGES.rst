@@ -5,6 +5,8 @@ Changelog
 2.0.2 (unreleased)
 ------------------
 
+- Depend on plone.api
+  [ale-rt]
 - Fixed some docstring
   [ale-rt]
 - Biography: plone.app.textfield RichText field for Plone 5

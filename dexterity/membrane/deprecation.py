@@ -14,13 +14,13 @@ def deprecate():
 
     behavior.membranegroup = deprecated(
         group,
-        'module membranegroup is now named group.'
+        'module membranegroup is now named group.',
     )
     behavior.membraneuser = deprecated(
         user,
-        'module membraneuser is now named user.'
+        'module membraneuser is now named user.',
     )
     behavior.membranepassword = deprecated(
         password,
-        'module membranepassword is now named password.'
+        'module membranepassword is now named password.',
     )

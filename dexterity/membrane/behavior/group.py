@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from Products.CMFCore.utils import getToolByName
+from plone import api
 from Products.membrane.interfaces import IGroup
 from Products.membrane.interfaces import IMembraneUserAuth
 from zope.component import adapter
@@ -35,7 +35,7 @@ class MembraneGroup(object):
         return ()
 
     def getGroupMembers(self):
-        mt = getToolByName(self.context, 'membrane_tool')
+        mt = api.portal.get_tool('membrane_tool')
         brains = mt.unrestrictedSearchResults(
             object_implements=IMembraneUserAuth.__identifier__,
             path='/'.join(self.context.getPhysicalPath())

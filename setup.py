@@ -40,6 +40,7 @@ setup(
         'Products.CMFPlone>=4.3',
         'Products.membrane>=2.0.2',
         'bcrypt>=2.0',
+        'plone.api',
         'plone.app.dexterity',
         'plone.app.referenceablebehavior>=0.7.0',
         'plone.memoize',
@@ -48,7 +49,6 @@ setup(
     ],
     extras_require={
         'test': [
-            'plone.api',
             'plone.app.testing',
         ],
     },

@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-2.1.0 (unreleased)
+2.1.0 (2019-06-01)
 ------------------
 
 - Depend on plone.api

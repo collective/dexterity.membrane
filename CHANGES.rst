@@ -11,6 +11,8 @@ Changelog
   [ale-rt]
 - Biography: plone.app.textfield RichText field for Plone 5
   [ksuess]
+- Fix AttributeError: 'tuple' object has no attribute 'strip'
+  [b4oshany]
 
 
 2.0.1 (2018-01-18)

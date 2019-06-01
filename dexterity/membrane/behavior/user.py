@@ -181,7 +181,10 @@ class MembraneUserProperties(DxUserObject):
         """
         properties = dict(propertysheet.propertyItems())
         for prop_name, field_name in self.property_map.items():
-            value = properties.get(prop_name, '').strip()
+            value = properties.get(prop_name, '')
+            # Only strip text or non-iterable value.
+            if hasattr(value, "strip"):
+                value = value.strip()
             logger.debug("Setting field %s: %r", field_name, value)
             setattr(self.context, field_name, value)
 

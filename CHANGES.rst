@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-2.0.2 (unreleased)
+2.1.0 (unreleased)
 ------------------
 
 - Depend on plone.api

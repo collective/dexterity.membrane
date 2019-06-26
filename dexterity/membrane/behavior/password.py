@@ -22,6 +22,9 @@ from zope.interface import invariant
 from zope.interface import provider
 
 import bcrypt
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 def _forever_cache_key(func, self, *args):
@@ -182,10 +185,17 @@ class MembraneUserAuthentication(object):
     def authenticateCredentials(self, credentials):
         # Should not authenticate when the user is not enabled.
         workflow_info = IMembraneUserWorkflow(self.context)
+        loggable_credentials = {
+            'login': credentials['login'],
+            'remote_address': credentials['remote_address']
+        }
         if not workflow_info.in_right_state():
+            logger.info("User login failed for {login} from {remote_address} - workflow in wrong state".format(**loggable_credentials))
             return
-        if self.verifyCredentials(credentials):
-            # return (self.getUserId(), self.getUserName())
+        if not self.verifyCredentials(credentials):
+            logger.info("User login failed for {login} from {remote_address} - bad credentials".format(**loggable_credentials))
+        else:
+            logger.info("User login succeed for {login} from {remote_address}".format(**loggable_credentials))
             user = IMembraneUserObject(self.context)
             return (user.getUserId(), user.getUserName())
 

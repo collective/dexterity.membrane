@@ -2,10 +2,10 @@ Changelog
 =========
 
 
-2.1.1 (unreleased)
+2.1.0-je (unreleased)
 ------------------
 
-- Nothing changed yet.
+-logging on success or otherwise of logging in
 
 
 2.1.0 (2019-06-01)

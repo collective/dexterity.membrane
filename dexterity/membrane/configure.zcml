@@ -27,6 +27,14 @@
        are visible and can be installed separately.  Any upgrade steps
        for that profile are also defined there. -->
 
+  <genericsetup:registerProfile
+      name="uninstall"
+      title="dexterity.membrane: behaviors"
+      description="Uninstall profile for the dexterity.membrane behaviors"
+      directory="profiles/uninstall"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+
   <genericsetup:upgradeStep
       title="Update profile"
       description="Dummy step to fix profile registration after rename."

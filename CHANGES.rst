@@ -5,7 +5,8 @@ Changelog
 2.1.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Added uninstall profile
+  [agitator]
 
 
 2.1.0 (2019-06-01)

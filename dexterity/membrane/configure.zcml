@@ -29,7 +29,7 @@
 
   <genericsetup:registerProfile
       name="uninstall"
-      title="dexterity.membrane: behaviors"
+      title="Uninstall dexterity.membrane: control panel, registry settings & example type"
       description="Uninstall profile for the dexterity.membrane behaviors"
       directory="profiles/uninstall"
       provides="Products.GenericSetup.interfaces.EXTENSION"

@@ -15,7 +15,7 @@ install:
   - virtualenv -p `which python` .
   - bin/pip install -r requirements.txt
   - sed -ie "s#plone-5.1.x.cfg#plone-$PLONE_VERSION.x.cfg#" travis.cfg
-  - bin/buildout -c travis.cfg buildout:download-cache=downloads code-analysis:return-status-codes=True
+  - bin/buildout -c travis.cfg -n buildout:download-cache=downloads code-analysis:return-status-codes=True
 script:
   - bin/code-analysis
   - bin/test --all

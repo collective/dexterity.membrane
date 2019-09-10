@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<registry>
+  <record name="dexterity.membrane.behavior.settings.IDexterityMembraneSettings.local_roles" remove="True" />
+  <record name="dexterity.membrane.behavior.settings.IDexterityMembraneSettings.use_email_as_username" remove="True" />
+  <record name="dexterity.membrane.behavior.settings.IDexterityMembraneSettings.use_uuid_as_userid" remove="True" />
+</registry>

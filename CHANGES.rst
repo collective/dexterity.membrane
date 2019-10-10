@@ -5,6 +5,9 @@ Changelog
 2.1.1 (unreleased)
 ------------------
 
+- ZCML namespace cleanup.
+  [thet]
+
 - Added uninstall profile
   [agitator]
 

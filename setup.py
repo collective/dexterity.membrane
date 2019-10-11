@@ -42,12 +42,14 @@ setup(
         'bcrypt>=2.0',
         'plone.api',
         'plone.app.dexterity',
-        'plone.app.referenceablebehavior>=0.7.0',
         'plone.memoize',
         'setuptools',
         'zope.deprecation',
     ],
     extras_require={
+        'archetypes': [
+            'plone.app.referenceablebehavior>=0.7.0',
+        ],
         'test': [
             'plone.app.testing',
         ],

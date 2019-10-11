@@ -2,8 +2,11 @@ Changelog
 =========
 
 
-2.1.1 (unreleased)
+3.0.0 (unreleased)
 ------------------
+
+- Plone5.2 porting: do not require Archetypes
+  [ale-rt]
 
 - ZCML namespace cleanup.
   [thet]

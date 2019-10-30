@@ -4,7 +4,7 @@ from plone.app.testing import FunctionalTesting
 from plone.app.testing import IntegrationTesting
 from plone.app.testing import PLONE_FIXTURE
 from plone.app.testing import PloneSandboxLayer
-from plone.testing import z2
+from plone.testing import zope as zope_testing
 from zope.configuration import xmlconfig
 
 
@@ -31,14 +31,14 @@ class DexterityMembrane(PloneSandboxLayer):
             plone.app.referenceablebehavior,
             context=configurationContext
         )
-        z2.installProduct(app, 'Products.membrane')
+        zope_testing.installProduct(app, 'Products.membrane')
 
     def setUpPloneSite(self, portal):
         applyProfile(portal, EXAMPLE_PROFILE)
         portal.portal_workflow.setDefaultChain('one_state_workflow')
 
     def tearDownZope(self, app):
-        z2.uninstallProduct(app, 'Products.membrane')
+        zope_testing.uninstallProduct(app, 'Products.membrane')
 
 
 DEXTERITY_MEMBRANE_FIXTURE = DexterityMembrane()

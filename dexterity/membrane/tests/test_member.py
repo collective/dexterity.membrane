@@ -263,7 +263,7 @@ class TestMember(unittest.TestCase):
         )
         self.layer['portal'].acl_users.userSetPassword(user_id, b'foobar')
         self.assertTrue(AuthEncoding.is_encrypted(member.password))
-        scheme_prefix = '{BCRYPT}'
+        scheme_prefix = b'{BCRYPT}'
         self.assertTrue(member.password.startswith(scheme_prefix))
         self.assertTrue(AuthEncoding.pw_validate(member.password, b'foobar'))
 

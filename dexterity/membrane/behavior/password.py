@@ -3,11 +3,11 @@ from AccessControl import AuthEncoding
 from dexterity.membrane import _
 from dexterity.membrane.behavior.user import IMembraneUser
 from dexterity.membrane.behavior.user import IMembraneUserWorkflow
-from dexterity.membrane.membrane_helpers import safe_encode
 from plone.autoform import directives
 from plone.autoform.interfaces import IFormFieldProvider
 from plone.memoize import ram
 from plone.supermodel import model
+from Products.CMFPlone.utils import safe_encode
 from Products.membrane.interfaces import IMembraneUserAuth
 from Products.membrane.interfaces import IMembraneUserChanger
 from Products.membrane.interfaces import IMembraneUserObject

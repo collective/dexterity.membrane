@@ -25,12 +25,16 @@ class DexterityMembrane(PloneSandboxLayer):
             dexterity.membrane,
             context=configurationContext
         )
-        import plone.app.referenceablebehavior
-        xmlconfig.file(
-            'configure.zcml',
-            plone.app.referenceablebehavior,
-            context=configurationContext
-        )
+        # plone.app.referenceablebehavior can be added with the extra [archetypes]
+        try:
+            import plone.app.referenceablebehavior
+            xmlconfig.file(
+                'configure.zcml',
+                plone.app.referenceablebehavior,
+                context=configurationContext
+            )
+        except ImportError:
+            pass
         zope_testing.installProduct(app, 'Products.membrane')
 
     def setUpPloneSite(self, portal):

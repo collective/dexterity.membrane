@@ -12,7 +12,6 @@ from dexterity.membrane.testing import DEXTERITY_MEMBRANE_FUNCTIONAL_TESTING
 from plone import api
 from plone.app.content.interfaces import INameFromTitle
 from plone.app.dexterity.behaviors import metadata
-from plone.app.referenceablebehavior.referenceable import IReferenceable
 from plone.app.testing import login
 from plone.app.testing import logout
 from plone.app.testing import setRoles
@@ -22,6 +21,12 @@ from plone.behavior.interfaces import IBehaviorAssignable
 from Products.membrane.interfaces import IMembraneUserObject
 
 import unittest
+
+# plone.app.referenceablebehavior can be added with the extra [archetypes]
+try:
+    from plone.app.referenceablebehavior.referenceable import IReferenceable
+except ImportError:
+    IReferenceable = None
 
 
 class TestMember(unittest.TestCase):
@@ -57,7 +62,11 @@ class TestMember(unittest.TestCase):
         # Record the current number of members; we do not want this
         # test to fail just because someone adds an extra test member
         # somewhere.
-        start_count = len(membrane.unrestrictedSearchResults())
+        start_count = len(
+            membrane.unrestrictedSearchResults(
+                portal_type='dexterity.membrane.member'
+            )
+        )
         member = self._createType(
             self.layer['portal'],
             'dexterity.membrane.member',
@@ -68,10 +77,14 @@ class TestMember(unittest.TestCase):
         # 'member.reindexObject()' but that is apparently not enough
         # to get it added to the membrane_tool catalog.  Simply adding
         # a member in the live site works though and we do not need to
-        # redo the membrane or collective.indexing tests here.
+        # redo the membrane tests here.
         membrane.reindexObject(member)
         self.assertEqual(
-            len(membrane.unrestrictedSearchResults()),
+            len(
+                membrane.unrestrictedSearchResults(
+                    portal_type='dexterity.membrane.member'
+                )
+            ),
             start_count + 1,
         )
 
@@ -176,9 +189,7 @@ class TestMember(unittest.TestCase):
     def test_delete_member(self):
         # Deleting should not leave behind the old brain in the
         # membrane catalog.  Actually, we can just check that an
-        # unindexObject works properly.  Note that collective.indexing
-        # needs to be available for this, and its monkey patches
-        # applied, which should happen automatically on startup.
+        # unindexObject works properly.
         member = self._createType(
             self.layer['portal'],
             'dexterity.membrane.member',
@@ -404,13 +415,15 @@ class TestMember(unittest.TestCase):
     def test_member_behaviors(self):
         behaviors = [
             INameFromFullName,
-            IReferenceable,
             metadata.ICategorization,
             metadata.IPublication,
             metadata.IOwnership,
             IMembraneUser,
-            IProvidePasswords
+            IProvidePasswords,
         ]
+        if IReferenceable:
+            behaviors.append(IReferenceable)
+
         member = self._createType(
             self.layer['portal'],
             'dexterity.membrane.member',

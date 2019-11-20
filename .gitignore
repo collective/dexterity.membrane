@@ -17,6 +17,7 @@ eggs
 fake-eggs
 parts
 var
+/checkouts/
 /lib/
 /local/
 /include/

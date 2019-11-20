@@ -4,8 +4,13 @@ from plone.app.testing import FunctionalTesting
 from plone.app.testing import IntegrationTesting
 from plone.app.testing import PLONE_FIXTURE
 from plone.app.testing import PloneSandboxLayer
-from plone.testing import zope as zope_testing
 from zope.configuration import xmlconfig
+
+try:
+    from plone.testing import zope as zope_testing
+except ImportError:
+    # Plone 5.1 compatibility
+    from plone.testing import z2 as zope_testing
 
 
 EXAMPLE_PROFILE = 'dexterity.membrane.content:example'

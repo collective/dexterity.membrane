@@ -9,6 +9,7 @@ from zope.interface import Invalid
 from zope.interface import invariant
 
 import re
+import six
 
 
 PLONE5 = getFSVersionTuple()[0] >= 5
@@ -44,7 +45,7 @@ def is_email(value):
     Invalid: Not an email address
 
     """
-    if not isinstance(value, basestring) or '@' not in value:
+    if not isinstance(value, six.string_types) or '@' not in value:
         raise Invalid(_(u'Not an email address'))
     return True
 
@@ -80,7 +81,7 @@ def is_url(value):
     Invalid: Not a valid link
 
     """
-    if isinstance(value, basestring):
+    if isinstance(value, six.string_types):
         pattern = re.compile(r'^https?://[^\s\r\n]+')
         if pattern.search(value.strip()):
             return True

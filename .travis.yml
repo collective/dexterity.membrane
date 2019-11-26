@@ -1,5 +1,4 @@
 language: python
-sudo: true
 cache:
   pip: true
   directories:
@@ -7,13 +6,17 @@ cache:
     - downloads
 python:
   - 2.7
+  - 3.7
 env:
-  - PLONE_VERSION=4.3
-  - PLONE_VERSION=5.0
   - PLONE_VERSION=5.1
+  - PLONE_VERSION=5.2
+jobs:
+  exclude:
+    - python: 3.7
+      env: PLONE_VERSION=5.1
 install:
   - virtualenv -p `which python` .
-  - bin/pip install -r requirements.txt
+  - bin/pip install -r requirements-$PLONE_VERSION.txt
   - sed -ie "s#plone-5.1.x.cfg#plone-$PLONE_VERSION.x.cfg#" travis.cfg
   - bin/buildout -c travis.cfg -n buildout:download-cache=downloads code-analysis:return-status-codes=True
 script:

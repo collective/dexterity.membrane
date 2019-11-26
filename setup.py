@@ -16,9 +16,9 @@ setup(
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Environment :: Web Environment',
-        'Framework :: Plone :: 4.3',
-        'Framework :: Plone :: 5.0',
+        'Framework :: Plone :: Addon',
         'Framework :: Plone :: 5.1',
+        'Framework :: Plone :: 5.2',
         'Framework :: Plone',
         'Intended Audience :: System Administrators',
         'License :: OSI Approved :: GNU General Public License v2 (GPLv2)',
@@ -42,12 +42,14 @@ setup(
         'bcrypt>=2.0',
         'plone.api',
         'plone.app.dexterity',
-        'plone.app.referenceablebehavior>=0.7.0',
         'plone.memoize',
         'setuptools',
         'zope.deprecation',
     ],
     extras_require={
+        'archetypes': [
+            'plone.app.referenceablebehavior>=0.7.0',
+        ],
         'test': [
             'plone.app.testing',
         ],

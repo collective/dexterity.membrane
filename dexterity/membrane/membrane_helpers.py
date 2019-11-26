@@ -6,7 +6,13 @@ from Products.membrane.config import TOOLNAME
 from zope.component.hooks import getSite
 
 import logging
+import zope.deferredimport
 
+
+zope.deferredimport.deprecated(
+    'Import from Products.CMFPlone.utils instead, remove in Plone 6',
+    safe_encode='Products.CMFPlone.utils:safe_encode',
+)
 
 logger = logging.getLogger(__name__)
 
@@ -98,12 +104,3 @@ def get_membrane_user(context, principal_id, member_type='nd.content.member',
     if get_object:
         return brain.getObject()
     return brain
-
-
-def safe_encode(string):
-    """Safely unicode objects to UTF-8. If it's a binary string, just return
-    it.
-    """
-    if isinstance(string, unicode):
-        string = string.encode('utf-8')
-    return string

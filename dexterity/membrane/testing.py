@@ -4,8 +4,13 @@ from plone.app.testing import FunctionalTesting
 from plone.app.testing import IntegrationTesting
 from plone.app.testing import PLONE_FIXTURE
 from plone.app.testing import PloneSandboxLayer
-from plone.testing import z2
 from zope.configuration import xmlconfig
+
+try:
+    from plone.testing import zope as zope_testing
+except ImportError:
+    # Plone 5.1 compatibility
+    from plone.testing import z2 as zope_testing
 
 
 EXAMPLE_PROFILE = 'dexterity.membrane.content:example'
@@ -25,20 +30,24 @@ class DexterityMembrane(PloneSandboxLayer):
             dexterity.membrane,
             context=configurationContext
         )
-        import plone.app.referenceablebehavior
-        xmlconfig.file(
-            'configure.zcml',
-            plone.app.referenceablebehavior,
-            context=configurationContext
-        )
-        z2.installProduct(app, 'Products.membrane')
+        # plone.app.referenceablebehavior can be added with the extra [archetypes]
+        try:
+            import plone.app.referenceablebehavior
+            xmlconfig.file(
+                'configure.zcml',
+                plone.app.referenceablebehavior,
+                context=configurationContext
+            )
+        except ImportError:
+            pass
+        zope_testing.installProduct(app, 'Products.membrane')
 
     def setUpPloneSite(self, portal):
         applyProfile(portal, EXAMPLE_PROFILE)
         portal.portal_workflow.setDefaultChain('one_state_workflow')
 
     def tearDownZope(self, app):
-        z2.uninstallProduct(app, 'Products.membrane')
+        zope_testing.uninstallProduct(app, 'Products.membrane')
 
 
 DEXTERITY_MEMBRANE_FIXTURE = DexterityMembrane()

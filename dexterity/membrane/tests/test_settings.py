@@ -4,7 +4,6 @@ from dexterity.membrane.testing import DEXTERITY_MEMBRANE_FUNCTIONAL_TESTING
 from plone import api
 from plone.app.testing import logout
 from plone.registry.interfaces import IRegistry
-from zope.component import getMultiAdapter
 from zope.component import getUtility
 
 import unittest
@@ -17,12 +16,20 @@ class TestSettings(unittest.TestCase):
     def test_controlpanel_view(self):
         # Test the setting control panel view works
         portal = self.layer['portal']
-        view = getMultiAdapter(
-            (portal, portal.REQUEST),
-            name='dexteritymembrane-settings',
+        request = self.layer['request'].clone()
+        view = api.content.get_view(
+            'dexteritymembrane-settings',
+            portal,
+            request,
         )
-        view = view.__of__(portal)
-        self.assertTrue(view())
+        response = view()
+        widgets = view.form_instance.widgets
+        self.assertSetEqual(
+            set(widgets),
+            {'local_roles', 'use_email_as_username', 'use_uuid_as_userid'},
+        )
+        for key in widgets:
+            self.assertIn(widgets[key].render(), response)
 
     def test_controlpanel_view_protected(self):
         # Test that the setting control panel view can not be

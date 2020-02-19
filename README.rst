@@ -12,6 +12,8 @@ Compatibility
 
 This package is currently tested and developed for Plone 5.1+.
 
+With Plone 5.2+, Products.membrane 5 or higher is needed.
+
 We depend on Products.membrane 4 higher as that contains a fix to make sure members that are deleted are also removed from the membrane_tool catalog.
 
 

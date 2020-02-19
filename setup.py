@@ -39,8 +39,8 @@ setup(
     include_package_data=True,
     zip_safe=False,
     install_requires=[
-        'Products.CMFPlone>=4.3',
-        'Products.membrane>=2.0.2',
+        'Products.CMFPlone>=5.1',
+        'Products.membrane>=4.0',
         'bcrypt>=2.0',
         'plone.api',
         'plone.app.dexterity',

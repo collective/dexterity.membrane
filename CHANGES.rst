@@ -2,8 +2,8 @@ Changelog
 =========
 
 
-3.0.0 (unreleased)
-------------------
+3.0.0a1 (2020-02-19)
+--------------------
 
 - Plone5.2 porting: do not require Archetypes
   [ale-rt]

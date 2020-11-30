@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-3.0.0a2 (unreleased)
+3.0.0a2 (2020-11-30)
 --------------------
 
 - Performance improvements: cache expensive bcrypt operations

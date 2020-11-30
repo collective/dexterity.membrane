@@ -163,6 +163,10 @@ class MembraneUserAuthentication(object):
     def __init__(self, context):
         self.context = context
 
+    @ram.cache(_forever_cache_key)
+    def _pw_validate(self, reference, password):
+        return AuthEncoding.pw_validate(reference, password)
+
     def verifyCredentials(self, credentials):
         """Returns True is password is authenticated, False if not.
         """
@@ -174,9 +178,8 @@ class MembraneUserAuthentication(object):
         password_provider = IProvidePasswordsSchema(self.context)
         if not password_provider:
             return False
-        return AuthEncoding.pw_validate(
-            password_provider.password,
-            credentials.get('password', '')
+        return self._pw_validate(
+            password_provider.password, credentials.get('password', '')
         )
 
     def authenticateCredentials(self, credentials):

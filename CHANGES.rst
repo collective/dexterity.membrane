@@ -5,7 +5,8 @@ Changelog
 3.0.0a2 (unreleased)
 --------------------
 
-- Nothing changed yet.
+- Performance improvements: cache expensive bcrypt operations
+  [ale-rt]
 
 
 3.0.0a1 (2020-02-19)

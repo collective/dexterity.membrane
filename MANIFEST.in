@@ -1,3 +1,4 @@
+include .coveragerc
 include *.rst
 include *.txt
 exclude bootstrap3.sh

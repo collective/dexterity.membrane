@@ -16,6 +16,11 @@ With Plone 5.2+, Products.membrane 5 or higher is needed.
 
 We depend on Products.membrane 4 higher as that contains a fix to make sure members that are deleted are also removed from the membrane_tool catalog.
 
+When using Python2.7 you will need to pin bcrypt to the latest compatible version::
+
+    [versions:python27]
+    bcrypt = 3.1.7
+
 
 User id
 -------

@@ -3,6 +3,7 @@
 *.mo
 *.pyc
 *.pyo
+.coverage
 .installed.cfg
 .mr.developer.cfg
 .project

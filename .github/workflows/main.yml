@@ -28,8 +28,11 @@ jobs:
       - name: Cache
         uses: actions/cache@v2
         with:
-          path: ~/.cache/pip, eggs, downloads
-          key: ${{ runner.os }}-cache-${{ hashFiles('setup.*', 'tox.ini', '*.cfg') }}-${{ matrix.config[0] }}
+          path: |
+            ~/.cache/pip
+            **/eggs
+            **/downloads
+          key: ${{ runner.os }}-cache-${{ hashFiles('setup.*', '*.cfg') }}-${{ matrix.config[0] }}
           restore-keys: |
             ${{ runner.os }}-cache-
       - name: Install dependencies
@@ -37,8 +40,8 @@ jobs:
           pip install virtualenv
           virtualenv -p `which python` .
           bin/pip install -r requirements-${{ matrix.config[2] }}.txt
-          sed -ie "s#plone-5.1.x.cfg#plone-${{ matrix.config[2] }}.x.cfg#" travis.cfg
-          bin/buildout -c travis.cfg -n buildout:download-cache=downloads code-analysis:return-status-codes=True
+          sed -ie "s#plone-5.1.x.cfg#plone-${{ matrix.config[2] }}.x.cfg#" .github.cfg
+          bin/buildout -c .github.cfg
       - name: Test
         run: |
           bin/code-analysis

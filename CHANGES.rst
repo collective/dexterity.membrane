@@ -5,7 +5,8 @@ Changelog
 3.0.0a3 (unreleased)
 --------------------
 
-- Nothing changed yet.
+- remove `<includeDependencies />`
+  [petschki]
 
 
 3.0.0a2 (2020-11-30)

@@ -4,7 +4,8 @@
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     i18n_domain="dexterity.membrane">
 
-  <includeDependencies package="." />
+  <include package="Products.membrane" />
+
   <i18n:registerTranslations directory="locales" />
 
   <include package=".behavior" />

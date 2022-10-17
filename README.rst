@@ -12,9 +12,13 @@ Compatibility
 
 This package is currently tested and developed for Plone 5.1+.
 
+With Plone 5.1+ you should use Products.membrane 4.
+
 With Plone 5.2+, Products.membrane 5 or higher is needed.
 
 We depend on Products.membrane 4 higher as that contains a fix to make sure members that are deleted are also removed from the membrane_tool catalog.
+
+Python2.7 users should use a Products.membrane version lower than 6.
 
 When using Python2.7 you will need to pin bcrypt to the latest compatible version::
 

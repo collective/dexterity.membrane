@@ -12,7 +12,6 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - ["Py2.7-Plone5.2", "2.7", "5.2", "ubuntu-20.04"]
           - ["Py3.6-Plone5.2", "3.6", "5.2", "ubuntu-20.04"]
           - ["Py3.7-Plone5.2", "3.7", "5.2", "ubuntu-latest"]
           - ["Py3.8-Plone5.2", "3.8", "5.2", "ubuntu-latest"]

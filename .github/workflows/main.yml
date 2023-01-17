@@ -43,11 +43,11 @@ jobs:
           pip install virtualenv
           virtualenv -p `which python` .
           bin/pip install -r requirements-${{ matrix.config[2] }}.txt
-          sed -ie "s#plone-5.1.x.cfg#plone-${{ matrix.config[2] }}.x.cfg#" .github.cfg
-          bin/buildout -c .github.cfg
+          sed -ie "s#plone-5.2.x.cfg#plone-${{ matrix.config[2] }}.x.cfg#" buildout.cfg
+          bin/buildout
       - name: Test
         run: |
           bin/code-analysis
-          bin/test --all
+          PYTHONWARNINGS=ignore bin/test --all
           bin/createcoverage
           bin/coverage report --fail-under=85

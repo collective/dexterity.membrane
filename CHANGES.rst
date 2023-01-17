@@ -5,7 +5,9 @@ Changelog
 3.0.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Rename profile `dexterity.membrane: example` -> `dexterity.membrane: content`
+  and add uninstall profile for it.
+  [petschki]
 
 
 3.0.0 (2021-12-06)

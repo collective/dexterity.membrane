@@ -2,24 +2,23 @@ name: tests
 
 on:
   push:
-    branches: [master]
-  pull_request:
-  schedule:
-    - cron: "0 12 * * 0" # run once a week on Sunday
+    branches-ignore:
+      - "releases/**"
+      - "master"
 
 jobs:
   build:
     strategy:
+      fail-fast: false
       matrix:
         config:
-          - ["Py2.7-Plone5.1", "2.7", "5.1", "ubuntu-20.04"]
-          - ["Py2.7-Plone5.2", "2.7", "5.2", "ubuntu-20.04"]
           - ["Py3.6-Plone5.2", "3.6", "5.2", "ubuntu-20.04"]
           - ["Py3.7-Plone5.2", "3.7", "5.2", "ubuntu-latest"]
           - ["Py3.8-Plone5.2", "3.8", "5.2", "ubuntu-latest"]
           - ["Py3.8-Plone6.0", "3.8", "6.0", "ubuntu-latest"]
           - ["Py3.9-Plone6.0", "3.9", "6.0", "ubuntu-latest"]
           - ["Py3.10-Plone6.0", "3.10", "6.0", "ubuntu-latest"]
+          - ["Py3.11-Plone6.0", "3.11", "6.0", "ubuntu-latest"]
     runs-on: ${{ matrix.config[3] }}
     name: ${{ matrix.config[0] }}
     steps:
@@ -43,11 +42,11 @@ jobs:
           pip install virtualenv
           virtualenv -p `which python` .
           bin/pip install -r requirements-${{ matrix.config[2] }}.txt
-          sed -ie "s#plone-5.1.x.cfg#plone-${{ matrix.config[2] }}.x.cfg#" .github.cfg
-          bin/buildout -c .github.cfg
+          sed -ie "s#plone-5.2.x.cfg#plone-${{ matrix.config[2] }}.x.cfg#" buildout.cfg
+          bin/buildout
       - name: Test
         run: |
           bin/code-analysis
-          bin/test --all
+          PYTHONWARNINGS=ignore bin/test --all
           bin/createcoverage
           bin/coverage report --fail-under=85

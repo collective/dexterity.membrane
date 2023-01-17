@@ -10,36 +10,18 @@ dexterity.membrane enables dexterity content items to be used as users and group
 Compatibility
 -------------
 
-This package is currently tested and developed for Plone 5.1+.
-
-With Plone 5.1+ you should use Products.membrane 4.
+This package is currently tested and developed for Plone 5.2+ and python>=3.6.
 
 With Plone 5.2+, Products.membrane 5 or higher is needed.
 
-We depend on Products.membrane 4 higher as that contains a fix to make sure members that are deleted are also removed from the membrane_tool catalog.
-
-Python2.7 users should use a Products.membrane version lower than 6.
-
-When using Python2.7 you will need to pin bcrypt to the latest compatible version::
-
-    [versions:python27]
-    bcrypt = 3.1.7
+With Plone 6.0+ we recommend Products.membrane >= 6.0.
 
 
 User id
 -------
 
 As user id we use the uuid that is generated for the content item.
-This only works on Plone 4.1 and higher.
 See the definition of ``getUserId`` in the ``user.py`` behavior.
-
-This also means members can be referenced from Archetypes content.
-
-
-Note for archetype users
-------------------------
-
-If you define your own member content type, you should enable the ``plone.app.referenceablebehavior.referenceable.IReferenceable`` behavior on it as that gives uuid support.
 
 
 Email as login name

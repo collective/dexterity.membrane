@@ -5,7 +5,8 @@ Changelog
 3.0.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Remove py2.7 and Plone < 5.2 support.
+  [petschki]
 
 
 3.0.0 (2021-12-06)

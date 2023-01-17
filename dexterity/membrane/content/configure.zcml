@@ -8,10 +8,18 @@
   <five:registerPackage package="."/>
 
   <genericsetup:registerProfile
-      name="example"
+      name="content"
       title="dexterity.membrane: content"
-      description="Configuration for the dexterity.membrane example content type"
-      directory="../profiles/example"
+      description="Configuration for the dexterity.membrane content type"
+      directory="../profiles/content"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+
+  <genericsetup:registerProfile
+      name="uninstall"
+      title="Uninstall dexterity.membrane: content"
+      description="Uninstall profile for the dexterity.membrane behaviors"
+      directory="../profiles/uninstall_content"
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
 

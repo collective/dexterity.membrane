@@ -15,6 +15,9 @@ Changelog
 - Remove py2.7 and Plone < 5.2 support.
   [petschki]
 
+- Warning: The package is not tested anymore on Plone 5.2 and Python 3.6
+  because Plone 5.2 is not tested as well on that Python versions.
+
 
 3.0.0 (2021-12-06)
 ------------------

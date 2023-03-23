@@ -38,7 +38,7 @@ def register_auth_encoding(identity):
     return register_once
 
 
-@register_auth_encoding(b'BCRYPT')
+@register_auth_encoding('BCRYPT')
 class BCRYPTEncryptionScheme(object):
     """A BCRYPT AuthEncoding."""
 

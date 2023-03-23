@@ -5,6 +5,11 @@ Changelog
 3.0.1 (unreleased)
 ------------------
 
+
+- Rename profile `dexterity.membrane: example` -> `dexterity.membrane: content`
+  and add uninstall profile for it.
+  [petschki]
+  
 - Remove py2.7 and Plone < 5.2 support.
   [petschki]
 

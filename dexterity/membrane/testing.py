@@ -13,7 +13,7 @@ except ImportError:
     from plone.testing import z2 as zope_testing
 
 
-EXAMPLE_PROFILE = 'dexterity.membrane.content:example'
+CONTENT_PROFILE = 'dexterity.membrane.content:content'
 
 CONTRIBUTOR_NAME = 'contributor'
 REVIEWER_NAME = 'reviewer'
@@ -43,7 +43,7 @@ class DexterityMembrane(PloneSandboxLayer):
         zope_testing.installProduct(app, 'Products.membrane')
 
     def setUpPloneSite(self, portal):
-        applyProfile(portal, EXAMPLE_PROFILE)
+        applyProfile(portal, CONTENT_PROFILE)
         portal.portal_workflow.setDefaultChain('one_state_workflow')
 
     def tearDownZope(self, app):

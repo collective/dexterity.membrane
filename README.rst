@@ -10,7 +10,7 @@ dexterity.membrane enables dexterity content items to be used as users and group
 Compatibility
 -------------
 
-This package is currently tested and developed for Plone 5.2+ and python>=3.6.
+This package is currently tested and developed for Plone 5.2+ and python>=3.7.
 
 With Plone 5.2+, Products.membrane 5 or higher is needed.
 

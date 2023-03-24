@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-3.0.1 (unreleased)
+3.0.1 (2023-03-24)
 ------------------
 
 - Fix for `AuthEncoding >= 5.0`.

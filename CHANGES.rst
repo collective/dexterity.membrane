@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-3.0.2 (unreleased)
+3.0.2 (2023-06-07)
 ------------------
 
 - Remove deprecation warnings.

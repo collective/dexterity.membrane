@@ -216,7 +216,7 @@ class TestMember(unittest.TestCase):
         )
 
     def _legacy_set_password(self, member, password):
-        from AccessControl import AuthEncoding
+        from AuthEncoding import AuthEncoding
         # Default AuthEncoding 'encryption' uses SSHA
         member.password = AuthEncoding.pw_encrypt(password)
         self.layer['portal'].membrane_tool.reindexObject(member)
@@ -238,7 +238,7 @@ class TestMember(unittest.TestCase):
         )
 
     def test_legacy_password_validates(self):
-        from AccessControl import AuthEncoding
+        from AuthEncoding import AuthEncoding
         member = self._createType(
             self.layer['portal'],
             'dexterity.membrane.member',
@@ -249,7 +249,7 @@ class TestMember(unittest.TestCase):
         self.assertTrue(AuthEncoding.pw_validate(member.password, b'foobar'))
 
     def test_reset_password(self):
-        from AccessControl import AuthEncoding
+        from AuthEncoding import AuthEncoding
         member = self._createType(
             self.layer['portal'],
             'dexterity.membrane.member',

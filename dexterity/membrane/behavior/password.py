@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from AccessControl import AuthEncoding
+from AuthEncoding import AuthEncoding
 from dexterity.membrane import _
 from dexterity.membrane.behavior.user import IMembraneUser
 from dexterity.membrane.behavior.user import IMembraneUserWorkflow

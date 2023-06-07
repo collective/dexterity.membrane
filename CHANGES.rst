@@ -5,7 +5,8 @@ Changelog
 3.0.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Remove deprecation warnings.
+  [ale-rt]
 
 
 3.0.1 (2023-03-24)
